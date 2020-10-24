@@ -23,7 +23,6 @@ public class PlayerController : Controller
     Camera cam;
     Rigidbody rb;
 
-
     void Start()
     {
         accelRatePerSecond = maxSpeed / timeZeroToMax;
@@ -41,10 +40,19 @@ public class PlayerController : Controller
         {
             Accelerate(decelRatePerSecond, maxSpeed);
         }
-        
+
         newInput = true;
     }
-
+    public void Look(Vector3 point, Transform followTarget)
+    {
+        Vector3 direction = point - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        followTarget.rotation = Quaternion.Slerp(followTarget.rotation, rotation, smoothTime * Time.fixedDeltaTime).normalized;
+    }
+    public void ResetRotation(Transform followTarget, Quaternion followTargetInitialRotation)
+    {
+        followTarget.rotation = Quaternion.Lerp(followTarget.rotation, followTargetInitialRotation, (smoothTime * 10) * Time.fixedDeltaTime);
+    }
     private void Update()
     {
         if (Input.GetMouseButton(1) && !isScopedIn)
@@ -65,13 +73,9 @@ public class PlayerController : Controller
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             if (hit.collider.tag == ("Enemy")) 
             {
-                if (!isLockedOn) 
-                {
-                    print("Hit");
-                    isLockedOn = true;
-                    target = hit.collider.gameObject;
-                }
-
+                print("Hit");
+                isLockedOn = true;
+                target = hit.collider.gameObject;
             }
         }
         
@@ -84,31 +88,6 @@ public class PlayerController : Controller
         }
         rb.MovePosition(transform.position + moveInput * forwardVelocity * Time.fixedDeltaTime);
     }
-    /*public void GridMove (Vector3 moveInput, Transform movePoint)
-    {
-        if (moveInput == Vector3.zero)
-        {
-            Accelerate(decelRatePerSecond, 3);
-        }
-        if(Vector3.Distance(transform.position, movePoint.position) <= 1f)
-        {
-            if (Mathf.Abs(moveInput.x) == 1f)
-            {
-                movePoint.position += new Vector3((moveInput.x)/4, 0f, 0f);              
-            }
-
-            if (Mathf.Abs(moveInput.z) == 1f)
-            {
-                movePoint.position += new Vector3(0f, 0f, moveInput.z)/4;               
-            }
-            
-        }
-        if (moveInput.x > 0 || moveInput.z > 0)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, movePoint.position, forwardVelocity * Time.deltaTime);
-        }
-        newInput = false;
-    }*/
 
     public void Accelerate(float accel, float maxSpeed)
     {

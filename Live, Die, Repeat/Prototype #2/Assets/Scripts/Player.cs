@@ -16,25 +16,26 @@ public class Player : LivingEntity
     public float radius;
     public GameObject groundCursor;
     public Rigidbody rb;
-    public GameObject mainCam;
-    public GameObject aimCam;
+    public CameraController camCont;
+    public Transform followTarget;
+    Quaternion followTargetInitialRot;
     protected override void Start()
     {
         base.Start();
         controller = GetComponent<PlayerController>();
         viewCamera = Camera.main;
         gunController = GetComponent<GunController>();
-
+        followTargetInitialRot = followTarget.transform.rotation;
     }
 
     private void FixedUpdate()
     {
         //Movement input
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        Vector3 moveVelocity = moveInput.normalized;
+        moveInput = Camera.main.transform.TransformDirection(moveInput);
         if (transform.position.y < 1.3f && !Input.GetMouseButtonDown(0))
         {
-            controller.Move(moveVelocity);
+            controller.Move(moveInput);
         }
         //Weapon input
         if (Input.GetMouseButton(0))
@@ -56,13 +57,12 @@ public class Player : LivingEntity
 
         if (controller.isScopedIn == true)
         {
-            mainCam.SetActive(false);
-            aimCam.SetActive(true);
+            camCont.AimIn();
         }
         else
         {
-            aimCam.SetActive(false);
-            mainCam.SetActive(true);
+            camCont.AimOut();
+            controller.ResetRotation(followTarget, followTargetInitialRot);
         }
 
         if (controller.isLockedOn)
@@ -80,18 +80,19 @@ public class Player : LivingEntity
         if (groundPlane.Raycast(ray, out rayDistance))
         {
             Vector3 point = ray.GetPoint(rayDistance);
+            Debug.DrawLine(ray.origin, point, Color.red);
             groundCursor.transform.position = new Vector3(point.x, point.y - 1f, point.z);
-            if (!controller.isLockedOn)
+            if ((new Vector3(point.x, point.y, point.z) - new Vector3(transform.position.x, transform.position.y, transform.position.z)).sqrMagnitude > 3f && controller.isScopedIn)
             {
-                if((new Vector3 (point.x,point.y, point.z) - new Vector3 (transform.position.x, transform.position.y, transform.position.z)).sqrMagnitude > 1.2f)
-                {
-                    gunController.Aim(groundCursor.transform.position);
-                }                      
+                controller.Look(point, followTarget);
+                gunController.Aim(point);
             }
+            if (!controller.isScopedIn && !controller.isLockedOn)
+            {
+                gunController.Aim(groundCursor.transform.position);
+            }
+
         }
 
     }
-
-
-    
 }

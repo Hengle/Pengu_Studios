@@ -10,7 +10,6 @@ public class Gun : MonoBehaviour
     public float msBetweenShots = 100;
     public float muzzleVelocity = 35f;
     float nextShotTime;
-    Vector3 smoothDampRecoil;
     Player player;
     public float smoothTime;
     public float recoilStrength;
