@@ -17,7 +17,7 @@ public class player : MonoBehaviour
 
     void Update()
     {
-        Vector3 movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        Vector3 movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
 
         Vector3 motion = movementInput;
         motion *= speed;
