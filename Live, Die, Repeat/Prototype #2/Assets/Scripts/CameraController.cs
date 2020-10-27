@@ -6,8 +6,6 @@ public class CameraController : MonoBehaviour
 {
     public GameObject mainCam;
     public GameObject aimCam;
-    Vector3 orginalCameraPos;
-    public float smoothTime;
     public PlayerController controller;
     public void AimIn()
     {

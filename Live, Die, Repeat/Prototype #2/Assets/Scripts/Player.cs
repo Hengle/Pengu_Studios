@@ -28,7 +28,7 @@ public class Player : LivingEntity
         followTargetInitialRot = followTarget.transform.rotation;
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         //Movement input
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));

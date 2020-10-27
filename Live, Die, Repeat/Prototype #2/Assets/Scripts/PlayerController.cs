@@ -51,7 +51,7 @@ public class PlayerController : Controller
     }
     public void ResetRotation(Transform followTarget, Quaternion followTargetInitialRotation)
     {
-        followTarget.rotation = Quaternion.Lerp(followTarget.rotation, followTargetInitialRotation, (smoothTime * 10) * Time.fixedDeltaTime);
+        followTarget.rotation = Quaternion.Lerp(followTarget.rotation, followTargetInitialRotation, (smoothTime) * 20 * Time.deltaTime).normalized;
     }
     private void Update()
     {

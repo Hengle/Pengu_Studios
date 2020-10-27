@@ -154,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 401792790}
   aimCam: {fileID: 1066287680}
-  smoothTime: 0
   controller: {fileID: 624153544}
 --- !u!4 &116264330
 Transform:
@@ -305,7 +304,6 @@ GameObject:
   m_Component:
   - component: {fileID: 401792792}
   - component: {fileID: 401792791}
-  - component: {fileID: 401792793}
   m_Layer: 0
   m_Name: Move Cam
   m_TagString: Untagged
@@ -356,28 +354,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401792790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7919998, y: 3.4659994, z: -11.639999}
+  m_LocalPosition: {x: -1.5799999, y: 3.4659994, z: -12.639999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1335353651}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
---- !u!114 &401792793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401792790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c11265b855408d42af33d62691f5194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ChannelMask: -1
-  m_Gain: 1
-  m_Use2DDistance: 0
 --- !u!1 &559484196
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothTime: 0.3
-  maxSpeed: 4
+  maxSpeed: 6
   timeZeroToMax: 0.5
   timeMaxToZero: 1
   forwardVelocity: 0
@@ -597,29 +580,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1066287683}
   - component: {fileID: 1066287682}
-  - component: {fileID: 1066287681}
   m_Layer: 0
   m_Name: Aim Cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1066287681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066287680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c11265b855408d42af33d62691f5194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ChannelMask: -1
-  m_Gain: 1
-  m_Use2DDistance: 0
+  m_IsActive: 0
 --- !u!114 &1066287682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,7 +603,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 9
   m_StandbyUpdate: 1
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1823061264}
@@ -663,7 +630,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066287680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5799999, y: 2.4659996, z: -10.639999}
+  m_LocalPosition: {x: -2.78, y: 2.2316794, z: -8.66784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1813702535}
@@ -780,9 +747,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 3, y: 3, z: 3}
-  ShoulderOffset: {x: 2, y: 1, z: -6}
+  ShoulderOffset: {x: 2, y: 1, z: -7}
   VerticalArmLength: 1
-  CameraSide: 0.697
+  CameraSide: 1
   CameraDistance: 2
   CameraCollisionFilter:
     serializedVersion: 2
@@ -830,11 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0617a90ec7585734cbd08198c36eb1f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - enemyCount: 1
-    timeBetweenSpawns: 0
-    enemyHealth: 11
-    enemyDamage: 0
+  enemies: []
   enemy: {fileID: 6708270510006308986, guid: fb86199628491e044bb68df6771472e1, type: 3}
 --- !u!4 &1591598605
 Transform:
@@ -894,8 +857,8 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 0
-  m_BlendUpdateMethod: 0
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
     m_Time: 0.5
@@ -937,7 +900,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 70
-  field of view: 54
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -963,7 +926,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_LocalRotation: {x: 0.117984064, y: 0, z: 0, w: 0.9930155}
-  m_LocalPosition: {x: -1.5799999, y: 2.4659996, z: -9.479999}
+  m_LocalPosition: {x: -1.5799999, y: 3.4659994, z: -12.639999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1045,10 +1008,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 3, y: 3, z: 3}
-  ShoulderOffset: {x: 2, y: 0, z: -5}
+  ShoulderOffset: {x: 2, y: 0, z: -4}
   VerticalArmLength: 1
-  CameraSide: 1
-  CameraDistance: 2
+  CameraSide: 0.7
+  CameraDistance: 1
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 0
@@ -1220,7 +1183,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.6886792, g: 0.49052152, b: 0.34509805, a: 1}
+  m_Color: {r: 1, g: 0.7457654, b: 0.5613208, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
