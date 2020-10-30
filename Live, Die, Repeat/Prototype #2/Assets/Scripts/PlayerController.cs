@@ -10,15 +10,15 @@ public class PlayerController : Controller
     //fine tune control variables
     float smoothTime = 1F;
     float lookSmoothtime = .3f;
-    public float maxSpeed;
-    public float timeZeroToMax;
-    public float timeMaxToZero;
+    float maxSpeed = 6;
+    float timeZeroToMax = .5f;
+    float timeMaxToZero = 1;
     float accelRatePerSecond;
     float decelRatePerSecond;
-    public float maxInteractDistance;
+    float maxInteractDistance = 30;
     //groundChecks
     Vector3 groundNormal;
-    public bool isGrounded;
+    [HideInInspector]public bool isGrounded;
     float m_GroundCheckDistance = 1.1f;
     //gameobjects/components
     Camera cam;
@@ -50,15 +50,15 @@ public class PlayerController : Controller
 
         newInput = true;
     }
-    public void Look(Vector3 point, Transform followTarget)
+    public void Look(Vector3 point, GameObject followTarget)
     {
         Vector3 direction = (point - transform.position);
         Quaternion rotation = Quaternion.LookRotation(direction);
-        followTarget.rotation = Quaternion.Slerp(followTarget.rotation, rotation, lookSmoothtime * Time.fixedDeltaTime);
+        followTarget.transform.rotation = Quaternion.Slerp(followTarget.transform.rotation, rotation, lookSmoothtime * Time.fixedDeltaTime);
     }
-    public void ResetRotation(Transform followTarget, Quaternion followTargetInitialRotation)
+    public void ResetRotation(GameObject followTarget, Quaternion followTargetInitialRotation)
     {
-        followTarget.rotation = Quaternion.Lerp(followTarget.rotation, followTargetInitialRotation, (smoothTime) * Time.deltaTime);
+        followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, followTargetInitialRotation, (smoothTime) * Time.deltaTime);
     }
     private void Update()
     {

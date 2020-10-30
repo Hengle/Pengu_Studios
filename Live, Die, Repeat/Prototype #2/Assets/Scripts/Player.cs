@@ -11,16 +11,18 @@ public class Player : LivingEntity
     Camera viewCamera;
     PlayerController controller;
     GunController gunController;
-    public Transform firePoint;
-    public float radius;
-    public GameObject groundCursor;
-    public Rigidbody rb;
-    public CameraController camCont;
-    public Transform followTarget;
+    GameObject groundCursor;
+    CameraController camCont;
+    GameObject followTarget;
     Quaternion followTargetInitialRot;
+    [HideInInspector] public Rigidbody rb;
     protected override void Start()
     {
         base.Start();
+        rb = GetComponent<Rigidbody>();
+        camCont = FindObjectOfType<CameraController>();
+        followTarget = GameObject.Find("FollowTarget");
+        groundCursor = GameObject.Find("GroundCursor");
         controller = GetComponent<PlayerController>();
         viewCamera = Camera.main;
         gunController = GetComponent<GunController>();
@@ -81,12 +83,12 @@ public class Player : LivingEntity
             Vector3 point = ray.GetPoint(rayDistance);
             Debug.DrawLine(ray.origin, point, Color.red);
             groundCursor.transform.position = new Vector3(point.x, point.y - 1f, point.z);
-            if (controller.isScopedIn)
+            while (controller.isScopedIn)
             {
                 controller.Look(point, followTarget);
                 gunController.Aim(point);
             }
-            if (!controller.isScopedIn && !controller.isLockedOn)
+            while (!controller.isScopedIn && !controller.isLockedOn)
             {
                 gunController.Aim(groundCursor.transform.position);
             }
