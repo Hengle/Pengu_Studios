@@ -19,7 +19,7 @@ public class Gun : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
     }
-    void FixedUpdate()
+    void Update()
     {
         transform.localPosition = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftShift))
@@ -45,8 +45,8 @@ public class Gun : MonoBehaviour
             Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
             newProjectile.SetSpeed(muzzleVelocity);
             transform.localPosition -= Vector3.forward * .01f;
-            //player.transform.position =  Vector3.Lerp(player.transform.position, player.transform.position - (muzzle.position - transform.position) * 3, 10f);
-            player.rb.velocity = Vector3.Slerp(player.rb.velocity, player.rb.velocity - (muzzle.transform.position - transform.position) * recoilStrength, 1f);
+            player.transform.position = player.transform.position + new Vector3(0,.3f, 0);
+            player.rb.velocity = Vector3.Lerp(player.rb.velocity, player.rb.velocity - (muzzle.transform.position - transform.position) * recoilStrength, 1f);
         }
     }
 }

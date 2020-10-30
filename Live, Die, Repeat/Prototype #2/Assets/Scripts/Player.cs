@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.WSA;
 
-[RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(GunController))]
 public class Player : LivingEntity
 {
@@ -35,7 +34,7 @@ public class Player : LivingEntity
         moveInput = Camera.main.transform.TransformDirection(moveInput);
         if (transform.position.y < 1.3f && !Input.GetMouseButtonDown(0))
         {
-            controller.Move(moveInput);
+            controller.Move();
         }
         //Weapon input
         if (Input.GetMouseButton(0))
@@ -82,7 +81,7 @@ public class Player : LivingEntity
             Vector3 point = ray.GetPoint(rayDistance);
             Debug.DrawLine(ray.origin, point, Color.red);
             groundCursor.transform.position = new Vector3(point.x, point.y - 1f, point.z);
-            if ((new Vector3(point.x, point.y, point.z) - new Vector3(transform.position.x, transform.position.y, transform.position.z)).sqrMagnitude > 3f && controller.isScopedIn)
+            if (controller.isScopedIn)
             {
                 controller.Look(point, followTarget);
                 gunController.Aim(point);
@@ -93,6 +92,5 @@ public class Player : LivingEntity
             }
 
         }
-
     }
 }

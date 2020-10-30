@@ -7,24 +7,35 @@ using UnityEngine;
 
 public class PlayerController : Controller
 {
-    public float smoothTime = 0.3F;
+    //fine tune control variables
+    float smoothTime = 1F;
+    float lookSmoothtime = .3f;
     public float maxSpeed;
     public float timeZeroToMax;
     public float timeMaxToZero;
     float accelRatePerSecond;
     float decelRatePerSecond;
-    public float forwardVelocity;
-    public LayerMask interactable;
-    public LayerMask colliderObjects;
     public float maxInteractDistance;
-    public GameObject target;
-    public bool isScopedIn = false;
-    public bool isLockedOn = false;
+    //groundChecks
+    Vector3 groundNormal;
+    public bool isGrounded;
+    float m_GroundCheckDistance = 1.1f;
+    //gameobjects/components
     Camera cam;
     Rigidbody rb;
-
+    [HideInInspector]public GameObject target;
+    //bools
+    [HideInInspector]public bool isScopedIn = false;
+    [HideInInspector]public bool isLockedOn = false;
+    //layermasks
+    public LayerMask interactable;
+    public LayerMask colliderObjects;
+    //player state
+    float forwardVelocity;
     void Start()
     {
+        groundNormal = Vector3.zero;
+        isGrounded = true;
         accelRatePerSecond = maxSpeed / timeZeroToMax;
         decelRatePerSecond = -maxSpeed / timeMaxToZero;
         cam = Camera.main;
@@ -34,24 +45,20 @@ public class PlayerController : Controller
     {
         if (data.axes[0] != 0 || data.axes[1] != 0)
         {
-            Accelerate(accelRatePerSecond, maxSpeed);
-        }
-        else
-        {
-            Accelerate(decelRatePerSecond, maxSpeed);
+            Accelerate(accelRatePerSecond);
         }
 
         newInput = true;
     }
     public void Look(Vector3 point, Transform followTarget)
     {
-        Vector3 direction = point - transform.position;
+        Vector3 direction = (point - transform.position);
         Quaternion rotation = Quaternion.LookRotation(direction);
-        followTarget.rotation = Quaternion.Slerp(followTarget.rotation, rotation, smoothTime * Time.fixedDeltaTime).normalized;
+        followTarget.rotation = Quaternion.Slerp(followTarget.rotation, rotation, lookSmoothtime * Time.fixedDeltaTime);
     }
     public void ResetRotation(Transform followTarget, Quaternion followTargetInitialRotation)
     {
-        followTarget.rotation = Quaternion.Lerp(followTarget.rotation, followTargetInitialRotation, (smoothTime) * 20 * Time.deltaTime).normalized;
+        followTarget.rotation = Quaternion.Lerp(followTarget.rotation, followTargetInitialRotation, (smoothTime) * Time.deltaTime);
     }
     private void Update()
     {
@@ -64,6 +71,7 @@ public class PlayerController : Controller
             isScopedIn = false;
         }
     }
+
     public void CreateRay ()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -80,20 +88,48 @@ public class PlayerController : Controller
         }
         
     }
-    public void Move (Vector3 moveInput)
+    public void Move ()
     {
-        if (moveInput == Vector3.zero)
+        CheckGroundStatus();
+        if(isGrounded)
         {
-            Accelerate(decelRatePerSecond, 3);
+            if (newInput)
+            {
+                rb.velocity = transform.forward * forwardVelocity;
+            }
+            else
+            {
+                Accelerate(decelRatePerSecond);
+            }
         }
-        rb.MovePosition(transform.position + moveInput * forwardVelocity * Time.fixedDeltaTime);
+        newInput = false;
     }
 
-    public void Accelerate(float accel, float maxSpeed)
+    public void Accelerate(float accel)
     {
         forwardVelocity += accel * Time.deltaTime;
         forwardVelocity = Mathf.Clamp(forwardVelocity, 0, maxSpeed);
     }
 
+    void CheckGroundStatus()
+    {
+        RaycastHit hitInfo;
+#if UNITY_EDITOR
+        // helper to visualise the ground check ray in the scene view
+        Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance), Color.red);
+#endif
+        // 0.1f is a small offset to start the ray from inside the character
+        // it is also good to note that the transform position in the sample assets is at the base of the character
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
+        {
+            groundNormal = hitInfo.normal;
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+            groundNormal = Vector3.up;
+        }
+    }
 }
 
