@@ -443,7 +443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &624153543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,12 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 10
   moveSpeed: 5
-  firePoint: {fileID: 559484197}
-  radius: 2
-  groundCursor: {fileID: 214825065}
   rb: {fileID: 624153547}
-  camCont: {fileID: 116264329}
-  followTarget: {fileID: 1823061264}
 --- !u!114 &624153544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,10 +471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb7bfa26b49bf94e91e81e4037a73d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 6
-  timeZeroToMax: 0.5
-  timeMaxToZero: 1
-  maxInteractDistance: 20
   isGrounded: 0
   target: {fileID: 0}
   isScopedIn: 0
@@ -672,66 +663,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &684338164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684338157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc7f14b02b387d94ca5c9858d59e9004, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 10
-  moveSpeed: 5
-  firePoint: {fileID: 559484197}
-  radius: 2
-  groundCursor: {fileID: 214825065}
-  rb: {fileID: 684338163}
-  camCont: {fileID: 116264329}
-  followTarget: {fileID: 1823061264}
---- !u!114 &684338165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684338157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c6c952cc1426c42acfdff8da726d13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponHold: {fileID: 2004270714}
-  startingGun: {fileID: 1682663373935392573, guid: 30d6bdb9634b6244b8affea7f320df50, type: 3}
---- !u!114 &684338166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 684338157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecb7bfa26b49bf94e91e81e4037a73d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 0
-  timeZeroToMax: 0
-  timeMaxToZero: 0
-  maxInteractDistance: 20
-  isGrounded: 0
-  target: {fileID: 0}
-  isScopedIn: 0
-  isLockedOn: 0
-  interactable:
-    serializedVersion: 2
-    m_Bits: 256
-  colliderObjects:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1001 &856344779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -745,7 +676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1359,7 +1290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823061264}
   m_Layer: 0
-  m_Name: Aim Target
+  m_Name: FollowTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

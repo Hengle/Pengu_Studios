@@ -16,10 +16,11 @@ public class PlayerController : Controller
     float accelRatePerSecond;
     float decelRatePerSecond;
     float maxInteractDistance = 30;
+    Vector3 walkVelocity;
     //groundChecks
     Vector3 groundNormal;
     [HideInInspector]public bool isGrounded;
-    float m_GroundCheckDistance = 1.1f;
+    float m_GroundCheckDistance = 1f;
     //gameobjects/components
     Camera cam;
     Rigidbody rb;
@@ -43,11 +44,18 @@ public class PlayerController : Controller
     }
     public override void ReadInput(InputData data)
     {
-        if (data.axes[0] != 0 || data.axes[1] != 0)
+
+        if (data.axes[0] != 0)
         {
             Accelerate(accelRatePerSecond);
+            walkVelocity += Vector3.forward * data.axes[0];
         }
-
+        if (data.axes[1] != 0)
+        {
+            Accelerate(accelRatePerSecond);
+            walkVelocity += Vector3.right * data.axes[1];
+        }
+        walkVelocity = walkVelocity.normalized;
         newInput = true;
     }
     public void Look(Vector3 point, GameObject followTarget)
@@ -95,10 +103,11 @@ public class PlayerController : Controller
         {
             if (newInput)
             {
-                rb.velocity = transform.forward * forwardVelocity;
+                rb.velocity = walkVelocity * forwardVelocity;
             }
             else
             {
+                rb.velocity =  walkVelocity * forwardVelocity;
                 Accelerate(decelRatePerSecond);
             }
         }

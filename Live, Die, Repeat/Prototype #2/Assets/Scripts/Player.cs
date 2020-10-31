@@ -29,15 +29,11 @@ public class Player : LivingEntity
         followTargetInitialRot = followTarget.transform.rotation;
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         //Movement input
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        moveInput = Camera.main.transform.TransformDirection(moveInput);
-        if (transform.position.y < 1.3f && !Input.GetMouseButtonDown(0))
-        {
-            controller.Move();
-        }
+        controller.Move();
         //Weapon input
         if (Input.GetMouseButton(0))
         {
@@ -83,12 +79,12 @@ public class Player : LivingEntity
             Vector3 point = ray.GetPoint(rayDistance);
             Debug.DrawLine(ray.origin, point, Color.red);
             groundCursor.transform.position = new Vector3(point.x, point.y - 1f, point.z);
-            while (controller.isScopedIn)
+            if (controller.isScopedIn)
             {
                 controller.Look(point, followTarget);
                 gunController.Aim(point);
             }
-            while (!controller.isScopedIn && !controller.isLockedOn)
+            if (!controller.isScopedIn && !controller.isLockedOn)
             {
                 gunController.Aim(groundCursor.transform.position);
             }
