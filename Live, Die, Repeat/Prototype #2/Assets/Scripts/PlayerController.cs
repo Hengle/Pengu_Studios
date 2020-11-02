@@ -90,8 +90,8 @@ public class PlayerController : Controller
             if (hit.collider.tag == ("Enemy")) 
             {
                 print("Hit");
-                isLockedOn = true;
-                target = hit.collider.gameObject;
+                //isLockedOn = true;
+                //target = hit.collider.gameObject;
             }
         }
         
@@ -104,11 +104,6 @@ public class PlayerController : Controller
             if (newInput)
             {
                 rb.velocity = walkVelocity * forwardVelocity;
-            }
-            else
-            {
-                rb.velocity =  walkVelocity * forwardVelocity;
-                Accelerate(decelRatePerSecond);
             }
         }
         newInput = false;
