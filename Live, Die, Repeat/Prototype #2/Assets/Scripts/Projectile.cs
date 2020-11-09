@@ -7,7 +7,8 @@ public class Projectile : MonoBehaviour
     public LayerMask collisionMask;
     float speed = 10f;
     float damage = 1;
-    Cinemachine.CinemachineImpulseSource source;
+    float lifeTime = 3;
+    float skinWidth = .1f;
 
     public void SetSpeed (float newSpeed)
     {
@@ -15,9 +16,13 @@ public class Projectile : MonoBehaviour
     }
     private void Start()
     {
-        source = GetComponent<Cinemachine.CinemachineImpulseSource>();
-        Destroy(this.gameObject, 2f);
-        source.GenerateImpulse(transform.forward);
+        Destroy(gameObject, lifeTime);
+
+        Collider[] initialCollisions = Physics.OverlapSphere(transform.position, .1f, collisionMask);
+        if (initialCollisions.Length > 0)
+        {
+            OnHitObject(initialCollisions[0]);
+        }
     }
 
     void Update()
@@ -32,7 +37,7 @@ public class Projectile : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, moveDistance, collisionMask, QueryTriggerInteraction.Collide))
+        if (Physics.Raycast(ray, out hit, moveDistance + skinWidth, collisionMask, QueryTriggerInteraction.Collide))
         {
             OnHitObject(hit);
         }
@@ -44,6 +49,15 @@ public class Projectile : MonoBehaviour
         if (damagableObgect != null)
         {
             damagableObgect.TakeHit(damage, hit);
+        }
+        GameObject.Destroy(gameObject);
+    }
+    void OnHitObject(Collider c)
+    {
+        IDamagable damagableObgect = c.GetComponent<IDamagable>();
+        if (damagableObgect != null)
+        {
+            damagableObgect.TakeDamage(damage);
         }
         GameObject.Destroy(gameObject);
     }
