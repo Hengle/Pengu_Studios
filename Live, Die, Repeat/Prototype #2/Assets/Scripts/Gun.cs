@@ -14,10 +14,13 @@ public class Gun : MonoBehaviour
     public float smoothTime;
     public float recoilStrength;
     public float maxRecoil;
+    float displacement = .3f;
+    float maxDisplacement;
 
     void Start()
     {
         player = FindObjectOfType<Player>();
+        maxDisplacement = displacement;
     }
     void Update()
     {
@@ -25,10 +28,12 @@ public class Gun : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             recoilStrength = 4;
+            displacement = 0;
         }
         else
         {
             recoilStrength = maxRecoil;
+            displacement = maxDisplacement;
         }
     }
     public void Aim(Vector3 point)
@@ -45,7 +50,7 @@ public class Gun : MonoBehaviour
             Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
             newProjectile.SetSpeed(muzzleVelocity);
             transform.localPosition -= Vector3.forward * .01f;
-            player.transform.position = player.transform.position + new Vector3(0,.3f, 0);
+            player.transform.position = player.transform.position + new Vector3(0,displacement, 0);
             player.rb.velocity = Vector3.Lerp(player.rb.velocity, player.rb.velocity - (muzzle.transform.position - transform.position) * recoilStrength, 1f);
         }
     }

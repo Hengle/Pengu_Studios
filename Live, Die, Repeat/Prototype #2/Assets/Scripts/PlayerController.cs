@@ -61,11 +61,11 @@ public class PlayerController : Controller
 
     private void Update()
     {
-        if (Input.GetMouseButton(1) && !isScopedIn)
+        if (Input.GetMouseButtonDown(1) && !isScopedIn)
         {
             isScopedIn = true;
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonDown(1))
         {
             isScopedIn = false;
         }
