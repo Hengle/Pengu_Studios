@@ -7,12 +7,12 @@ public class CameraController : MonoBehaviour
     public GameObject mainCam;
     public GameObject aimCam;
     public PlayerController controller;
-    public void AimIn()
+    public void Fight()
     {
         mainCam.SetActive(false);
         aimCam.SetActive(true);
     }
-    public void AimOut()
+    public void ResetCam()
     {
         aimCam.SetActive(false);
         mainCam.SetActive(true);

@@ -14,7 +14,6 @@ public class Player : LivingEntity
     GameObject groundCursor;
     CameraController camCont;
     GameObject followTarget;
-    Quaternion followTargetInitialRot;
     [HideInInspector] public Rigidbody rb;
     protected override void Start()
     {
@@ -26,19 +25,12 @@ public class Player : LivingEntity
         controller = GetComponent<PlayerController>();
         viewCamera = Camera.main;
         gunController = GetComponent<GunController>();
-        followTargetInitialRot = followTarget.transform.rotation;
     }
 
     void LateUpdate()
     {
         //Movement input
-        Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         controller.Move();
-        //Weapon input
-        if (Input.GetMouseButton(0))
-        {
-            gunController.Shoot();
-        }
     }
 
     void Update()
@@ -54,19 +46,19 @@ public class Player : LivingEntity
 
         if (controller.isScopedIn == true)
         {
-            camCont.AimIn();
+            //Switch this....
+            camCont.Fight();
         }
         else
         {
-            camCont.AimOut();
-            controller.ResetRotation(followTarget, followTargetInitialRot);
+            camCont.ResetCam();
         }
 
         if (controller.isLockedOn)
         {
             if (controller.target != null)
             {
-                gunController.Aim(controller.target.transform.position);
+               //reticle changes
             }
             else 
             {
@@ -76,12 +68,12 @@ public class Player : LivingEntity
 
         if (groundPlane.Raycast(ray, out rayDistance))
         {
+            // checks if the ray hit the ground and then sends the info to the point vector
             Vector3 point = ray.GetPoint(rayDistance);
             Debug.DrawLine(ray.origin, point, Color.red);
             groundCursor.transform.position = new Vector3(point.x, point.y - 1f, point.z);
             if (controller.isScopedIn)
             {
-                controller.Look(point, followTarget);
                 gunController.Aim(point);
             }
             if (!controller.isScopedIn && !controller.isLockedOn)
@@ -89,6 +81,11 @@ public class Player : LivingEntity
                 gunController.Aim(groundCursor.transform.position);
             }
 
+        }
+        //Weapon input
+        if (Input.GetMouseButton(0))
+        {
+            gunController.Shoot();
         }
     }
 }
