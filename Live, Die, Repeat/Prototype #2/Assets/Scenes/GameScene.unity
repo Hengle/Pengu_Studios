@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7f14b02b387d94ca5c9858d59e9004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 10
+  startingHealth: 3
   moveSpeed: 5
   rb: {fileID: 624153547}
 --- !u!114 &624153544
@@ -490,9 +490,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5344663
-  m_Height: 1.9971765
+  m_Height: 2.227144
   m_Direction: 1
-  m_Center: {x: -0.005930066, y: 0.007817216, z: 0.011888891}
+  m_Center: {x: -0.005930066, y: 0.122800805, z: 0.011888891}
 --- !u!54 &624153547
 Rigidbody:
   m_ObjectHideFlags: 0
