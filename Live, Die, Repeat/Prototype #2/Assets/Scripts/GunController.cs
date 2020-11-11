@@ -7,6 +7,7 @@ public class GunController : MonoBehaviour
     public Transform weaponHold;
     public Gun startingGun;
     Gun equippedGun;
+    [HideInInspector] public float shotTime;
     private void Start()
     {
         if (startingGun != null)
@@ -34,6 +35,7 @@ public class GunController : MonoBehaviour
 
     public void Aim(Vector3 aimPoint)
     {
+        shotTime = equippedGun.nextShotTime;
         if (equippedGun != null)
         {
             equippedGun.Aim(aimPoint);

@@ -27,10 +27,13 @@ public class Player : LivingEntity
         gunController = GetComponent<GunController>();
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         //Movement input
-        controller.Move();
+        if (gunController.shotTime <= 1)
+        {
+            controller.Move();
+        }
     }
 
     void Update()
@@ -44,7 +47,7 @@ public class Player : LivingEntity
             controller.CreateRay();
         }
 
-        if (controller.isScopedIn == true)
+        if (controller.isScopedIn)
         {
             //Switch this....
             camCont.Fight();

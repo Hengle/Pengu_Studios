@@ -8,11 +8,9 @@ using UnityEngine;
 public class PlayerController : Controller
 {
     //fine tune control variables
-    float smoothTime = 1F;
-    float lookSmoothtime = .3f;
     float maxSpeed = 6;
     float timeZeroToMax = .5f;
-    float timeMaxToZero = 1;
+    float timeMaxToZero = .3f;
     float accelRatePerSecond;
     float decelRatePerSecond;
     float maxInteractDistance = 30;
@@ -98,6 +96,11 @@ public class PlayerController : Controller
             {
                 walkVelocity = Camera.main.transform.TransformDirection(walkVelocity);
                 walkVelocity.y = 0f;
+                rb.velocity = walkVelocity * forwardVelocity;
+            }
+            if(!newInput)
+            {
+                Accelerate(decelRatePerSecond);
                 rb.velocity = walkVelocity * forwardVelocity;
             }
         }

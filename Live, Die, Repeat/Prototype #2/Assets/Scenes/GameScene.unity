@@ -570,6 +570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponHold: {fileID: 559484197}
   startingGun: {fileID: 1682663373935392573, guid: 30d6bdb9634b6244b8affea7f320df50, type: 3}
+  shotTime: 0
 --- !u!1 &684338157 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100168, guid: b235179bd2a63d1468dd430670338c55, type: 3}
@@ -1110,11 +1111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0617a90ec7585734cbd08198c36eb1f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - enemyCount: 1
-    timeBetweenSpawns: 0
-    enemyHealth: 10
-    enemyDamage: 0
+  enemies: []
   enemy: {fileID: 6708270510006308986, guid: fb86199628491e044bb68df6771472e1, type: 3}
 --- !u!4 &1591598605
 Transform:

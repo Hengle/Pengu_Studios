@@ -7,15 +7,16 @@ public class Gun : MonoBehaviour
 {
     public Transform muzzle;
     public Projectile projectile;
-    public float msBetweenShots = 100;
-    public float muzzleVelocity = 35f;
-    float nextShotTime;
+    float msBetweenShots = 2000;
+    float muzzleVelocity = 50f;
+    public float nextShotTime = 2;
     Player player;
-    public float smoothTime;
-    public float recoilStrength;
-    public float maxRecoil;
+    float smoothTime = 3;
+    float recoilStrength = 10;
+    float maxRecoil = 10;
     float displacement = .3f;
     float maxDisplacement;
+    public float shotTime = 2;
 
     void Start()
     {
@@ -36,6 +37,13 @@ public class Gun : MonoBehaviour
             displacement = maxDisplacement;
         }
     }
+    void FixedUpdate()
+    {
+        if(nextShotTime >= 0)
+        {
+            nextShotTime -= Time.deltaTime;
+        }
+    }
     public void Aim(Vector3 point)
     {
         Vector3 direction = point - player.transform.position;
@@ -44,9 +52,9 @@ public class Gun : MonoBehaviour
     }
     public void Shoot()
     {
-        if (Time.time > nextShotTime)
+        if (nextShotTime <= 0)
         {
-            nextShotTime = Time.time + msBetweenShots / 1000;
+            nextShotTime = shotTime;
             Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
             newProjectile.SetSpeed(muzzleVelocity);
             transform.localPosition -= Vector3.forward * .01f;
