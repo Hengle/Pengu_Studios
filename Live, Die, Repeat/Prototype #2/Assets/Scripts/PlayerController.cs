@@ -96,6 +96,8 @@ public class PlayerController : Controller
         {
             if (newInput)
             {
+                walkVelocity = Camera.main.transform.TransformDirection(walkVelocity);
+                walkVelocity.y = 0f;
                 rb.velocity = walkVelocity * forwardVelocity;
             }
         }

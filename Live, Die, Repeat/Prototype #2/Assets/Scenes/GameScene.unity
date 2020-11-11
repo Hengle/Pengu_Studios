@@ -384,7 +384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401792790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5799999, y: 1.9100001, z: -8.93}
+  m_LocalPosition: {x: -3.58, y: 1.9100001, z: -8.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1335353651}
@@ -1059,10 +1059,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 2, y: 2, z: 2}
+  Damping: {x: 1, y: 1, z: 1}
   ShoulderOffset: {x: 2, y: 0, z: -5}
   VerticalArmLength: 1
-  CameraSide: 1
+  CameraSide: 0.5
   CameraDistance: 0
   CameraCollisionFilter:
     serializedVersion: 2
@@ -1243,7 +1243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5799999, y: 1.9100001, z: -8.93}
+  m_LocalPosition: {x: -3.58, y: 1.9100001, z: -8.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1324,10 +1324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 2, y: 2, z: 2}
+  Damping: {x: 1, y: 1, z: 1}
   ShoulderOffset: {x: 0, y: 1, z: -5}
   VerticalArmLength: 0.6
-  CameraSide: 0.363
+  CameraSide: 0.5
   CameraDistance: 2
   CameraCollisionFilter:
     serializedVersion: 2
