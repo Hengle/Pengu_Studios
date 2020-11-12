@@ -68,6 +68,10 @@ public class PlayerController : Controller
             isScopedIn = false;
         }
     }
+    public void FollowTarget(Transform followTarget, float damping, Transform enemy)
+    {
+        followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, enemy.transform.rotation, damping);
+    }
 
     public void CreateRay ()
     {

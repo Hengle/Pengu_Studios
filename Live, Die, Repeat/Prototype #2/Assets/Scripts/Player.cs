@@ -7,20 +7,19 @@ using UnityEngine.WSA;
 public class Player : LivingEntity
 {
     public float moveSpeed = 5;
-
+    float damping  = .1f;
     Camera viewCamera;
     PlayerController controller;
     GunController gunController;
     GameObject groundCursor;
     CameraController camCont;
-    GameObject followTarget;
+    public Transform followTarget;
     [HideInInspector] public Rigidbody rb;
     protected override void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody>();
         camCont = FindObjectOfType<CameraController>();
-        followTarget = GameObject.Find("FollowTarget");
         groundCursor = GameObject.Find("GroundCursor");
         controller = GetComponent<PlayerController>();
         viewCamera = Camera.main;
@@ -38,6 +37,8 @@ public class Player : LivingEntity
 
     void Update()
     {
+        // enemy detection
+        //controller.FollowTarget(followTarget, )
         //Look input
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, transform.position);

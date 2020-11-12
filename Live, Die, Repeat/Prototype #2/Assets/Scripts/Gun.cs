@@ -7,14 +7,13 @@ public class Gun : MonoBehaviour
 {
     public Transform muzzle;
     public Projectile projectile;
-    float msBetweenShots = 2000;
     float muzzleVelocity = 50f;
     public float nextShotTime = 2;
     Player player;
     float smoothTime = 3;
-    float recoilStrength = 10;
-    float maxRecoil = 10;
-    float displacement = .3f;
+    float recoilStrength = 11;
+    float maxRecoil = 11;
+    float displacement = .1f;
     float maxDisplacement;
     public float shotTime = 2;
 
@@ -57,7 +56,6 @@ public class Gun : MonoBehaviour
             nextShotTime = shotTime;
             Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
             newProjectile.SetSpeed(muzzleVelocity);
-            transform.localPosition -= Vector3.forward * .01f;
             player.transform.position = player.transform.position + new Vector3(0,displacement, 0);
             player.rb.velocity = Vector3.Lerp(player.rb.velocity, player.rb.velocity - (muzzle.transform.position - transform.position) * recoilStrength, 1f);
         }
