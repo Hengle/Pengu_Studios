@@ -9,7 +9,7 @@ public class PlayerController : Controller
 {
     //fine tune control variables
     float maxSpeed = 6;
-    float timeZeroToMax = .5f;
+    float timeZeroToMax = .3f;
     float timeMaxToZero = .3f;
     float accelRatePerSecond;
     float decelRatePerSecond;

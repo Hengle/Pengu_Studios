@@ -7,7 +7,7 @@ using UnityEngine.WSA;
 public class Player : LivingEntity
 {
     public float moveSpeed = 5;
-    float damping  = .1f;
+    public float recoveryTime;
     Camera viewCamera;
     PlayerController controller;
     GunController gunController;
@@ -15,6 +15,7 @@ public class Player : LivingEntity
     CameraController camCont;
     public Transform followTarget;
     [HideInInspector] public Rigidbody rb;
+    public Crosshairs crosshair;
     protected override void Start()
     {
         base.Start();
@@ -29,7 +30,7 @@ public class Player : LivingEntity
     void FixedUpdate()
     {
         //Movement input
-        if (gunController.shotTime <= 1)
+        if (gunController.shotTime <= recoveryTime)
         {
             controller.Move();
         }
@@ -41,7 +42,7 @@ public class Player : LivingEntity
         //controller.FollowTarget(followTarget, )
         //Look input
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, transform.position);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunController.GunHeight);
         float rayDistance;
         if (Input.GetMouseButtonDown(0))
         {
@@ -76,7 +77,7 @@ public class Player : LivingEntity
             Vector3 point = ray.GetPoint(rayDistance);
             Debug.DrawLine(ray.origin, point, Color.red);
             groundCursor.transform.position = new Vector3(point.x, point.y - 1f, point.z);
-            if (controller.isScopedIn)
+            /*if (controller.isScopedIn)
             {
                 gunController.Aim(point);
             }
@@ -84,6 +85,11 @@ public class Player : LivingEntity
             {
                 gunController.Aim(groundCursor.transform.position);
             }
+            */
+
+            gunController.Aim(groundCursor.transform.position);
+            crosshair.transform.position = groundCursor.transform.position;
+            crosshair.DetectTargets(ray);
 
         }
         //Weapon input

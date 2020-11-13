@@ -211,11 +211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 6307264864652186083}
   projectile: {fileID: 140652380501109978, guid: 6fe7c4559be51024ba1d9df91814db78, type: 3}
-  msBetweenShots: 2000
-  muzzleVelocity: 50
-  smoothTime: 3
-  recoilStrength: 10.87
-  maxRecoil: 10
+  nextShotTime: 2
+  shotTime: 1.5
 --- !u!65 &9175121696937554851
 BoxCollider:
   m_ObjectHideFlags: 0
