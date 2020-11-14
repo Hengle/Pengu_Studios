@@ -22,7 +22,7 @@ public class Crosshairs : MonoBehaviour
 
 	public void DetectTargets(Ray ray)
 	{
-		if (Physics.Raycast(ray, 100, targetMask))
+		if (Physics.Raycast(ray, 1000, targetMask, QueryTriggerInteraction.Collide))
 		{
 			dot.color = dotHighlightColour;
 		}

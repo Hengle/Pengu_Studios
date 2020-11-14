@@ -42,7 +42,7 @@ public class Player : LivingEntity
         //controller.FollowTarget(followTarget, )
         //Look input
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunController.GunHeight);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.up * -1);
         float rayDistance;
         if (Input.GetMouseButtonDown(0))
         {
@@ -75,8 +75,8 @@ public class Player : LivingEntity
         {
             // checks if the ray hit the ground and then sends the info to the point vector
             Vector3 point = ray.GetPoint(rayDistance);
+            point = point - transform.position.normalized;
             Debug.DrawLine(ray.origin, point, Color.red);
-            groundCursor.transform.position = new Vector3(point.x, point.y - 1f, point.z);
             /*if (controller.isScopedIn)
             {
                 gunController.Aim(point);
@@ -87,10 +87,9 @@ public class Player : LivingEntity
             }
             */
 
-            gunController.Aim(groundCursor.transform.position);
-            crosshair.transform.position = groundCursor.transform.position;
+            gunController.Aim(point);
+            crosshair.transform.position = point;
             crosshair.DetectTargets(ray);
-
         }
         //Weapon input
         if (Input.GetMouseButton(0))
