@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7f14b02b387d94ca5c9858d59e9004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 3
+  startingHealth: 10
   moveSpeed: 5
   recoveryTime: 1
   followTarget: {fileID: 100784392}
@@ -1315,7 +1315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0617a90ec7585734cbd08198c36eb1f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
+  enemies:
+  - enemyCount: 1
+    timeBetweenSpawns: 0
+    enemyHealth: 10
+    enemyDamage: 1
   enemy: {fileID: 6708270510006308986, guid: fb86199628491e044bb68df6771472e1, type: 3}
 --- !u!4 &1591598605
 Transform:

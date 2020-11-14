@@ -42,7 +42,7 @@ public class Player : LivingEntity
         //controller.FollowTarget(followTarget, )
         //Look input
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.up * -1);
+        Plane groundPlane = new Plane(Vector3.zero, Vector3.zero,Vector3.zero);
         float rayDistance;
         if (Input.GetMouseButtonDown(0))
         {
@@ -75,7 +75,6 @@ public class Player : LivingEntity
         {
             // checks if the ray hit the ground and then sends the info to the point vector
             Vector3 point = ray.GetPoint(rayDistance);
-            point = point - transform.position.normalized;
             Debug.DrawLine(ray.origin, point, Color.red);
             /*if (controller.isScopedIn)
             {
