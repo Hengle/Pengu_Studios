@@ -42,7 +42,7 @@ public class Player : LivingEntity
         //controller.FollowTarget(followTarget, )
         //Look input
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.zero, Vector3.zero,Vector3.zero);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayDistance;
         if (Input.GetMouseButtonDown(0))
         {
