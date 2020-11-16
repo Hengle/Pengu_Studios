@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: 624153550}
   - component: {fileID: 624153547}
   - component: {fileID: 624153545}
+  - component: {fileID: 624153546}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -486,7 +487,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 10
   moveSpeed: 5
-  recoveryTime: 1
+  interactables:
+    serializedVersion: 2
+    m_Bits: 512
+  enemies:
+    serializedVersion: 2
+    m_Bits: 256
+  recoveryTime: 0.9
   followTarget: {fileID: 100784392}
   rb: {fileID: 624153547}
   crosshair: {fileID: 1821351469}
@@ -526,6 +533,19 @@ CapsuleCollider:
   m_Height: 2.9275875
   m_Direction: 1
   m_Center: {x: -0.005930066, y: 0.47302192, z: 0.011888891}
+--- !u!114 &624153546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624153542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261c3aca03ffd9479acdb4163cbc371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesInRange: 0
 --- !u!54 &624153547
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -550,7 +570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624153542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.58, y: 0.91, z: -3.93}
+  m_LocalPosition: {x: -9.15, y: 0.91, z: -8.65}
   m_LocalScale: {x: 0.8, y: 0.9, z: 0.8}
   m_Children:
   - {fileID: 559484197}
@@ -890,7 +910,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066287680}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.222819, y: 4.507187, z: -9.124883}
+  m_LocalPosition: {x: -12.792819, y: 4.507187, z: -13.844882}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1813702535}
@@ -1315,7 +1335,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0617a90ec7585734cbd08198c36eb1f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
+  enemies:
+  - enemyCount: 5
+    timeBetweenSpawns: 3
+    enemyHealth: 1
+    enemyDamage: 3
+    enemySpeed: 10
   enemy: {fileID: 6708270510006308986, guid: fb86199628491e044bb68df6771472e1, type: 3}
 --- !u!4 &1591598605
 Transform:
@@ -1444,7 +1469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_LocalRotation: {x: 0.26682648, y: 0.29526067, z: -0.103922874, w: 0.9114959}
-  m_LocalPosition: {x: -7.222819, y: 4.507187, z: -9.124883}
+  m_LocalPosition: {x: -12.792819, y: 4.507187, z: -13.844882}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 664291031}

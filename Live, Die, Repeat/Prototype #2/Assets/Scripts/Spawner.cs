@@ -27,6 +27,8 @@ public class Spawner : MonoBehaviour
             nextSpawnTime = Time.time + currentEnemy.timeBetweenSpawns;
             Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as Enemy;
             spawnedEnemy.startingHealth = currentEnemy.enemyHealth;
+            spawnedEnemy.damage = currentEnemy.enemyDamage;
+            spawnedEnemy.pathfinder.speed = currentEnemy.enemySpeed;
             spawnedEnemy.OnDeath += OnEnemyDeath;
         }
     }
@@ -62,5 +64,6 @@ public class Spawner : MonoBehaviour
         public float timeBetweenSpawns;
         public int enemyHealth;
         public int enemyDamage;
+        public int enemySpeed;
     }
 }

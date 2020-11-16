@@ -7,11 +7,16 @@ using UnityEngine.WSA;
 public class Player : LivingEntity
 {
     public float moveSpeed = 5;
+    float interactDistance = 5;
+    float viewDistance = 40;
+    public LayerMask interactables;
+    public LayerMask enemies;
+    int maxtargets = 5;
     public float recoveryTime;
     Camera viewCamera;
     PlayerController controller;
     GunController gunController;
-    GameObject groundCursor;
+    AwarenessScript eyes;
     CameraController camCont;
     public Transform followTarget;
     [HideInInspector] public Rigidbody rb;
@@ -21,7 +26,7 @@ public class Player : LivingEntity
         base.Start();
         rb = GetComponent<Rigidbody>();
         camCont = FindObjectOfType<CameraController>();
-        groundCursor = GameObject.Find("GroundCursor");
+        eyes = GetComponent<AwarenessScript>();
         controller = GetComponent<PlayerController>();
         viewCamera = Camera.main;
         gunController = GetComponent<GunController>();
@@ -38,9 +43,9 @@ public class Player : LivingEntity
 
     void Update()
     {
-        // enemy detection
-        //controller.FollowTarget(followTarget, )
-        //Look input
+        //Interactable detection
+        eyes.DetectInteractables(interactDistance, interactables, maxtargets);
+        eyes.DetectEnemies(viewDistance, enemies, maxtargets);
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayDistance;
@@ -49,7 +54,7 @@ public class Player : LivingEntity
             controller.CreateRay();
         }
 
-        if (controller.isScopedIn)
+        if (eyes.enemiesInRange)
         {
             //Switch this....
             camCont.Fight();

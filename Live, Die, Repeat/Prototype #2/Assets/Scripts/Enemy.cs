@@ -6,11 +6,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : LivingEntity
 {
-    public enum State {Idle, Chasing, Attacking};
+    public enum State { Idle, Chasing, Attacking };
     State currentState;
     Material skinMaterial;
     Color originalColor;
-    NavMeshAgent pathfinder;
+    public NavMeshAgent pathfinder;
     LivingEntity targetEntity;
     Transform target;
     float attackDistanceThreshold = 1.5f;
@@ -19,7 +19,7 @@ public class Enemy : LivingEntity
     float myCollisionRadius;
     float targetCollisionRadius;
     bool hasTarget;
-    float damage = 1;
+    [HideInInspector] public float damage = 1;
     protected override void Start()
     {
         base.Start();
