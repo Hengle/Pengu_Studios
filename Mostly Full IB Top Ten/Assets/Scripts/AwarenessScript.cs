@@ -38,7 +38,7 @@ public class AwarenessScript : MonoBehaviour
         foreach (GameObject interactable in interactablesToHit)
         {
             print(interactablesToHit.Count + " interactables");
-            look.position = Vector3.SmoothDamp(look.position,interactablesToHit[0].transform.position, ref vel, 100f * Time.deltaTime);
+            look.position = Vector3.SmoothDamp(look.position,new Vector3(interactablesToHit[0].transform.position.x, interactablesToHit[0].transform.position.y + 4, interactablesToHit[0].transform.position.z), ref vel, 1000f * Time.deltaTime);
         }
     }
 

@@ -10,6 +10,10 @@ public class CameraController : MonoBehaviour
     float range = 20f;
     public Transform lookTarget;
     public Transform followTarget;
+    Vector3 movement;
+    public float moveSpeed;
+    public Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +23,10 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        movement = new Vector3(0, 0, Input.GetAxisRaw("Vertical"));
+
+        rb.MovePosition(followTarget.position + movement * moveSpeed * Time.fixedDeltaTime);
         eyes.DetectInteractables(range, interactable, maxTargets, lookTarget);
     }
 }
