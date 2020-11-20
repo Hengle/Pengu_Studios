@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
     Vector3 movement;
     public float moveSpeed;
     public Rigidbody rb;
+    public GameObject hiddenObjects;
+    public GameObject initialText;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +25,19 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (lookTarget.position.z < transform.position.z)
+        {
+            initialText.SetActive(false);
+            hiddenObjects.SetActive(true);
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            moveSpeed = 5;
+        }
+        else
+        {
+            moveSpeed = 2;
+        }
         movement = new Vector3(0, 0, Input.GetAxisRaw("Vertical"));
 
         rb.MovePosition(followTarget.position + movement * moveSpeed * Time.fixedDeltaTime);
