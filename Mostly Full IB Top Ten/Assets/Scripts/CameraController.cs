@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
             initialText.SetActive(false);
             hiddenObjects.SetActive(true);
         }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
             moveSpeed = 5;
         }
@@ -38,9 +38,12 @@ public class CameraController : MonoBehaviour
         {
             moveSpeed = 2;
         }
-        movement = new Vector3(0, 0, Input.GetAxisRaw("Vertical"));
-
-        rb.MovePosition(followTarget.position + movement * moveSpeed * Time.fixedDeltaTime);
+        movement = new Vector3(0, 0, 1);
+        
+        if(Input.GetKey(KeyCode.Mouse0))
+        {
+            rb.MovePosition(followTarget.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
         eyes.DetectInteractables(range, interactable, maxTargets, lookTarget);
     }
 }
