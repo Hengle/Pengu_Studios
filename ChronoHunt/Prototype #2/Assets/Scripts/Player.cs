@@ -8,6 +8,7 @@ public class Player : LivingEntity
 {
     public float moveSpeed = 5;
     float interactDistance = 5;
+    float outerInteractDistance = 20;
     float viewDistance = 40;
     public LayerMask interactables;
     public LayerMask enemies;
@@ -44,7 +45,7 @@ public class Player : LivingEntity
     void Update()
     {
         //Interactable detection
-        eyes.DetectInteractables(interactDistance, interactables, maxtargets);
+        eyes.DetectInteractables(interactDistance,outerInteractDistance, interactables, maxtargets);
         eyes.DetectEnemies(viewDistance, enemies, maxtargets);
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
@@ -54,7 +55,7 @@ public class Player : LivingEntity
             controller.CreateRay();
         }
 
-        if (eyes.enemiesInRange)
+        if (eyes.enemiesInRange || Input.GetMouseButton(1))
         {
             //Switch this....
             camCont.Fight();

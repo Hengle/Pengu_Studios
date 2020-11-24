@@ -6,27 +6,48 @@ using System.Linq;
 public class AwarenessScript : MonoBehaviour
 {
     public bool enemiesInRange;
-    public void DetectInteractables(float range, LayerMask interactables, int maxTargets)
+    public void DetectInteractables(float range,float outerRange, LayerMask interactables, int maxTargets)
     {
+        Material interactColor;
+        Material currentColor;
         //Get any colliders in this range that are on the layermask
         Collider[] interactablesInRange = Physics.OverlapSphere(transform.position, range, interactables);
+        Collider[] interactablesInOuterRange = Physics.OverlapSphere(transform.position, outerRange, interactables);
 
         //For if more than maxTargets were found
-        if(interactablesInRange.Length > maxTargets)
+        if (interactablesInRange.Length > maxTargets)
         {
             //sort by distance
             interactablesInRange.OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position));
         }
+        if (interactablesInOuterRange.Length > maxTargets)
+        {
+            //sort by distance
+            interactablesInOuterRange.OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position));
+        }
 
         //This is a list for all of the interactables in the range
-        List<GameObject> interactablesToHit = new List<GameObject>();
-
-        //populate the tnteractablesToHit list
-        for(int i = 0; i<maxTargets; i++)
+        List<InteractableObject> interactablesToHit = new List<InteractableObject>();
+        List<InteractableObject> interactablesInOuterRangeToHit = new List<InteractableObject>();
+        //populate the InteractablesInOuterRange list
+        for (int i = 0; i < maxTargets; i++)
         {
-            if(i < interactablesInRange.Length)
+            if (i < interactablesInOuterRange.Length)
             {
-                interactablesToHit.Add(interactablesInRange[i].gameObject);
+                interactablesInOuterRangeToHit.Add(interactablesInOuterRange[i].GetComponent<InteractableObject>());
+                
+            }
+            else
+            {
+                break;
+            }
+        }
+        //populate the tnteractablesToHit list
+        for (int i = 0; i < maxTargets; i++)
+        {
+            if (i < interactablesInRange.Length)
+            {
+                interactablesToHit.Add(interactablesInRange[i].GetComponent<InteractableObject>());
             }
             else
             {
@@ -34,10 +55,18 @@ public class AwarenessScript : MonoBehaviour
             }
         }
 
-        foreach(GameObject interactable in interactablesToHit)
+        foreach (InteractableObject inRange in interactablesInOuterRangeToHit)
         {
-            print(interactablesToHit.Count + " interactables");
+            currentColor = inRange.GetComponent<Renderer>().material;
+            currentColor.color = inRange.StartingColor;
         }
+
+        foreach (InteractableObject interactable in interactablesToHit)
+        {
+            interactColor = interactable.GetComponent<Renderer>().material;
+            interactColor.color = Color.white;
+        }
+
     }
 
     public void DetectEnemies(float range, LayerMask enemies, int maxTargets)

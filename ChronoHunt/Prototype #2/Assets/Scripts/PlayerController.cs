@@ -27,8 +27,7 @@ public class PlayerController : Controller
     [HideInInspector]public bool isScopedIn = false;
     [HideInInspector]public bool isLockedOn = false;
     //layermasks
-    public LayerMask interactable;
-    public LayerMask colliderObjects;
+    public LayerMask enemy;
     //player state
     float forwardVelocity;
     void Start()
@@ -78,7 +77,7 @@ public class PlayerController : Controller
         //Creates a ray to dectect if the player hit an enemy
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, maxInteractDistance, interactable, QueryTriggerInteraction.Collide)) 
+        if (Physics.Raycast(ray, out hit, maxInteractDistance, enemy, QueryTriggerInteraction.Collide)) 
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             if (hit.collider.tag == ("Enemy")) 
