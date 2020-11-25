@@ -4,13 +4,14 @@ using System.Collections;
 public class Crosshairs : MonoBehaviour
 {
 
-	public LayerMask targetMask;
-	public SpriteRenderer dot;
-	public Color dotHighlightColour;
+	[SerializeField] LayerMask targetMask;
+	[SerializeField] SpriteRenderer dot;
+	[SerializeField] Color dotHighlightColour;
 	Color originalDotColour;
 
 	void Start()
 	{
+		//Cursor.visible = false;
 		originalDotColour = dot.color;
 	}
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
 
 
@@ -9,8 +8,8 @@ public class PlayerController : Controller
 {
     //fine tune control variables
     float maxSpeed = 6;
-    float timeZeroToMax = .3f;
-    float timeMaxToZero = .3f;
+    float timeZeroToMax = .5f;
+    float timeMaxToZero = .5f;
     float accelRatePerSecond;
     float decelRatePerSecond;
     float maxInteractDistance = 30;
@@ -27,11 +26,18 @@ public class PlayerController : Controller
     [HideInInspector]public bool isScopedIn = false;
     [HideInInspector]public bool isLockedOn = false;
     //layermasks
-    public LayerMask enemy;
+    [SerializeField] LayerMask enemy;
     //player state
-    float forwardVelocity;
+    [SerializeField]float forwardVelocity;
+    public bool moving;
+    public bool running;
+    Vector3 forward, right; // Keeps track of our relative forward and right vectors
     void Start()
     {
+        forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
+        forward.y = 0; // make sure y is 0
+        forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
+        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
         groundNormal = Vector3.zero;
         isGrounded = true;
         accelRatePerSecond = maxSpeed / timeZeroToMax;
@@ -41,11 +47,11 @@ public class PlayerController : Controller
     }
     public override void ReadInput(InputData data)
     {
-        // Takes input from the input manage
+        // Takes input from the input manager
         if (data.axes[0] != 0)
         {
             Accelerate(accelRatePerSecond);
-            walkVelocity += Vector3.forward * data.axes[0];
+            walkVelocity += Vector3.up * data.axes[0];
         }
         if (data.axes[1] != 0)
         {
@@ -95,16 +101,31 @@ public class PlayerController : Controller
         CheckGroundStatus();
         if(isGrounded)
         {
+            Vector3 rightMovement = right * forwardVelocity * Time.deltaTime * walkVelocity.x; // Our right movement is based on the right vector, movement speed, and our GetAxis command. We multiply by Time.deltaTime to make the movement smooth.
+            Vector3 upMovement = forward * forwardVelocity * Time.deltaTime * walkVelocity.y; // Up movement uses the forward vector, movement speed, and the vertical axis inputs.
             if (newInput)
             {
-                walkVelocity = Camera.main.transform.TransformDirection(walkVelocity);
-                walkVelocity.y = 0f;
-                rb.velocity = walkVelocity * forwardVelocity;
+                transform.position += rightMovement; // move our transform's position right/left
+                transform.position += upMovement; // Move our transform's position up/down
+                if (forwardVelocity > 0)
+                {
+                    moving = true;
+                    if (forwardVelocity > 3)
+                    {
+                        running = true;
+                    }
+                }
             }
             if(!newInput)
-            {
+            {  
+                if (forwardVelocity <= 5)
+                {
+                    running = false;
+                    moving = false;
+                }
                 Accelerate(decelRatePerSecond);
-                rb.velocity = walkVelocity * forwardVelocity;
+                transform.position += rightMovement; // move our transform's position right/left
+                transform.position += upMovement; // Move our transform's position up/down
             }
         }
         newInput = false;

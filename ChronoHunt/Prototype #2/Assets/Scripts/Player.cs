@@ -1,27 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
 
 [RequireComponent(typeof(GunController))]
 public class Player : LivingEntity
 {
-    public float moveSpeed = 5;
     float interactDistance = 5;
     float outerInteractDistance = 20;
     float viewDistance = 40;
-    public LayerMask interactables;
-    public LayerMask enemies;
+    float maxRayDistance = 20f;
+    [SerializeField] LayerMask interactables;
+    [SerializeField] LayerMask enemies;
+    [SerializeField] LayerMask layerMask;
     int maxtargets = 5;
-    public float recoveryTime;
+    [SerializeField] float recoveryTime;
     Camera viewCamera;
     PlayerController controller;
     GunController gunController;
     AwarenessScript eyes;
     CameraController camCont;
-    public Transform followTarget;
+    [SerializeField] Transform followTarget;
     [HideInInspector] public Rigidbody rb;
-    public Crosshairs crosshair;
+    [SerializeField] Crosshairs crosshair;
+    [SerializeField] Animator playerAnim;
+    Vector3 forward, right;
     protected override void Start()
     {
         base.Start();
@@ -31,10 +33,17 @@ public class Player : LivingEntity
         controller = GetComponent<PlayerController>();
         viewCamera = Camera.main;
         gunController = GetComponent<GunController>();
+        forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
+        forward.y = 0; // make sure y is 0
+        forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
+        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
     }
 
     void FixedUpdate()
     {
+        //set animations
+        playerAnim.SetBool("Moving", controller.moving);
+        playerAnim.SetBool("Running", controller.running);
         //Movement input
         if (gunController.shotTime <= recoveryTime)
         {
@@ -47,20 +56,22 @@ public class Player : LivingEntity
         //Interactable detection
         eyes.DetectInteractables(interactDistance,outerInteractDistance, interactables, maxtargets);
         eyes.DetectEnemies(viewDistance, enemies, maxtargets);
-        Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayDistance;
+        Vector2 mouseScreenPosition = Input.mousePosition;
+        mouseScreenPosition = new Vector3(mouseScreenPosition.x,mouseScreenPosition.y, 0) - transform.position;
+        Ray ray = viewCamera.ScreenPointToRay(mouseScreenPosition);
+        RaycastHit hit;
+        Vector3 point;
         if (Input.GetMouseButtonDown(0))
         {
             controller.CreateRay();
         }
 
-        if (eyes.enemiesInRange || Input.GetMouseButton(1))
+        if (eyes.enemiesInRange || Input.GetMouseButtonDown(1))
         {
             //Switch this....
             camCont.Fight();
         }
-        else
+        else if(Input.GetMouseButtonDown(1))
         {
             camCont.ResetCam();
         }
@@ -76,26 +87,21 @@ public class Player : LivingEntity
                 controller.isLockedOn = false;
             }
         }
-
-        if (groundPlane.Raycast(ray, out rayDistance))
+        
+        if (Physics.Raycast(ray, out hit, maxRayDistance, layerMask))
         {
-            // checks if the ray hit the ground and then sends the info to the point vector
-            Vector3 point = ray.GetPoint(rayDistance);
-            Debug.DrawLine(ray.origin, point, Color.red);
-            /*if (controller.isScopedIn)
-            {
-                gunController.Aim(point);
-            }
-            if (!controller.isScopedIn && !controller.isLockedOn)
-            {
-                gunController.Aim(groundCursor.transform.position);
-            }
-            */
-
-            gunController.Aim(point);
-            crosshair.transform.position = point;
+            point = hit.point;
             crosshair.DetectTargets(ray);
         }
+        else
+        {
+            point = ray.origin + ray.direction * maxRayDistance;
+        }
+      
+        Debug.DrawLine(ray.origin, point, Color.red);
+        gunController.Aim(point);
+        crosshair.transform.position = point;
+
         //Weapon input
         if (Input.GetMouseButton(0))
         {
