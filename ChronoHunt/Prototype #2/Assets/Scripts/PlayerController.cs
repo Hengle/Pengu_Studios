@@ -13,7 +13,7 @@ public class PlayerController : Controller
     float accelRatePerSecond;
     float decelRatePerSecond;
     float maxInteractDistance = 30;
-    Vector3 walkVelocity;
+    [HideInInspector]public Vector3 walkVelocity;
     //groundChecks
     Vector3 groundNormal;
     [HideInInspector]public bool isGrounded;
@@ -29,8 +29,8 @@ public class PlayerController : Controller
     [SerializeField] LayerMask enemy;
     //player state
     [SerializeField]float forwardVelocity;
-    public bool moving;
-    public bool running;
+    [HideInInspector] public bool moving;
+    [HideInInspector] public bool running;
     Vector3 forward, right; // Keeps track of our relative forward and right vectors
     void Start()
     {

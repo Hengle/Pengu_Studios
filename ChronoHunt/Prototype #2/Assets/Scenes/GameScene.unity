@@ -529,6 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb7bfa26b49bf94e91e81e4037a73d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkVelocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
   target: {fileID: 0}
   isScopedIn: 0
@@ -718,9 +719,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 70
-  field of view: 85
+  field of view: 70
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -1461,8 +1462,8 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
-  m_BlendUpdateMethod: 1
+  m_UpdateMethod: 0
+  m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 0.5
@@ -1744,12 +1745,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821351465}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88f1720f17a508e4aaffa35587f7f205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 1687258584}
   objectScale: 0.1
 --- !u!1 &1892880568
 GameObject:

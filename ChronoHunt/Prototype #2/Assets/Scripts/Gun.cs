@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
     float muzzleVelocity = 50f;
     public float nextShotTime = 2;
     Player player;
-    float smoothTime = 3;
+    [SerializeField]float smoothTime = 5;
     float recoilStrength = 11;
     float maxRecoil = 11;
     float displacement = .1f;
@@ -21,7 +21,7 @@ public class Gun : MonoBehaviour
         player = FindObjectOfType<Player>();
         maxDisplacement = displacement;
     }
-    void Update()
+    void FixedUpdate()
     {
         transform.localPosition = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftShift))
@@ -34,10 +34,7 @@ public class Gun : MonoBehaviour
             recoilStrength = maxRecoil;
             displacement = maxDisplacement;
         }
-    }
-    void FixedUpdate()
-    {
-        if(nextShotTime >= 0)
+        if (nextShotTime >= 0)
         {
             nextShotTime -= Time.deltaTime;
         }
@@ -45,7 +42,7 @@ public class Gun : MonoBehaviour
     public void Aim(Vector3 point)
     {
         Vector3 direction = point - player.transform.position;
-        Quaternion rotation = Quaternion.LookRotation(direction);
+        Quaternion rotation = Quaternion.LookRotation(direction.normalized);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, smoothTime * Time.deltaTime);
     }
     public void Shoot()

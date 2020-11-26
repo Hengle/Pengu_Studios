@@ -212,6 +212,7 @@ MonoBehaviour:
   muzzle: {fileID: 6307264864652186083}
   projectile: {fileID: 140652380501109978, guid: 6fe7c4559be51024ba1d9df91814db78, type: 3}
   nextShotTime: 2
+  smoothTime: 2
   shotTime: 1.5
 --- !u!65 &9175121696937554851
 BoxCollider:

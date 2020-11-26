@@ -23,7 +23,7 @@ public class Player : LivingEntity
     [HideInInspector] public Rigidbody rb;
     [SerializeField] Crosshairs crosshair;
     [SerializeField] Animator playerAnim;
-    Vector3 forward, right;
+    Vector3 point;
     protected override void Start()
     {
         base.Start();
@@ -33,10 +33,6 @@ public class Player : LivingEntity
         controller = GetComponent<PlayerController>();
         viewCamera = Camera.main;
         gunController = GetComponent<GunController>();
-        forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
-        forward.y = 0; // make sure y is 0
-        forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
-        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
     }
 
     void FixedUpdate()
@@ -44,11 +40,9 @@ public class Player : LivingEntity
         //set animations
         playerAnim.SetBool("Moving", controller.moving);
         playerAnim.SetBool("Running", controller.running);
+        playerAnim.SetFloat("WalkVel", controller.walkVelocity.x);
         //Movement input
-        if (gunController.shotTime <= recoveryTime)
-        {
-            controller.Move();
-        }
+        controller.Move();
     }
 
     void Update()
@@ -60,7 +54,6 @@ public class Player : LivingEntity
         mouseScreenPosition = new Vector3(mouseScreenPosition.x,mouseScreenPosition.y, 0) - transform.position;
         Ray ray = viewCamera.ScreenPointToRay(mouseScreenPosition);
         RaycastHit hit;
-        Vector3 point;
         if (Input.GetMouseButtonDown(0))
         {
             controller.CreateRay();
@@ -88,7 +81,7 @@ public class Player : LivingEntity
             }
         }
         
-        if (Physics.Raycast(ray, out hit, maxRayDistance, layerMask))
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, maxRayDistance, layerMask))
         {
             point = hit.point;
             crosshair.DetectTargets(ray);
@@ -97,11 +90,9 @@ public class Player : LivingEntity
         {
             point = ray.origin + ray.direction * maxRayDistance;
         }
-      
         Debug.DrawLine(ray.origin, point, Color.red);
         gunController.Aim(point);
         crosshair.transform.position = point;
-
         //Weapon input
         if (Input.GetMouseButton(0))
         {
