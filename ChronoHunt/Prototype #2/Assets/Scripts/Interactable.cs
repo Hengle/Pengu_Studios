@@ -17,7 +17,7 @@ public class Interactable : MonoBehaviour, IDamagable
         health = startingHealth;
     }
 
-    public void TakeHit(float damage, RaycastHit hit)
+    public void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
         //Work with the hit variable;
         TakeDamage(damage);

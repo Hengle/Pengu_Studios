@@ -41,12 +41,12 @@ public class GunController : MonoBehaviour
             equippedGun.Aim(aimPoint);
         }
     }
-
-    public float GunHeight
+    public void Reload()
     {
-        get
+        if (equippedGun != null)
         {
-            return weaponHold.position.y;
+            equippedGun.Reload();
         }
     }
+
 }

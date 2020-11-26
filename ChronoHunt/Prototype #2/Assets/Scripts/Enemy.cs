@@ -8,6 +8,7 @@ public class Enemy : LivingEntity
 {
     public enum State { Idle, Chasing, Attacking };
     State currentState;
+    [SerializeField] GameObject deathEffect;
     Material skinMaterial;
     Color originalColor;
     public NavMeshAgent pathfinder;
@@ -41,6 +42,14 @@ public class Enemy : LivingEntity
         }
     }
 
+    public override void TakeHit(float damage, Vector3 hitpoint, Vector3 hitdirection)
+    {
+        if (damage >= health)
+        {
+            Destroy(Instantiate(deathEffect, hitpoint, Quaternion.FromToRotation(Vector3.forward, hitdirection)) as GameObject, 2f);
+        }
+        base.TakeHit(damage, hitpoint, hitdirection);
+    }
     void OnTargetDeath()
     {
         hasTarget = false;

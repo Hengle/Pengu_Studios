@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
+  deathEffect: {fileID: 826504698156976616, guid: 59a1dca62839b65449c2f225617be8ba, type: 3}
   pathfinder: {fileID: 6708270510006308987}
   damage: 1
 --- !u!195 &6708270510006308987

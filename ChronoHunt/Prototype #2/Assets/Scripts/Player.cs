@@ -91,9 +91,16 @@ public class Player : LivingEntity
             point = ray.origin + ray.direction * maxRayDistance;
         }
         Debug.DrawLine(ray.origin, point, Color.red);
-        gunController.Aim(point);
         crosshair.transform.position = point;
+        if ((new Vector3(point.x, point.z) - new Vector3(transform.position.x, transform.position.z)).sqrMagnitude > .5f)
+        {
+            gunController.Aim(point);
+        }
         //Weapon input
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gunController.Reload();
+        }
         if (Input.GetMouseButton(0))
         {
             gunController.Shoot();

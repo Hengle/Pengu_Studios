@@ -4,39 +4,48 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public Transform muzzle;
-    public Projectile projectile;
+    [SerializeField] Transform muzzle;
+    [SerializeField] Projectile projectile;
     float muzzleVelocity = 50f;
     public float nextShotTime = 2;
     Player player;
     [SerializeField]float smoothTime = 5;
     float recoilStrength = 11;
     float maxRecoil = 11;
-    float displacement = .1f;
-    float maxDisplacement;
     public float shotTime = 2;
+    [SerializeField] Rigidbody rb;
+    Vector3 recoilSmotherDampVel;
+
+    //Reloading
+    [SerializeField]int projectilesPerMag;
+    int projectilesRemainingInMag;
+    bool isReloading;
+    [SerializeField]float reloadTime;
+
 
     void Start()
     {
         player = FindObjectOfType<Player>();
-        maxDisplacement = displacement;
+        projectilesRemainingInMag = projectilesPerMag;
     }
-    void FixedUpdate()
+    private void LateUpdate()
     {
-        transform.localPosition = Vector3.zero;
-        if (Input.GetKey(KeyCode.LeftShift))
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmotherDampVel, .05f);
+        if (!isReloading && projectilesRemainingInMag == 0)
         {
-            recoilStrength = 4;
-            displacement = 0;
-        }
-        else
-        {
-            recoilStrength = maxRecoil;
-            displacement = maxDisplacement;
+            Reload();
         }
         if (nextShotTime >= 0)
         {
             nextShotTime -= Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            recoilStrength = 4;
+        }
+        else
+        {
+            recoilStrength = maxRecoil;
         }
     }
     public void Aim(Vector3 point)
@@ -47,13 +56,42 @@ public class Gun : MonoBehaviour
     }
     public void Shoot()
     {
-        if (nextShotTime <= 0)
+        if (!isReloading && nextShotTime <= 0 && projectilesRemainingInMag > 0)
         {
+            projectilesRemainingInMag--;
             nextShotTime = shotTime;
             Projectile newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile;
             newProjectile.SetSpeed(muzzleVelocity);
-            player.transform.position = player.transform.position + new Vector3(0,displacement, 0);
+            transform.localPosition -= Vector3.left * Random.Range(.5f, 1);
             player.rb.velocity = Vector3.Lerp(player.rb.velocity, player.rb.velocity - (muzzle.transform.position - transform.position) * recoilStrength, 1f);
         }
     }
+
+    public void Reload()
+    {
+        StartCoroutine(AnimateReload());
+    }
+    IEnumerator AnimateReload()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(.2f);
+
+        float reloadSpeed = 1 / reloadTime;
+        float percent = 0;
+        Vector3 initialRot = transform.localEulerAngles;
+        float maxReloadAngle = 30;
+
+        while(percent < 1)
+        {
+            percent += Time.deltaTime * reloadSpeed;
+            float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
+            float reloadAngle = Mathf.Lerp(0, maxReloadAngle, interpolation);
+            transform.localEulerAngles = initialRot + Vector3.forward * reloadAngle;
+
+            yield return null;
+        }
+        isReloading = false;
+        projectilesRemainingInMag = projectilesPerMag;
+    }
+
 }
