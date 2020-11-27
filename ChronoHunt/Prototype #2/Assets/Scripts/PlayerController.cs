@@ -64,6 +64,14 @@ public class PlayerController : Controller
 
     private void Update()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            maxSpeed = 3;
+        }
+        else
+        {
+            maxSpeed = 6;
+        }
         if (Input.GetMouseButtonDown(1) && !isScopedIn)
         {
             isScopedIn = true;
@@ -72,10 +80,6 @@ public class PlayerController : Controller
         {
             isScopedIn = false;
         }
-    }
-    public void FollowTarget(Transform followTarget, float damping, Transform enemy)
-    {
-        followTarget.transform.rotation = Quaternion.Lerp(followTarget.transform.rotation, enemy.transform.rotation, damping);
     }
 
     public void CreateRay ()

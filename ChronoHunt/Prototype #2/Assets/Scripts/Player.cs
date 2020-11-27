@@ -37,16 +37,16 @@ public class Player : LivingEntity
 
     void FixedUpdate()
     {
-        //set animations
-        playerAnim.SetBool("Moving", controller.moving);
-        playerAnim.SetBool("Running", controller.running);
-        playerAnim.SetFloat("WalkVel", controller.walkVelocity.x);
         //Movement input
         controller.Move();
     }
 
     void Update()
     {
+        //set animations
+        playerAnim.SetBool("Moving", controller.moving);
+        playerAnim.SetBool("Running", controller.running);
+        playerAnim.SetFloat("WalkVel", controller.walkVelocity.x);
         //Interactable detection
         eyes.DetectInteractables(interactDistance,outerInteractDistance, interactables, maxtargets);
         eyes.DetectEnemies(viewDistance, enemies, maxtargets);
@@ -103,7 +103,11 @@ public class Player : LivingEntity
         }
         if (Input.GetMouseButton(0))
         {
-            gunController.Shoot();
+            gunController.OnTriggerHold();
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            gunController.OnTriggerRelease();
         }
     }
 }

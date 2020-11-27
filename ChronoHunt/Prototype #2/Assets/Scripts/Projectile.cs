@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     float damage = 1;
     float lifeTime = 3;
     float skinWidth = .1f;
+    public Color trailColor;
 
     public void SetSpeed (float newSpeed)
     {
@@ -17,7 +18,7 @@ public class Projectile : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, lifeTime);
-
+        //GetComponent<TrailRenderer>().material.SetColor("_TintColor", trailColor);
         Collider[] initialCollisions = Physics.OverlapSphere(transform.position, .1f, collisionMask);
         if (initialCollisions.Length > 0)
         {
