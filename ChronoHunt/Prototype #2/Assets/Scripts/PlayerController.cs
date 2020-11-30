@@ -18,7 +18,7 @@ public class PlayerController : Controller
     Quaternion _targetRotation;
     //groundChecks
     Vector3 _groundNormal;
-    [HideInInspector]public bool isGrounded;
+    public bool isGrounded;
     float _height = 1f;
     [SerializeField]float _heightPadding = .05f;
     [SerializeField] LayerMask _ground;
