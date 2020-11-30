@@ -5,19 +5,19 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public LayerMask collisionMask;
-    float speed = 10f;
-    float damage = 1;
-    float lifeTime = 3;
-    float skinWidth = .1f;
+    float _speed = 10f;
+    float _damage = 1;
+    float _lifeTime = 3;
+    float _skinWidth = .1f;
     public Color trailColor;
 
     public void SetSpeed (float newSpeed)
     {
-        speed = newSpeed;
+        _speed = newSpeed;
     }
     private void Start()
     {
-        Destroy(gameObject, lifeTime);
+        Destroy(gameObject, _lifeTime);
         //GetComponent<TrailRenderer>().material.SetColor("_TintColor", trailColor);
         Collider[] initialCollisions = Physics.OverlapSphere(transform.position, .1f, collisionMask);
         if (initialCollisions.Length > 0)
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        float moveDistance = speed * Time.deltaTime;
+        float moveDistance = _speed * Time.deltaTime;
         CheckCollisions(moveDistance);
         transform.Translate(Vector3.forward * moveDistance);
     }
@@ -38,7 +38,7 @@ public class Projectile : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, moveDistance + skinWidth, collisionMask, QueryTriggerInteraction.Collide))
+        if (Physics.Raycast(ray, out hit, moveDistance + _skinWidth, collisionMask, QueryTriggerInteraction.Collide))
         {
             OnHitObject(hit.collider, hit.point);
         }
@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
         IDamagable damagableObgect = c.GetComponent<IDamagable>();
         if (damagableObgect != null)
         {
-            damagableObgect.TakeHit(damage, hitPoint, transform.forward);
+            damagableObgect.TakeHit(_damage, hitPoint, transform.forward);
         }
         GameObject.Destroy(gameObject);
     }

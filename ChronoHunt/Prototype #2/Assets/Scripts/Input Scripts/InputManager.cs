@@ -9,10 +9,10 @@ public class InputManager : MonoBehaviour
     [Range (0,20)]
     public int buttonCount;
 
-    public Controller controller;
+    public Controller playerController;
     public void PassInput(InputData data)
     {
-        controller.ReadInput(data);
+        playerController.ReadInput(data);
     }
 
     public void RefreshTracker()

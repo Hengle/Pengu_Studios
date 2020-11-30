@@ -213,19 +213,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d6e291dfbfbe846812b1e8978ad7a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireMode: 0
-  muzzles:
-  - {fileID: 6307264864652186083}
+  _fireMode: 2
+  _muzzles:
   - {fileID: 3816898116946035093}
-  projectile: {fileID: 140652380501109978, guid: 6fe7c4559be51024ba1d9df91814db78, type: 3}
+  _projectile: {fileID: 140652380501109978, guid: 6fe7c4559be51024ba1d9df91814db78, type: 3}
   nextShotTime: 1.5
-  smoothTime: 2
+  _smoothTime: 5
   shotTime: 2
-  projectilesPerMag: 1
-  reloadTime: 0.5
-  bolt: {fileID: 6304697921569988934}
-  shell: {fileID: 4510996431171402105, guid: 2097c90d50cbde54697cccc2613a8adc, type: 3}
-  shellEjection: {fileID: 5548071490061693367}
+  _projectilesPerMag: 2
+  _reloadTime: 1
+  _bolt: {fileID: 6304697921569988934}
+  _shell: {fileID: 4510996431171402105, guid: 2097c90d50cbde54697cccc2613a8adc, type: 3}
+  _shellEjection: {fileID: 5548071490061693367}
 --- !u!65 &9175121696937554851
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -267,16 +266,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c3d1b2b9c9ebe42a4d8d2e57bf2bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashHolder: {fileID: 5605130822233432184}
-  flashSprites:
+  _flashHolder: {fileID: 5605130822233432184}
+  _flashSprites:
   - {fileID: -6578892327267529403, guid: 7cbef934ae9b71840a37e4c6dc30dc9e, type: 3}
   - {fileID: -4221598902092674775, guid: 7cbef934ae9b71840a37e4c6dc30dc9e, type: 3}
   - {fileID: 5564759131187023308, guid: 7cbef934ae9b71840a37e4c6dc30dc9e, type: 3}
   - {fileID: 4175653292564332668, guid: 7cbef934ae9b71840a37e4c6dc30dc9e, type: 3}
-  spriteRenderers:
-  - {fileID: 8999259686363151844}
+  _spriteRenderers:
   - {fileID: 1894452504600841987}
-  flashTime: 0.05
+  - {fileID: 8999259686363151844}
+  _flashTime: 0.1
 --- !u!1 &1682663374092554880
 GameObject:
   m_ObjectHideFlags: 0

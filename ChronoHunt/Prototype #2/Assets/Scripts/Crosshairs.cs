@@ -4,15 +4,15 @@ using System.Collections;
 public class Crosshairs : MonoBehaviour
 {
 
-	[SerializeField] LayerMask targetMask;
-	[SerializeField] SpriteRenderer dot;
-	[SerializeField] Color dotHighlightColour;
-	Color originalDotColour;
+	[SerializeField] LayerMask _targetMask;
+	[SerializeField] SpriteRenderer _dot;
+	[SerializeField] Color _dotHighlightColour;
+	Color _originalDotColour;
 
 	void Start()
 	{
 		//Cursor.visible = false;
-		originalDotColour = dot.color;
+		_originalDotColour = _dot.color;
 	}
 
 	void LateUpdate()
@@ -22,13 +22,13 @@ public class Crosshairs : MonoBehaviour
 
 	public void DetectTargets(Ray ray)
 	{
-		if (Physics.Raycast(ray, 1000, targetMask, QueryTriggerInteraction.Collide))
+		if (Physics.Raycast(ray, 1000, _targetMask, QueryTriggerInteraction.Collide))
 		{
-			dot.color = dotHighlightColour;
+			_dot.color = _dotHighlightColour;
 		}
 		else
 		{
-			dot.color = originalDotColour;
+			_dot.color = _originalDotColour;
 		}
 	}
 }

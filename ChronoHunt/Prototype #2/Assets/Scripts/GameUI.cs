@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
-    [SerializeField] Image fadePlane;
-    [SerializeField] GameObject gameOverUI;
+    [SerializeField] Image _fadePlane;
+    [SerializeField] GameObject _gameOverUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class GameUI : MonoBehaviour
     void OnGameOver()
     {
         StartCoroutine(Fade(Color.clear, Color.black, 1));
-        gameOverUI.SetActive(true);
+        _gameOverUI.SetActive(true);
     }
 
     IEnumerator Fade(Color from, Color to, float time)
@@ -29,7 +29,7 @@ public class GameUI : MonoBehaviour
         while(percent <1)
         {
             percent += Time.deltaTime * speed;
-            fadePlane.color = Color.Lerp(from, to, percent);
+            _fadePlane.color = Color.Lerp(from, to, percent);
             yield return null;
         }
     }

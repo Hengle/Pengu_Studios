@@ -8,33 +8,33 @@ public class AwarenessScript : MonoBehaviour
     public bool enemiesInRange;
     public void DetectInteractables(float range,float outerRange, LayerMask interactables, int maxTargets)
     {
-        Material interactColor;
-        Material currentColor;
+        Material _interactColor;
+        Material _currentColor;
         //Get any colliders in this range that are on the layermask
-        Collider[] interactablesInRange = Physics.OverlapSphere(transform.position, range, interactables);
-        Collider[] interactablesInOuterRange = Physics.OverlapSphere(transform.position, outerRange, interactables);
+        Collider[] _interactablesInRange = Physics.OverlapSphere(transform.position, range, interactables);
+        Collider[] _interactablesInOuterRange = Physics.OverlapSphere(transform.position, outerRange, interactables);
 
         //For if more than maxTargets were found
-        if (interactablesInRange.Length > maxTargets)
+        if (_interactablesInRange.Length > maxTargets)
         {
             //sort by distance
-            interactablesInRange.OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position));
+            _interactablesInRange.OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position));
         }
-        if (interactablesInOuterRange.Length > maxTargets)
+        if (_interactablesInOuterRange.Length > maxTargets)
         {
             //sort by distance
-            interactablesInOuterRange.OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position));
+            _interactablesInOuterRange.OrderBy(hit => Vector3.Distance(hit.transform.position, transform.position));
         }
 
         //This is a list for all of the interactables in the range
-        List<InteractableObject> interactablesToHit = new List<InteractableObject>();
-        List<InteractableObject> interactablesInOuterRangeToHit = new List<InteractableObject>();
+        List<InteractableObject> _interactablesToHit = new List<InteractableObject>();
+        List<InteractableObject> _interactablesInOuterRangeToHit = new List<InteractableObject>();
         //populate the InteractablesInOuterRange list
         for (int i = 0; i < maxTargets; i++)
         {
-            if (i < interactablesInOuterRange.Length)
+            if (i < _interactablesInOuterRange.Length)
             {
-                interactablesInOuterRangeToHit.Add(interactablesInOuterRange[i].GetComponent<InteractableObject>());
+                _interactablesInOuterRangeToHit.Add(_interactablesInOuterRange[i].GetComponent<InteractableObject>());
                 
             }
             else
@@ -45,9 +45,9 @@ public class AwarenessScript : MonoBehaviour
         //populate the tnteractablesToHit list
         for (int i = 0; i < maxTargets; i++)
         {
-            if (i < interactablesInRange.Length)
+            if (i < _interactablesInRange.Length)
             {
-                interactablesToHit.Add(interactablesInRange[i].GetComponent<InteractableObject>());
+                _interactablesToHit.Add(_interactablesInRange[i].GetComponent<InteractableObject>());
             }
             else
             {
@@ -55,16 +55,16 @@ public class AwarenessScript : MonoBehaviour
             }
         }
 
-        foreach (InteractableObject inRange in interactablesInOuterRangeToHit)
+        foreach (InteractableObject inRange in _interactablesInOuterRangeToHit)
         {
-            currentColor = inRange.GetComponent<Renderer>().material;
-            currentColor.color = inRange.StartingColor;
+            _currentColor = inRange.GetComponent<Renderer>().material;
+            _currentColor.color = inRange.StartingColor;
         }
 
-        foreach (InteractableObject interactable in interactablesToHit)
+        foreach (InteractableObject interactable in _interactablesToHit)
         {
-            interactColor = interactable.GetComponent<Renderer>().material;
-            interactColor.color = Color.white;
+            _interactColor = interactable.GetComponent<Renderer>().material;
+            _interactColor.color = Color.white;
         }
 
     }

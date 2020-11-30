@@ -1,62 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 
 public class PlayerController : Controller
 {
     //fine tune control variables
-    float maxSpeed = 6;
-    float timeZeroToMax = .5f;
-    float timeMaxToZero = .5f;
-    float accelRatePerSecond;
-    float decelRatePerSecond;
-    float maxInteractDistance = 30;
+    float _maxSpeed = 6;
+    float _timeZeroToMax = .5f;
+    float _timeMaxToZero = .5f;
+    float _accelRatePerSecond;
+    float _decelRatePerSecond;
+    float _maxInteractDistance = 30;
     [HideInInspector]public Vector3 walkVelocity;
+    [SerializeField]float _turnSpeed = 1;
+    float _angle;
+    Quaternion _targetRotation;
     //groundChecks
-    Vector3 groundNormal;
+    Vector3 _groundNormal;
     [HideInInspector]public bool isGrounded;
-    float m_GroundCheckDistance = 1f;
+    float _height = 1f;
+    [SerializeField]float _heightPadding = .05f;
+    [SerializeField] LayerMask _ground;
+    float _maxGroundAngle = 120;
+    float _groundAngle;
+    Vector3 _forward;
+    RaycastHit _hitInfo;
     //gameobjects/components
-    Camera cam;
-    Rigidbody rb;
+    Camera _cam;
     [HideInInspector]public GameObject target;
     //bools
     [HideInInspector]public bool isScopedIn = false;
     [HideInInspector]public bool isLockedOn = false;
     //layermasks
-    [SerializeField] LayerMask enemy;
+    [SerializeField] LayerMask _enemy;
     //player state
-    [SerializeField]float forwardVelocity;
-    [HideInInspector] public bool moving;
+    [SerializeField]float _forwardVelocity;
     [HideInInspector] public bool running;
-    Vector3 forward, right; // Keeps track of our relative forward and right vectors
+    bool _sliding;
     void Start()
     {
-        forward = Camera.main.transform.forward; // Set forward to equal the camera's forward vector
-        forward.y = 0; // make sure y is 0
-        forward = Vector3.Normalize(forward); // make sure the length of vector is set to a max of 1.0
-        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward; // set the right-facing vector to be facing right relative to the camera's forward vector
-        groundNormal = Vector3.zero;
+        _groundNormal = Vector3.zero;
         isGrounded = true;
-        accelRatePerSecond = maxSpeed / timeZeroToMax;
-        decelRatePerSecond = -maxSpeed / timeMaxToZero;
-        cam = Camera.main;
-        rb = GetComponent<Rigidbody>();
+        _accelRatePerSecond = _maxSpeed / _timeZeroToMax;
+        _decelRatePerSecond = -_maxSpeed / _timeMaxToZero;
+        _cam = Camera.main;
     }
     public override void ReadInput(InputData data)
     {
         // Takes input from the input manager
         if (data.axes[0] != 0)
         {
-            Accelerate(accelRatePerSecond);
+            Accelerate(_accelRatePerSecond);
             walkVelocity += Vector3.up * data.axes[0];
         }
         if (data.axes[1] != 0)
         {
-            Accelerate(accelRatePerSecond);
+            Accelerate(_accelRatePerSecond);
             walkVelocity += Vector3.right * data.axes[1];
+        }
+        if(data.buttons[0])
+        {
+            _sliding = true;
+        }
+        else
+        {
+            _sliding = false;
         }
         walkVelocity = walkVelocity.normalized;
         newInput = true;
@@ -64,30 +73,30 @@ public class PlayerController : Controller
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (_sliding)
         {
-            maxSpeed = 3;
+            _maxSpeed = 3;
         }
         else
         {
-            maxSpeed = 6;
+            _maxSpeed = 6;
         }
-        if (Input.GetMouseButtonDown(1) && !isScopedIn)
+        if (_forwardVelocity >= 1)
         {
-            isScopedIn = true;
+            running = true;
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (_forwardVelocity <= 5)
         {
-            isScopedIn = false;
+            running = false;
         }
     }
 
     public void CreateRay ()
     {
         //Creates a ray to dectect if the player hit an enemy
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, maxInteractDistance, enemy, QueryTriggerInteraction.Collide)) 
+        if (Physics.Raycast(ray, out hit, _maxInteractDistance, _enemy, QueryTriggerInteraction.Collide)) 
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             if (hit.collider.tag == ("Enemy")) 
@@ -105,61 +114,74 @@ public class PlayerController : Controller
         CheckGroundStatus();
         if(isGrounded)
         {
-            Vector3 rightMovement = right * forwardVelocity * Time.deltaTime * walkVelocity.x; // Our right movement is based on the right vector, movement speed, and our GetAxis command. We multiply by Time.deltaTime to make the movement smooth.
-            Vector3 upMovement = forward * forwardVelocity * Time.deltaTime * walkVelocity.y; // Up movement uses the forward vector, movement speed, and the vertical axis inputs.
+            if (_groundAngle >= _maxGroundAngle) return;
             if (newInput)
             {
-                transform.position += rightMovement; // move our transform's position right/left
-                transform.position += upMovement; // Move our transform's position up/down
-                if (forwardVelocity > 0)
-                {
-                    moving = true;
-                    if (forwardVelocity > 3)
-                    {
-                        running = true;
-                    }
-                }
+                transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime;
             }
             if(!newInput)
             {  
-                if (forwardVelocity <= 5)
-                {
-                    running = false;
-                    moving = false;
-                }
-                Accelerate(decelRatePerSecond);
-                transform.position += rightMovement; // move our transform's position right/left
-                transform.position += upMovement; // Move our transform's position up/down
+                Accelerate(_decelRatePerSecond);
+                transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime;
             }
         }
         newInput = false;
     }
-
+    
+    public void CalculateDirection()
+    {
+        _angle = Mathf.Atan2(walkVelocity.x, walkVelocity.y);
+        _angle = Mathf.Rad2Deg * _angle;
+        _angle += _cam.transform.eulerAngles.y;
+    }
+    public void SetRotation()
+    {
+        _targetRotation = Quaternion.Euler(0, _angle, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, _turnSpeed * Time.deltaTime);
+    }
     public void Accelerate(float accel)
     {
         // increases and decreases the forwardvelocity float.
-        forwardVelocity += accel * Time.deltaTime;
-        forwardVelocity = Mathf.Clamp(forwardVelocity, 0, maxSpeed);
+        _forwardVelocity += accel * Time.fixedDeltaTime;
+        _forwardVelocity = Mathf.Clamp(_forwardVelocity, 0, _maxSpeed);
     }
 
     void CheckGroundStatus()
     {
-        //checks to see if the player is touching the ground
-        RaycastHit hitInfo;
-        // helper to visualise the ground check ray in the scene view
-        Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance), Color.red);
+        Debug.DrawLine(transform.position, transform.position + _forward * _height * 2, Color.blue);
+        Debug.DrawLine(transform.position, transform.position - Vector3.up * (_height + _heightPadding), Color.red);
         // 0.1f is a small offset to start the ray from inside the character
-        // it is also good to note that the transform position in the sample assets is at the base of the character
-        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
+        if (Physics.Raycast(transform.position, -Vector3.up, out _hitInfo, _height + _heightPadding, _ground))
         {
-            groundNormal = hitInfo.normal;
+            if(Vector3.Distance(transform.position, _hitInfo.point) > _height)
+            {
+                transform.position = Vector3.Lerp(transform.position, transform.position + Vector3.up * _height, 5 * Time.deltaTime);
+            }
             isGrounded = true;
         }
         else
         {
             isGrounded = false;
-            groundNormal = Vector3.up;
         }
     }
+    public void CalculateForward()
+    {
+        if(!isGrounded)
+        {
+            _forward = transform.forward;
+        }
+
+        _forward = Vector3.Cross(transform.right, _groundNormal);
+    }
+    public void CalculateGroundAngle()
+    {
+        if (!isGrounded)
+        {
+            _groundAngle = 90;
+            return;
+        }
+        _groundAngle = Vector3.Angle(_groundNormal, transform.forward);
+    }
+
 }
 

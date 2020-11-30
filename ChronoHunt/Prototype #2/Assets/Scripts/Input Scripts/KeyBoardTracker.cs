@@ -17,23 +17,23 @@ public class KeyBoardTracker : DeviceTracker
     public override void Refresh()
     {
         im = GetComponent<InputManager>();
-        KeyCode[] newButtons = new KeyCode[im.buttonCount];
-        AxisKeys[] newAxes = new AxisKeys[im.axisCount];
+        KeyCode[] _newButtons = new KeyCode[im.buttonCount];
+        AxisKeys[] _newAxes = new AxisKeys[im.axisCount];
         if (buttonKeys != null)
         {
-            for (int i = 0; i < Mathf.Min(newButtons.Length, buttonKeys.Length); i++)
+            for (int i = 0; i < Mathf.Min(_newButtons.Length, buttonKeys.Length); i++)
             {
-                newButtons[i] = buttonKeys[i];
+                _newButtons[i] = buttonKeys[i];
             }
-            buttonKeys = newButtons;
+            buttonKeys = _newButtons;
         }
         if (axisKeys != null)
         {
-            for (int i = 0; i < Mathf.Min(newAxes.Length, axisKeys.Length); i++)
+            for (int i = 0; i < Mathf.Min(_newAxes.Length, axisKeys.Length); i++)
             {
-                newAxes[i] = axisKeys[i];
+                _newAxes[i] = axisKeys[i];
             }
-            axisKeys = newAxes;
+            axisKeys = _newAxes;
         }
     }
 
@@ -59,11 +59,12 @@ public class KeyBoardTracker : DeviceTracker
 
         for (int i = 0; i < buttonKeys.Length; i++)
         {
-            if (Input.GetKey(buttonKeys[i]))
+            if (Input.GetKeyDown(buttonKeys[i]))
             {
                 data.buttons[i] = true;
+                newData = true;
             }
-            newData = true;
+
         }
 
         if (newData)

@@ -5,109 +5,101 @@ using UnityEngine;
 [RequireComponent(typeof(GunController))]
 public class Player : LivingEntity
 {
-    float interactDistance = 5;
-    float outerInteractDistance = 20;
-    float viewDistance = 40;
-    float maxRayDistance = 20f;
-    [SerializeField] LayerMask interactables;
-    [SerializeField] LayerMask enemies;
-    [SerializeField] LayerMask layerMask;
-    int maxtargets = 5;
-    [SerializeField] float recoveryTime;
-    Camera viewCamera;
-    PlayerController controller;
-    GunController gunController;
-    AwarenessScript eyes;
-    CameraController camCont;
-    [SerializeField] Transform followTarget;
+    float _interactDistance = 5;
+    float _outerInteractDistance = 20;
+    float _maxRayDistance = 20f;
+    [SerializeField] LayerMask _interactables;
+    [SerializeField] LayerMask _enemies;
+    [SerializeField] LayerMask _layerMask;
+    int _maxtargets = 5;
+    Camera _viewCamera;
+    PlayerController _controller;
+    GunController _gunController;
+    AwarenessScript _eyes;
     [HideInInspector] public Rigidbody rb;
-    [SerializeField] Crosshairs crosshair;
-    [SerializeField] Animator playerAnim;
-    Vector3 point;
+    [SerializeField] Crosshairs _crosshair;
+    [SerializeField] Animator _playerAnim;
+    Vector3 _point;
     protected override void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody>();
-        camCont = FindObjectOfType<CameraController>();
-        eyes = GetComponent<AwarenessScript>();
-        controller = GetComponent<PlayerController>();
-        viewCamera = Camera.main;
-        gunController = GetComponent<GunController>();
+        _eyes = GetComponent<AwarenessScript>();
+        _controller = GetComponent<PlayerController>();
+        _viewCamera = Camera.main;
+        _gunController = GetComponent<GunController>();
     }
 
     void FixedUpdate()
     {
         //Movement input
-        controller.Move();
+        _controller.Move();
     }
 
     void Update()
     {
+        //Movement checks
+        _controller.CalculateDirection();
+        _controller.CalculateForward();
+        _controller.CalculateGroundAngle();
+        _controller.SetRotation();
+
         //set animations
-        playerAnim.SetBool("Moving", controller.moving);
-        playerAnim.SetBool("Running", controller.running);
-        playerAnim.SetFloat("WalkVel", controller.walkVelocity.x);
+        _playerAnim.SetBool("Running", _controller.running);
+        _playerAnim.SetFloat("WalkVelX", _controller.walkVelocity.x);
+        _playerAnim.SetFloat("WalkVelY", _controller.walkVelocity.y);
+
         //Interactable detection
-        eyes.DetectInteractables(interactDistance,outerInteractDistance, interactables, maxtargets);
-        eyes.DetectEnemies(viewDistance, enemies, maxtargets);
+        _eyes.DetectInteractables(_interactDistance,_outerInteractDistance, _interactables, _maxtargets);
         Vector2 mouseScreenPosition = Input.mousePosition;
         mouseScreenPosition = new Vector3(mouseScreenPosition.x,mouseScreenPosition.y, 0) - transform.position;
-        Ray ray = viewCamera.ScreenPointToRay(mouseScreenPosition);
+        Ray ray = _viewCamera.ScreenPointToRay(mouseScreenPosition);
         RaycastHit hit;
         if (Input.GetMouseButtonDown(0))
         {
-            controller.CreateRay();
+            _controller.CreateRay();
         }
 
-        if (eyes.enemiesInRange || Input.GetMouseButtonDown(1))
-        {
-            //Switch this....
-            camCont.Fight();
-        }
-        else if(Input.GetMouseButtonDown(1))
-        {
-            camCont.ResetCam();
-        }
 
-        if (controller.isLockedOn)
+        if (_controller.isLockedOn)
         {
-            if (controller.target != null)
+            if (_controller.target != null)
             {
                //reticle changes
             }
             else 
             {
-                controller.isLockedOn = false;
+                _controller.isLockedOn = false;
             }
         }
         
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, maxRayDistance, layerMask))
+        if (Physics.Raycast(ray, out hit, _maxRayDistance, _layerMask))
         {
-            point = hit.point;
-            crosshair.DetectTargets(ray);
+            _point = hit.point;
+            _crosshair.DetectTargets(ray);
         }
         else
         {
-            point = ray.origin + ray.direction * maxRayDistance;
+            _point = ray.origin + ray.direction * _maxRayDistance;
         }
-        Debug.DrawLine(ray.origin, point, Color.red);
-        crosshair.transform.position = point;
-        if ((new Vector3(point.x, point.z) - new Vector3(transform.position.x, transform.position.z)).sqrMagnitude > .5f)
+        Debug.DrawLine(ray.origin, _point, Color.red);
+        _crosshair.transform.position = _point;
+        if ((new Vector3(_point.x, _point.z) - new Vector3(transform.position.x, transform.position.z)).sqrMagnitude > .2f)
         {
-            gunController.Aim(point);
+            _gunController.Aim(_point);
         }
         //Weapon input
         if (Input.GetKeyDown(KeyCode.R))
         {
-            gunController.Reload();
+            _gunController.Reload();
         }
         if (Input.GetMouseButton(0))
         {
-            gunController.OnTriggerHold();
+            _gunController.OnTriggerHold();
         }
         if(Input.GetMouseButtonUp(0))
         {
-            gunController.OnTriggerRelease();
+            _gunController.OnTriggerRelease();
         }
     }
 }

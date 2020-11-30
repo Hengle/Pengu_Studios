@@ -6,38 +6,38 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : LivingEntity
 {
-    public enum State { Idle, Chasing, Attacking };
-    State currentState;
-    [SerializeField] GameObject deathEffect;
-    Material skinMaterial;
-    Color originalColor;
+    public enum State { _Idle, _Chasing, _Attacking };
+    State _currentState;
+    [SerializeField] GameObject _deathEffect;
+    Material _skinMaterial;
+    Color _originalColor;
     public NavMeshAgent pathfinder;
-    LivingEntity targetEntity;
-    Transform target;
-    float attackDistanceThreshold = 1.5f;
-    float timeBetweenAttacks = 1f;
-    float nextAttackTime;
-    float myCollisionRadius;
-    float targetCollisionRadius;
-    bool hasTarget;
+    LivingEntity _targetEntity;
+    Transform _target;
+    float _attackDistanceThreshold = 1.5f;
+    float _timeBetweenAttacks = 1f;
+    float _nextAttackTime;
+    float _myCollisionRadius;
+    float _targetCollisionRadius;
+    bool _hasTarget;
     [HideInInspector] public float damage = 1;
     protected override void Start()
     {
         base.Start();
         pathfinder = GetComponent<NavMeshAgent>();
-        skinMaterial = GetComponent<Renderer>().material;
-        originalColor = skinMaterial.color;
+        _skinMaterial = GetComponent<Renderer>().material;
+        _originalColor = _skinMaterial.color;
 
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            currentState = State.Chasing;
-            hasTarget = true;
-            target = GameObject.FindGameObjectWithTag("Player").transform;
-            targetEntity = target.GetComponent<LivingEntity>();
-            targetEntity.OnDeath += OnTargetDeath;
+            _currentState = State._Chasing;
+            _hasTarget = true;
+            _target = GameObject.FindGameObjectWithTag("Player").transform;
+            _targetEntity = _target.GetComponent<LivingEntity>();
+            _targetEntity.OnDeath += OnTargetDeath;
 
-            myCollisionRadius = GetComponent<CapsuleCollider>().radius;
-            targetCollisionRadius = target.GetComponent<CapsuleCollider>().radius;
+            _myCollisionRadius = GetComponent<CapsuleCollider>().radius;
+            _targetCollisionRadius = _target.GetComponent<CapsuleCollider>().radius;
             StartCoroutine(UpdatePath());
         }
     }
@@ -46,26 +46,26 @@ public class Enemy : LivingEntity
     {
         if (damage >= health)
         {
-            Destroy(Instantiate(deathEffect, hitpoint, Quaternion.FromToRotation(Vector3.forward, hitdirection)) as GameObject, 2f);
+            Destroy(Instantiate(_deathEffect, hitpoint, Quaternion.FromToRotation(Vector3.forward, hitdirection)) as GameObject, 2f);
         }
         base.TakeHit(damage, hitpoint, hitdirection);
     }
     void OnTargetDeath()
     {
-        hasTarget = false;
-        currentState = State.Idle;
+        _hasTarget = false;
+        _currentState = State._Idle;
     }
 
     void Update()
     {
-        if (hasTarget)
+        if (_hasTarget)
         {
-            if (Time.time > nextAttackTime)
+            if (Time.time > _nextAttackTime)
             {
-                float sqrDstToTarget = (target.position - transform.position).sqrMagnitude;
-                if (sqrDstToTarget < Mathf.Pow(attackDistanceThreshold + myCollisionRadius + targetCollisionRadius, 2))
+                float sqrDstToTarget = (_target.position - transform.position).sqrMagnitude;
+                if (sqrDstToTarget < Mathf.Pow(_attackDistanceThreshold + _myCollisionRadius + _targetCollisionRadius, 2))
                 {
-                    nextAttackTime = Time.time + timeBetweenAttacks;
+                    _nextAttackTime = Time.time + _timeBetweenAttacks;
                     StartCoroutine("Attack");
                 }
             }
@@ -73,16 +73,16 @@ public class Enemy : LivingEntity
     }
     IEnumerator Attack()
     {
-        currentState = State.Attacking;
+        _currentState = State._Attacking;
         pathfinder.enabled = false;
         Vector3 originalPosition = transform.position;
-        Vector3 dirToTarget = (target.position - transform.position).normalized;
-        Vector3 attackPosition = target.position - dirToTarget * (myCollisionRadius);
+        Vector3 dirToTarget = (_target.position - transform.position).normalized;
+        Vector3 attackPosition = _target.position - dirToTarget * (_myCollisionRadius);
 
         float attackSpeed = 3;
         float percent = 0;
 
-        skinMaterial.color = Color.red;
+        _skinMaterial.color = Color.red;
         bool hasAppliedDamage = false;
 
 
@@ -91,27 +91,27 @@ public class Enemy : LivingEntity
             if (percent >= .5f && !hasAppliedDamage)
             {
                 hasAppliedDamage = true;
-                targetEntity.TakeDamage(damage);
+                _targetEntity.TakeDamage(damage);
             }
             percent += Time.deltaTime * attackSpeed;
             float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
             transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
             yield return null;
         }
-        skinMaterial.color = originalColor;
-        currentState = State.Chasing;
+        _skinMaterial.color = _originalColor;
+        _currentState = State._Chasing;
         pathfinder.enabled = true;
     }
     IEnumerator UpdatePath()
     {
         float refreshRate = .25f;
 
-        while(hasTarget)
+        while(_hasTarget)
         {
-            if (currentState == State.Chasing)
+            if (_currentState == State._Chasing)
             {
-                Vector3 dirToTarget = (target.position - transform.position).normalized;
-                Vector3 targetPosition = target.position - dirToTarget * (myCollisionRadius + targetCollisionRadius + attackDistanceThreshold/2);
+                Vector3 dirToTarget = (_target.position - transform.position).normalized;
+                Vector3 targetPosition = _target.position - dirToTarget * (_myCollisionRadius + _targetCollisionRadius + _attackDistanceThreshold/2);
                 if (!dead)
                 {
                     pathfinder.SetDestination(targetPosition);

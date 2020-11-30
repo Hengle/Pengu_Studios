@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Shell : MonoBehaviour
 {
-    [SerializeField] Rigidbody rb;
-    [SerializeField] float forceMin;
-    [SerializeField] float forceMax;
+    [SerializeField] Rigidbody _rb;
+    [SerializeField] float _forceMin;
+    [SerializeField] float _forceMax;
 
     float lifeTime = 4;
     float fadeTime = 2;
     // Start is called before the first frame update
     void Start()
     {
-        float force = Random.Range(forceMin, forceMax);
-        rb.AddForce(transform.right * force);
-        rb.AddTorque(Random.insideUnitSphere * force);
+        float force = Random.Range(_forceMin, _forceMax);
+        _rb.AddForce(transform.right * force);
+        _rb.AddTorque(Random.insideUnitSphere * force);
         StartCoroutine(Fade());
     }
 
@@ -23,15 +23,15 @@ public class Shell : MonoBehaviour
     {
         yield return new WaitForSeconds(lifeTime);
 
-        float percent = 0;
-        float fadeSpeed = 1 / fadeTime;
-        Material mat = GetComponent<Renderer>().material;
-        Color initialColor = mat.color;
+        float _percent = 0;
+        float _fadeSpeed = 1 / fadeTime;
+        Material _mat = GetComponent<Renderer>().material;
+        Color initialColor = _mat.color;
 
-        while (percent < 1)
+        while (_percent < 1)
         {
-            percent += Time.deltaTime * fadeSpeed;
-            mat.color = Color.Lerp(initialColor, Color.clear, percent);
+            _percent += Time.deltaTime * _fadeSpeed;
+            _mat.color = Color.Lerp(initialColor, Color.clear, _percent);
             yield return null;
         }
 

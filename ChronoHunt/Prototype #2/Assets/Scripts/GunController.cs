@@ -6,7 +6,7 @@ public class GunController : MonoBehaviour
 {
     public Transform weaponHold;
     public Gun startingGun;
-    Gun equippedGun;
+    Gun _equippedGun;
     [HideInInspector] public float shotTime;
     private void Start()
     {
@@ -17,42 +17,42 @@ public class GunController : MonoBehaviour
     }
     public void EquipGun (Gun gunToEquip)
     {
-        if(equippedGun != null)
+        if(_equippedGun != null)
         {
-            Destroy(equippedGun.gameObject);
+            Destroy(_equippedGun.gameObject);
         }
-        equippedGun = Instantiate(gunToEquip, weaponHold.position, weaponHold.rotation) as Gun;
-        equippedGun.transform.parent = weaponHold;
+        _equippedGun = Instantiate(gunToEquip, weaponHold.position, weaponHold.rotation) as Gun;
+        _equippedGun.transform.parent = weaponHold;
     }
 
     public void OnTriggerHold()
     {
-        if (equippedGun != null)
+        if (_equippedGun != null)
         {
-            equippedGun.OnTriggerHold();
+            _equippedGun.OnTriggerHold();
         }
     }
     public void OnTriggerRelease()
     {
-        if (equippedGun != null)
+        if (_equippedGun != null)
         {
-            equippedGun.OnTriggerRelease();
+            _equippedGun.OnTriggerRelease();
         }
     }
 
     public void Aim(Vector3 aimPoint)
     {
-        shotTime = equippedGun.nextShotTime;
-        if (equippedGun != null)
+        shotTime = _equippedGun.nextShotTime;
+        if (_equippedGun != null)
         {
-            equippedGun.Aim(aimPoint);
+            _equippedGun.Aim(aimPoint);
         }
     }
     public void Reload()
     {
-        if (equippedGun != null)
+        if (_equippedGun != null)
         {
-            equippedGun.Reload();
+            _equippedGun.Reload();
         }
     }
 

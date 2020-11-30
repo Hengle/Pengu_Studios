@@ -5,55 +5,55 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {   
     //Shooting
-    [SerializeField] enum FireMode {Burst, Single, Auto}
-    [SerializeField] FireMode fireMode;
-    int burstCount = 3;
-    int shotsRemaingingInBurst;
-    [SerializeField] Transform[] muzzles;
-    [SerializeField] Projectile projectile;
-    float muzzleVelocity = 50f;
+    [SerializeField] enum FireMode {_Burst, _Single, _Auto}
+    [SerializeField] FireMode _fireMode;
+    int _burstCount = 3;
+    int _shotsRemaingingInBurst;
+    [SerializeField] Transform[] _muzzles;
+    [SerializeField] Projectile _projectile;
+    float _muzzleVelocity = 50f;
     public float nextShotTime = 2;
-    [SerializeField]float smoothTime = 5;
+    [SerializeField]float _smoothTime = 5;
     public float shotTime = 2;
-    Vector3 recoilSmotherDampVel;
-    Vector3 vel;
-    bool triggerReleasedSinceLastShot;
+    Vector3 _recoilSmotherDampVel;
+    Vector3 _vel;
+    bool _triggerReleasedSinceLastShot;
 
     //recoil
-    float recoilStrength = 11;
-    float maxRecoil = 11;
-    Player player;
+    float _recoilStrength = 9;
+    float _maxRecoil = 9;
+    Player _player;
 
     //Reloading
-    [SerializeField]int projectilesPerMag;
-    int projectilesRemainingInMag;
-    bool isReloading;
-    [SerializeField]float reloadTime;
-    [SerializeField] Transform bolt;
+    [SerializeField]int _projectilesPerMag;
+    int _projectilesRemainingInMag;
+    bool _isReloading;
+    [SerializeField]float _reloadTime;
+    [SerializeField] Transform _bolt;
 
     //shellEjection
-    [SerializeField] Transform shell;
-    [SerializeField] Transform shellEjection;
+    [SerializeField] Transform _shell;
+    [SerializeField] Transform _shellEjection;
 
     //muzzleFlash
-    Muzzleflash muzzleFlash;
+    Muzzleflash _muzzleFlash;
 
 
     void Start()
     {
-        shotsRemaingingInBurst = burstCount;
-        muzzleFlash = GetComponent<Muzzleflash>();
-        player = FindObjectOfType<Player>();
-        projectilesRemainingInMag = projectilesPerMag;
+        _shotsRemaingingInBurst = _burstCount;
+        _muzzleFlash = GetComponent<Muzzleflash>();
+        _player = FindObjectOfType<Player>();
+        _projectilesRemainingInMag = _projectilesPerMag;
     }
     private void LateUpdate()
     {
-        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref recoilSmotherDampVel, .3f);
-        bolt.localPosition = Vector3.SmoothDamp(bolt.localPosition, new Vector3(.387f, -.008f, -.444f), ref vel, .1f);
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref _recoilSmotherDampVel, .3f);
+        _bolt.localPosition = Vector3.SmoothDamp(_bolt.localPosition, new Vector3(.387f, -.008f, -.444f), ref _vel, .1f);
     }
     private void Update()
     {
-        if (!isReloading && projectilesRemainingInMag == 0)
+        if (!_isReloading && _projectilesRemainingInMag == 0)
         {
             Reload();
         }
@@ -63,49 +63,49 @@ public class Gun : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            recoilStrength = 4;
+            _recoilStrength = 4;
         }
         else
         {
-            recoilStrength = maxRecoil;
+            _recoilStrength = _maxRecoil;
         }
     }
     public void Aim(Vector3 point)
     {
-        Vector3 direction = point - player.transform.position;
+        Vector3 direction = point - _player.transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction.normalized);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, smoothTime * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _smoothTime * Time.deltaTime);
     }
     void Shoot()
     {
-        if (!isReloading && nextShotTime <= 0 && projectilesRemainingInMag > 0)
+        if (!_isReloading && nextShotTime <= 0 && _projectilesRemainingInMag > 0)
         {
-            if(fireMode == FireMode.Burst)
+            if(_fireMode == FireMode._Burst)
             {
-                if(shotsRemaingingInBurst == 0)
+                if(_shotsRemaingingInBurst == 0)
                 {
                     return;
                 }
-                shotsRemaingingInBurst--;
+                _shotsRemaingingInBurst--;
             }
-            else if (fireMode == FireMode.Single)
+            else if (_fireMode == FireMode._Single)
             {
-                if(!triggerReleasedSinceLastShot)
+                if(!_triggerReleasedSinceLastShot)
                 {
                     return;
                 }
             }
-            for(int i = 0; i < muzzles.Length; i++)
+            for(int i = 0; i < _muzzles.Length; i++)
             {
                 nextShotTime = shotTime;
-                Projectile newProjectile = Instantiate(projectile, muzzles[i].position, muzzles[i].rotation) as Projectile;
-                newProjectile.SetSpeed(muzzleVelocity);
+                Projectile newProjectile = Instantiate(_projectile, _muzzles[i].position, _muzzles[i].rotation) as Projectile;
+                newProjectile.SetSpeed(_muzzleVelocity);
             }
-            projectilesRemainingInMag--;
-            Instantiate(shell, shellEjection.position, shellEjection.rotation);
-            muzzleFlash.Activate();
+            _projectilesRemainingInMag--;
+            Instantiate(_shell, _shellEjection.position, _shellEjection.rotation);
+            _muzzleFlash.Activate();
             transform.localPosition -= new Vector3(.5f,0,.5f) * Random.Range(.7f, 1);
-            player.rb.velocity = Vector3.Lerp(player.rb.velocity, player.rb.velocity - (muzzles[1].transform.position - transform.position) * recoilStrength, 1f);
+            _player.rb.velocity = Vector3.Lerp(_player.rb.velocity, _player.rb.velocity - (_muzzles[0].transform.position - transform.position) * _recoilStrength, 1f);
         }
     }
 
@@ -115,10 +115,10 @@ public class Gun : MonoBehaviour
     }
     IEnumerator AnimateReload()
     {
-        isReloading = true;
+        _isReloading = true;
         yield return new WaitForSeconds(.2f);
 
-        float reloadSpeed = 1 / reloadTime;
+        float reloadSpeed = 1 / _reloadTime;
         float percent = 0;
         Vector3 initialRot = transform.localEulerAngles;
         float maxReloadAngle = 10;
@@ -130,23 +130,23 @@ public class Gun : MonoBehaviour
             float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
             float reloadAngle = Mathf.Lerp(0, maxReloadAngle, interpolation);
             float drawBack = Mathf.Lerp(0, maxDrawBack, interpolation);
-            bolt.localPosition = bolt.localPosition - Vector3.right * drawBack;
+            _bolt.localPosition = _bolt.localPosition - Vector3.right * drawBack;
             transform.localEulerAngles = initialRot + Vector3.forward * reloadAngle;
 
             yield return null;
         }
-        isReloading = false;
-        projectilesRemainingInMag = projectilesPerMag;
+        _isReloading = false;
+        _projectilesRemainingInMag = _projectilesPerMag;
     }
 
     public void OnTriggerHold()
     {
         Shoot();
-        triggerReleasedSinceLastShot = false;
+        _triggerReleasedSinceLastShot = false;
     }
     public void OnTriggerRelease()
     {
-        triggerReleasedSinceLastShot = true;
-        shotsRemaingingInBurst = burstCount;
+        _triggerReleasedSinceLastShot = true;
+        _shotsRemaingingInBurst = _burstCount;
     }
 }
