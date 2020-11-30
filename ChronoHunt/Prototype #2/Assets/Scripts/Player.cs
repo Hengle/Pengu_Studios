@@ -52,7 +52,7 @@ public class Player : LivingEntity
         //Interactable detection
         _eyes.DetectInteractables(_interactDistance,_outerInteractDistance, _interactables, _maxtargets);
         Vector2 mouseScreenPosition = Input.mousePosition;
-        mouseScreenPosition = new Vector3(mouseScreenPosition.x,mouseScreenPosition.y, 0) - transform.position;
+        //mouseScreenPosition = new Vector3(mouseScreenPosition.x,mouseScreenPosition.y, 0) - transform.position;
         Ray ray = _viewCamera.ScreenPointToRay(mouseScreenPosition);
         RaycastHit hit;
         if (Input.GetMouseButtonDown(0))
