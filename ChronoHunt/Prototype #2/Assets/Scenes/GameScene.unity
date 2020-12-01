@@ -247,7 +247,7 @@ MonoBehaviour:
   renderPriority: 1
   styledSpace0: 0
   overrideMaterial: {fileID: 2062702156}
-  overrideCamToVolumeDistance: Infinity
+  overrideCamToVolumeDistance: 1
   overrideVolumeDistanceFade: 0
   version: 180
   directionalMode: 1
