@@ -134,10 +134,10 @@ QualitySettings:
     softVegetation: 1
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
-    vSyncCount: 1
+    vSyncCount: 0
     lodBias: 1
     maximumLODLevel: 0
-    streamingMipmapsActive: 0
+    streamingMipmapsActive: 1
     streamingMipmapsAddAllCameras: 1
     streamingMipmapsMemoryBudget: 512
     streamingMipmapsRenderersPerFrame: 512
@@ -156,7 +156,7 @@ QualitySettings:
     Nintendo Switch: 2
     PS4: 2
     Stadia: 2
-    Standalone: 2
+    Standalone: 3
     WebGL: 1
     Windows Store Apps: 2
     XboxOne: 2
