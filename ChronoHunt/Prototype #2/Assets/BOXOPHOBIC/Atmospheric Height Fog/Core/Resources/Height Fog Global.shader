@@ -153,7 +153,7 @@ Shader "Hidden/BOXOPHOBIC/Atmospherics/Height Fog Global"
 
 			HLSLPROGRAM
 			#define _RECEIVE_SHADOWS_OFF 1
-			#define ASE_SRP_VERSION 999999
+			#define ASE_SRP_VERSION 70108
 			#define REQUIRE_DEPTH_TEXTURE 1
 
 			#pragma prefer_hlslcc gles
@@ -247,7 +247,7 @@ Shader "Hidden/BOXOPHOBIC/Atmospherics/Height Fog Global"
 			half AHF_FogIntensity;
 
 
-			float3 DepthByVersion226_g891( float3 _731, float3 _741 )
+			float3 DepthByVersion226_g873( float3 _731, float3 _741 )
 			{
 				float3 result = _731;
 				#if ASE_SRP_VERSION > 70301
@@ -449,82 +449,81 @@ Shader "Hidden/BOXOPHOBIC/Atmospherics/Height Fog Global"
 				float4 screenPos = IN.ase_texcoord3;
 				float4 ase_screenPosNorm = screenPos / screenPos.w;
 				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
-				float2 break248_g891 = (ase_screenPosNorm).xy;
-				float clampDepth227_g891 = SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy );
+				float2 break248_g873 = (ase_screenPosNorm).xy;
+				float clampDepth227_g873 = SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy );
 				#ifdef UNITY_REVERSED_Z
-				float staticSwitch250_g891 = ( 1.0 - clampDepth227_g891 );
+				float staticSwitch250_g873 = ( 1.0 - clampDepth227_g873 );
 				#else
-				float staticSwitch250_g891 = clampDepth227_g891;
+				float staticSwitch250_g873 = clampDepth227_g873;
 				#endif
-				float3 appendResult244_g891 = (float3(break248_g891.x , break248_g891.y , staticSwitch250_g891));
-				float4 appendResult220_g891 = (float4((appendResult244_g891*2.0 + -1.0) , 1.0));
-				float4 break229_g891 = mul( unity_CameraInvProjection, appendResult220_g891 );
-				float3 appendResult237_g891 = (float3(break229_g891.x , break229_g891.y , break229_g891.z));
-				float4 appendResult233_g891 = (float4(( ( appendResult237_g891 / break229_g891.w ) * half3(1,1,-1) ) , 1.0));
-				float4 break245_g891 = mul( unity_CameraToWorld, appendResult233_g891 );
-				float3 appendResult239_g891 = (float3(break245_g891.x , break245_g891.y , break245_g891.z));
-				float3 _731226_g891 = appendResult239_g891;
-				float eyeDepth218_g891 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
-				float4 unityObjectToClipPos224_g891 = TransformWorldToHClip(TransformObjectToWorld(IN.ase_texcoord4.xyz));
-				float4 computeScreenPos225_g891 = ComputeScreenPos( unityObjectToClipPos224_g891 );
-				float3 _741226_g891 = ( _WorldSpaceCameraPos - ( eyeDepth218_g891 * ( ( _WorldSpaceCameraPos - WorldPosition ) / computeScreenPos225_g891.w ) ) );
-				float3 localDepthByVersion226_g891 = DepthByVersion226_g891( _731226_g891 , _741226_g891 );
-				float3 WorldPositionFromDepth253_g891 = localDepthByVersion226_g891;
-				float3 WorldPosition2_g891 = WorldPositionFromDepth253_g891;
-				float temp_output_7_0_g893 = AHF_FogDistanceStart;
-				half FogDistanceMask12_g891 = pow( abs( saturate( ( ( distance( WorldPosition2_g891 , _WorldSpaceCameraPos ) - temp_output_7_0_g893 ) / ( AHF_FogDistanceEnd - temp_output_7_0_g893 ) ) ) ) , AHF_FogDistanceFalloff );
-				float3 lerpResult258_g891 = lerp( (AHF_FogColorStart).rgb , (AHF_FogColorEnd).rgb , ( saturate( ( FogDistanceMask12_g891 - 0.5 ) ) * AHF_FogColorDuo ));
-				float3 normalizeResult318_g891 = normalize( ( WorldPosition2_g891 - _WorldSpaceCameraPos ) );
-				float dotResult145_g891 = dot( normalizeResult318_g891 , AHF_DirectionalDir );
-				half DirectionalMask30_g891 = pow( abs( ( (dotResult145_g891*0.5 + 0.5) * AHF_DirectionalIntensity ) ) , AHF_DirectionalFalloff );
-				float3 lerpResult40_g891 = lerp( lerpResult258_g891 , (AHF_DirectionalColor).rgb , DirectionalMask30_g891);
-				float3 temp_output_2_0_g892 = lerpResult40_g891;
-				float3 gammaToLinear3_g892 = FastSRGBToLinear( temp_output_2_0_g892 );
+				float3 appendResult244_g873 = (float3(break248_g873.x , break248_g873.y , staticSwitch250_g873));
+				float4 appendResult220_g873 = (float4((appendResult244_g873*2.0 + -1.0) , 1.0));
+				float4 break229_g873 = mul( unity_CameraInvProjection, appendResult220_g873 );
+				float3 appendResult237_g873 = (float3(break229_g873.x , break229_g873.y , break229_g873.z));
+				float4 appendResult233_g873 = (float4(( ( appendResult237_g873 / break229_g873.w ) * half3(1,1,-1) ) , 1.0));
+				float4 break245_g873 = mul( unity_CameraToWorld, appendResult233_g873 );
+				float3 appendResult239_g873 = (float3(break245_g873.x , break245_g873.y , break245_g873.z));
+				float3 _731226_g873 = appendResult239_g873;
+				float eyeDepth218_g873 = LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy ),_ZBufferParams);
+				float4 unityObjectToClipPos224_g873 = TransformWorldToHClip(TransformObjectToWorld(IN.ase_texcoord4.xyz));
+				float4 computeScreenPos225_g873 = ComputeScreenPos( unityObjectToClipPos224_g873 );
+				float3 _741226_g873 = ( _WorldSpaceCameraPos - ( eyeDepth218_g873 * ( ( _WorldSpaceCameraPos - WorldPosition ) / computeScreenPos225_g873.w ) ) );
+				float3 localDepthByVersion226_g873 = DepthByVersion226_g873( _731226_g873 , _741226_g873 );
+				float3 WorldPositionFromDepth253_g873 = localDepthByVersion226_g873;
+				float3 WorldPosition2_g873 = WorldPositionFromDepth253_g873;
+				float temp_output_7_0_g875 = AHF_FogDistanceStart;
+				half FogDistanceMask12_g873 = pow( abs( saturate( ( ( distance( WorldPosition2_g873 , _WorldSpaceCameraPos ) - temp_output_7_0_g875 ) / ( AHF_FogDistanceEnd - temp_output_7_0_g875 ) ) ) ) , AHF_FogDistanceFalloff );
+				float3 lerpResult258_g873 = lerp( (AHF_FogColorStart).rgb , (AHF_FogColorEnd).rgb , ( saturate( ( FogDistanceMask12_g873 - 0.5 ) ) * AHF_FogColorDuo ));
+				float3 normalizeResult318_g873 = normalize( ( WorldPosition2_g873 - _WorldSpaceCameraPos ) );
+				float dotResult145_g873 = dot( normalizeResult318_g873 , AHF_DirectionalDir );
+				half DirectionalMask30_g873 = pow( abs( ( (dotResult145_g873*0.5 + 0.5) * AHF_DirectionalIntensity ) ) , AHF_DirectionalFalloff );
+				float3 lerpResult40_g873 = lerp( lerpResult258_g873 , (AHF_DirectionalColor).rgb , DirectionalMask30_g873);
+				float3 temp_output_2_0_g874 = lerpResult40_g873;
+				float3 gammaToLinear3_g874 = FastSRGBToLinear( temp_output_2_0_g874 );
 				#ifdef UNITY_COLORSPACE_GAMMA
-				float3 staticSwitch1_g892 = temp_output_2_0_g892;
+				float3 staticSwitch1_g874 = temp_output_2_0_g874;
 				#else
-				float3 staticSwitch1_g892 = gammaToLinear3_g892;
+				float3 staticSwitch1_g874 = gammaToLinear3_g874;
 				#endif
-				float3 temp_output_256_0_g891 = staticSwitch1_g892;
+				float3 temp_output_256_0_g873 = staticSwitch1_g874;
 				
-				half3 AHF_FogAxisOption181_g891 = AHF_FogAxisOption;
-				float3 break159_g891 = ( WorldPosition2_g891 * AHF_FogAxisOption181_g891 );
-				float temp_output_7_0_g894 = AHF_FogHeightEnd;
-				half FogHeightMask16_g891 = pow( abs( saturate( ( ( ( break159_g891.x + break159_g891.y + break159_g891.z ) - temp_output_7_0_g894 ) / ( AHF_FogHeightStart - temp_output_7_0_g894 ) ) ) ) , AHF_FogHeightFalloff );
-				float lerpResult328_g891 = lerp( ( FogDistanceMask12_g891 * FogHeightMask16_g891 ) , saturate( ( FogDistanceMask12_g891 + FogHeightMask16_g891 ) ) , AHF_FogLayersMode);
-				float simplePerlin3D193_g891 = snoise( ( ( WorldPosition2_g891 * ( 1.0 / AHF_NoiseScale ) ) + ( -AHF_NoiseSpeed * _TimeParameters.x ) ) );
-				float temp_output_7_0_g896 = AHF_NoiseDistanceEnd;
-				half NoiseDistanceMask7_g891 = saturate( ( ( distance( WorldPosition2_g891 , _WorldSpaceCameraPos ) - temp_output_7_0_g896 ) / ( 0.0 - temp_output_7_0_g896 ) ) );
-				float lerpResult198_g891 = lerp( 1.0 , (simplePerlin3D193_g891*0.5 + 0.5) , ( NoiseDistanceMask7_g891 * AHF_NoiseIntensity * AHF_NoiseModeBlend ));
-				half NoiseSimplex3D24_g891 = lerpResult198_g891;
+				half3 AHF_FogAxisOption181_g873 = AHF_FogAxisOption;
+				float3 break159_g873 = ( WorldPosition2_g873 * AHF_FogAxisOption181_g873 );
+				float temp_output_7_0_g876 = AHF_FogHeightEnd;
+				half FogHeightMask16_g873 = pow( abs( saturate( ( ( ( break159_g873.x + break159_g873.y + break159_g873.z ) - temp_output_7_0_g876 ) / ( AHF_FogHeightStart - temp_output_7_0_g876 ) ) ) ) , AHF_FogHeightFalloff );
+				float lerpResult328_g873 = lerp( ( FogDistanceMask12_g873 * FogHeightMask16_g873 ) , saturate( ( FogDistanceMask12_g873 + FogHeightMask16_g873 ) ) , AHF_FogLayersMode);
+				float simplePerlin3D193_g873 = snoise( ( ( WorldPosition2_g873 * ( 1.0 / AHF_NoiseScale ) ) + ( -AHF_NoiseSpeed * _TimeParameters.x ) ) );
+				float temp_output_7_0_g878 = AHF_NoiseDistanceEnd;
+				half NoiseDistanceMask7_g873 = saturate( ( ( distance( WorldPosition2_g873 , _WorldSpaceCameraPos ) - temp_output_7_0_g878 ) / ( 0.0 - temp_output_7_0_g878 ) ) );
+				float lerpResult198_g873 = lerp( 1.0 , (simplePerlin3D193_g873*0.5 + 0.5) , ( NoiseDistanceMask7_g873 * AHF_NoiseIntensity * AHF_NoiseModeBlend ));
+				half NoiseSimplex3D24_g873 = lerpResult198_g873;
 				#if defined(AHF_NOISEMODE_OFF)
-				float staticSwitch42_g891 = lerpResult328_g891;
+				float staticSwitch42_g873 = lerpResult328_g873;
 				#elif defined(AHF_NOISEMODE_PROCEDURAL3D)
-				float staticSwitch42_g891 = ( lerpResult328_g891 * NoiseSimplex3D24_g891 );
+				float staticSwitch42_g873 = ( lerpResult328_g873 * NoiseSimplex3D24_g873 );
 				#else
-				float staticSwitch42_g891 = lerpResult328_g891;
+				float staticSwitch42_g873 = lerpResult328_g873;
 				#endif
-				float3 normalizeResult169_g891 = normalize( WorldPosition2_g891 );
-				float3 break170_g891 = ( normalizeResult169_g891 * AHF_FogAxisOption181_g891 );
-				float temp_output_7_0_g895 = AHF_SkyboxFogHeight;
-				float saferPower309_g891 = max( abs( saturate( ( ( abs( ( break170_g891.x + break170_g891.y + break170_g891.z ) ) - temp_output_7_0_g895 ) / ( 0.0 - temp_output_7_0_g895 ) ) ) ) , 0.0001 );
-				float lerpResult179_g891 = lerp( pow( saferPower309_g891 , AHF_SkyboxFogFalloff ) , 1.0 , AHF_SkyboxFogFill);
-				half SkyboxFogHeightMask108_g891 = ( lerpResult179_g891 * AHF_SkyboxFogIntensity );
-				float clampDepth118_g891 = SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy );
-				float temp_output_124_0_g891 = ( 1.0 - clampDepth118_g891 );
+				float3 normalizeResult169_g873 = normalize( WorldPosition2_g873 );
+				float3 break170_g873 = ( normalizeResult169_g873 * AHF_FogAxisOption181_g873 );
+				float temp_output_7_0_g877 = AHF_SkyboxFogHeight;
+				float saferPower309_g873 = max( abs( saturate( ( ( abs( ( break170_g873.x + break170_g873.y + break170_g873.z ) ) - temp_output_7_0_g877 ) / ( 0.0 - temp_output_7_0_g877 ) ) ) ) , 0.0001 );
+				float lerpResult179_g873 = lerp( pow( saferPower309_g873 , AHF_SkyboxFogFalloff ) , 1.0 , AHF_SkyboxFogFill);
+				half SkyboxFogHeightMask108_g873 = ( lerpResult179_g873 * AHF_SkyboxFogIntensity );
+				float clampDepth118_g873 = SHADERGRAPH_SAMPLE_SCENE_DEPTH( ase_screenPosNorm.xy );
 				#ifdef UNITY_REVERSED_Z
-				float staticSwitch332_g891 = clampDepth118_g891;
+				float staticSwitch123_g873 = clampDepth118_g873;
 				#else
-				float staticSwitch332_g891 = temp_output_124_0_g891;
+				float staticSwitch123_g873 = ( 1.0 - clampDepth118_g873 );
 				#endif
-				half SkyboxMask95_g891 = ( 1.0 - ceil( staticSwitch332_g891 ) );
-				float lerpResult112_g891 = lerp( staticSwitch42_g891 , SkyboxFogHeightMask108_g891 , SkyboxMask95_g891);
-				float temp_output_43_0_g891 = ( lerpResult112_g891 * AHF_FogIntensity );
+				half SkyboxMask95_g873 = ( 1.0 - ceil( staticSwitch123_g873 ) );
+				float lerpResult112_g873 = lerp( staticSwitch42_g873 , SkyboxFogHeightMask108_g873 , SkyboxMask95_g873);
+				float temp_output_43_0_g873 = ( lerpResult112_g873 * AHF_FogIntensity );
 				
 				float3 BakedAlbedo = 0;
 				float3 BakedEmission = 0;
-				float3 Color = temp_output_256_0_g891;
-				float Alpha = temp_output_43_0_g891;
+				float3 Color = temp_output_256_0_g873;
+				float Alpha = temp_output_43_0_g873;
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -554,21 +553,21 @@ Shader "Hidden/BOXOPHOBIC/Atmospherics/Height Fog Global"
 }
 /*ASEBEGIN
 Version=18400
-1927;7;1906;1015;4170.349;5040.571;1;True;False
+1927;7;1906;1015;4147.792;5078.447;1;True;False
 Node;AmplifyShaderEditor.RangedFloatNode;885;-2912,-4864;Half;False;Property;_IsHeightFogShader;_IsHeightFogShader;5;1;[HideInInspector];Create;False;0;0;True;0;False;1;1;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.IntNode;891;-2656,-4864;Float;False;Property;_TransparentQueue;_TransparentQueue;6;1;[HideInInspector];Create;False;0;0;True;0;False;3000;0;0;1;INT;0
 Node;AmplifyShaderEditor.RangedFloatNode;892;-3328,-4864;Half;False;Property;_TITLE;< TITLE >;7;0;Create;True;0;0;True;1;StyledBanner(Height Fog Global);False;1;1;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;948;-3328,-4416;Inherit;False;Is Pipeline;0;;802;2b33d0c660fbdb24c98bea96428031b0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;879;-3136,-4864;Half;False;Property;_HeightFogGlobal;_HeightFogGlobal;4;1;[HideInInspector];Create;False;0;0;True;0;False;1;1;1;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.FunctionNode;978;-3328,-4608;Inherit;False;Base;-1;;891;13c50910e5b86de4097e1181ba121e0e;2,99,1,116,1;0;3;FLOAT4;113;FLOAT3;86;FLOAT;87
+Node;AmplifyShaderEditor.FunctionNode;974;-3328,-4608;Inherit;False;Base;-1;;873;13c50910e5b86de4097e1181ba121e0e;2,99,1,116,1;0;3;FLOAT4;113;FLOAT3;86;FLOAT;87
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;960;-2944,-4608;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;3;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;0;True;1;1;False;-1;0;False;-1;0;1;False;-1;0;False;-1;False;False;False;False;False;False;False;False;True;0;False;-1;True;True;True;True;True;0;False;-1;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;True;3;False;-1;True;True;0;False;-1;0;False;-1;True;0;False;0;Hidden/InternalErrorShader;0;0;Standard;0;True;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;962;-2944,-4608;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;3;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;0;False;False;False;False;False;False;False;False;True;0;False;-1;False;False;False;False;False;False;True;1;False;-1;True;3;False;-1;False;True;1;LightMode=ShadowCaster;False;0;Hidden/InternalErrorShader;0;0;Standard;0;True;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;963;-2944,-4608;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;3;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;0;False;False;False;False;False;False;False;False;True;0;False;-1;False;True;False;False;False;False;0;False;-1;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=DepthOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;0;True;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;964;-2944,-4608;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;3;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;Meta;0;4;Meta;0;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;0;False;False;False;False;False;False;False;False;False;True;2;False;-1;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;0;Hidden/InternalErrorShader;0;0;Standard;0;True;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;961;-2944,-4608;Float;False;True;-1;2;;0;3;Hidden/BOXOPHOBIC/Atmospherics/Height Fog Global;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;True;0;False;-1;True;1;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Overlay=RenderType;Queue=Overlay=Queue=0;True;2;0;True;1;5;False;-1;10;False;-1;0;1;False;-1;10;False;-1;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;-1;False;False;False;True;True;222;False;-1;255;False;-1;255;False;-1;6;False;-1;2;False;-1;0;False;-1;0;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;7;False;-1;True;False;0;False;-1;0;False;-1;True;1;LightMode=UniversalForward;False;0;Hidden/InternalErrorShader;0;0;Standard;22;Surface;1;  Blend;0;Two Sided;2;Cast Shadows;0;  Use Shadow Threshold;0;Receive Shadows;0;GPU Instancing;0;LOD CrossFade;0;Built-in Fog;0;Meta Pass;0;DOTS Instancing;0;Extra Pre Pass;0;Tessellation;0;  Phong;0;  Strength;0.5,False,-1;  Type;0;  Tess;16,False,-1;  Min;10,False,-1;  Max;25,False,-1;  Edge Length;16,False,-1;  Max Displacement;25,False,-1;Vertex Position,InvertActionOnDeselection;1;0;5;False;True;False;False;False;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;961;-2944,-4608;Float;False;True;-1;2;;0;3;Hidden/BOXOPHOBIC/Atmospherics/Height Fog Global;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;True;0;False;-1;True;1;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Overlay=RenderType;Queue=Overlay=Queue=0;True;2;0;True;1;5;False;-1;10;False;-1;0;1;False;-1;10;False;-1;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;-1;False;False;False;True;True;222;False;-1;255;False;-1;255;False;-1;6;False;-1;2;False;-1;0;False;-1;0;False;-1;6;False;-1;2;False;-1;0;False;-1;0;False;-1;True;2;False;-1;True;7;False;-1;True;False;0;False;-1;0;False;-1;True;1;LightMode=UniversalForward;False;0;Hidden/InternalErrorShader;0;0;Standard;22;Surface;1;  Blend;0;Two Sided;2;Cast Shadows;0;  Use Shadow Threshold;0;Receive Shadows;0;GPU Instancing;0;LOD CrossFade;0;Built-in Fog;0;Meta Pass;0;DOTS Instancing;0;Extra Pre Pass;0;Tessellation;0;  Phong;0;  Strength;0.5,False,-1;  Type;0;  Tess;16,False,-1;  Min;10,False,-1;  Max;25,False,-1;  Edge Length;16,False,-1;  Max Displacement;25,False,-1;Vertex Position,InvertActionOnDeselection;1;0;5;False;True;False;False;False;False;;False;0
 Node;AmplifyShaderEditor.CommentaryNode;880;-3328,-4992;Inherit;False;919.8825;100;Drawers;0;;1,0.475862,0,1;0;0
-WireConnection;961;2;978;86
-WireConnection;961;3;978;87
+WireConnection;961;2;974;86
+WireConnection;961;3;974;87
 WireConnection;961;5;948;0
 ASEEND*/
-//CHKSM=D1DE37709404E3EA8400771B69BFD6A1FE008A26
+//CHKSM=07C04A7B2ABB50F39F4ADCAA779F9E31F5E4BB52

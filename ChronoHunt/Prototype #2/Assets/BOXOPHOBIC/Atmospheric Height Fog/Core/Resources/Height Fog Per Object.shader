@@ -152,7 +152,7 @@ Shader "BOXOPHOBIC/Atmospherics/Height Fog Per Object"
 			HLSLPROGRAM
 			#define _RECEIVE_SHADOWS_OFF 1
 			#pragma multi_compile_instancing
-			#define ASE_SRP_VERSION 999999
+			#define ASE_SRP_VERSION 70108
 
 			#pragma prefer_hlslcc gles
 			#pragma exclude_renderers d3d11_9x
@@ -204,11 +204,11 @@ Shader "BOXOPHOBIC/Atmospherics/Height Fog Per Object"
 			CBUFFER_START(UnityPerMaterial)
 			half4 _Color;
 			float4 _MainTex_ST;
-			int _TransparentQueue;
 			half _TITLEE;
 			half _CUSTOM;
-			half _HeightFogPerObject;
+			int _TransparentQueue;
 			half _IsHeightFogShader;
+			half _HeightFogPerObject;
 			half _IsUniversalPipeline;
 			#ifdef TESSELLATION_ON
 				float _TessPhongStrength;
@@ -524,21 +524,21 @@ Node;AmplifyShaderEditor.GetLocalVarNode;920;-2816,-4608;Inherit;False;918;Custo
 Node;AmplifyShaderEditor.FunctionNode;949;-2797.416,-4504.001;Inherit;False;Is Pipeline;1;;780;2b33d0c660fbdb24c98bea96428031b0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;937;-3328,-4736;Inherit;False;Base;-1;;781;13c50910e5b86de4097e1181ba121e0e;2,99,0,116,0;0;3;FLOAT4;113;FLOAT3;86;FLOAT;87
 Node;AmplifyShaderEditor.GetLocalVarNode;898;-3328,-4544;Inherit;False;897;CustomAlphaInputs;1;0;OBJECT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleAddOpNode;936;-2512,-4592;Inherit;False;2;2;0;INT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;879;-2944,-5248;Half;False;Property;_HeightFogPerObject;_HeightFogPerObject;0;1;[HideInInspector];Create;False;0;0;True;0;False;1;1;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;938;-3008,-4608;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;890;-2688,-5248;Half;False;Property;_IsHeightFogShader;_IsHeightFogShader;5;1;[HideInInspector];Create;False;0;0;True;0;False;1;1;1;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.IntNode;922;-2432,-5248;Float;False;Property;_TransparentQueue;_TransparentQueue;6;1;[HideInInspector];Create;False;0;0;True;0;False;3000;0;0;1;INT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;936;-2512,-4592;Inherit;False;2;2;0;INT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;899;-3169,-5248;Half;False;Property;_CUSTOM;[ CUSTOM ];8;0;Create;True;0;0;True;1;StyledCategory(Custom Alpha Inputs);False;1;1;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;923;-3328,-5248;Half;False;Property;_TITLEE;< TITLEE >;7;0;Create;True;0;0;True;1;StyledBanner(Height Fog Per Object);False;1;1;1;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;879;-2944,-5248;Half;False;Property;_HeightFogPerObject;_HeightFogPerObject;0;1;[HideInInspector];Create;False;0;0;True;0;False;1;1;1;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.IntNode;922;-2432,-5248;Float;False;Property;_TransparentQueue;_TransparentQueue;6;1;[HideInInspector];Create;False;0;0;True;0;False;3000;0;0;1;INT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;944;-2304,-4736;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;12;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;0;True;1;1;False;-1;0;False;-1;0;1;False;-1;0;False;-1;False;False;False;False;False;False;False;False;True;0;False;-1;True;True;True;True;True;0;False;-1;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;1;False;-1;True;3;False;-1;True;True;0;False;-1;0;False;-1;True;0;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;945;-2304,-4736;Float;False;True;-1;2;;0;3;BOXOPHOBIC/Atmospherics/Height Fog Per Object;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;2;0;True;1;5;False;-1;10;False;-1;1;1;False;-1;10;False;-1;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;-1;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;3;False;-1;True;False;0;False;-1;0;False;-1;True;1;LightMode=UniversalForward;False;0;Hidden/InternalErrorShader;0;0;Standard;22;Surface;1;  Blend;0;Two Sided;1;Cast Shadows;0;  Use Shadow Threshold;0;Receive Shadows;0;GPU Instancing;1;LOD CrossFade;0;Built-in Fog;0;Meta Pass;0;DOTS Instancing;0;Extra Pre Pass;0;Tessellation;0;  Phong;0;  Strength;0.5,False,-1;  Type;0;  Tess;16,False,-1;  Min;10,False,-1;  Max;25,False,-1;  Edge Length;16,False,-1;  Max Displacement;25,False,-1;Vertex Position,InvertActionOnDeselection;1;0;5;False;True;False;False;False;False;;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;946;-2304,-4736;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;12;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;0;False;False;False;False;False;False;False;False;True;0;False;-1;False;False;False;False;False;False;True;1;False;-1;True;3;False;-1;False;True;1;LightMode=ShadowCaster;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;948;-2304,-4736;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;12;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;Meta;0;4;Meta;0;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;0;False;False;False;False;False;False;False;False;False;True;2;False;-1;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;947;-2304,-4736;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;12;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;True;0;False;-1;True;0;False;-1;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;0;False;False;False;False;False;False;False;False;True;0;False;-1;False;True;False;False;False;False;0;False;-1;False;False;False;False;True;1;False;-1;False;False;True;1;LightMode=DepthOnly;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.CommentaryNode;939;-3328,-4864;Inherit;False;1405.154;100;Final Pass;0;;0.684,1,0,1;0;0
 Node;AmplifyShaderEditor.CommentaryNode;880;-3328,-5376;Inherit;False;1406.973;101;Drawers;0;;1,0.475862,0,1;0;0
 Node;AmplifyShaderEditor.CommentaryNode;891;-3328,-4224;Inherit;False;1418.51;100;Custom Alpha Inputs / Add here your custom Alpha Inputs;0;;0.684,1,0,1;0;0
-Node;AmplifyShaderEditor.CommentaryNode;939;-3328,-4864;Inherit;False;1405.154;100;Final Pass;0;;0.684,1,0,1;0;0
 Node;AmplifyShaderEditor.CommentaryNode;916;-3328,-3328;Inherit;False;1409.549;100;Custom Vertex Offset / Add here your custom Vertex Offset;0;;0.684,1,0,1;0;0
 WireConnection;942;13;943;0
 WireConnection;892;1;895;0
@@ -548,12 +548,12 @@ WireConnection;896;0;894;4
 WireConnection;896;1;913;0
 WireConnection;897;0;896;0
 WireConnection;918;0;919;0
-WireConnection;936;0;920;0
-WireConnection;936;1;949;0
 WireConnection;938;0;937;87
 WireConnection;938;1;898;0
+WireConnection;936;0;920;0
+WireConnection;936;1;949;0
 WireConnection;945;2;937;86
 WireConnection;945;3;938;0
 WireConnection;945;5;936;0
 ASEEND*/
-//CHKSM=4583890A5D92567A990AA3C0D5A2A881F26CBCB4
+//CHKSM=2CC6BF15B3CA64B6E8A312629FC8C76259F66DEE

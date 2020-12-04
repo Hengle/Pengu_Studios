@@ -159,7 +159,7 @@ Shader "Custom/My Transparent Shader"
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
 			#define _EMISSION
-			#define ASE_SRP_VERSION 999999
+			#define ASE_SRP_VERSION 70108
 			#define REQUIRE_OPAQUE_TEXTURE 1
 
 			#pragma prefer_hlslcc gles
@@ -712,7 +712,7 @@ Shader "Custom/My Transparent Shader"
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
 			#define _EMISSION
-			#define ASE_SRP_VERSION 999999
+			#define ASE_SRP_VERSION 70108
 
 			#pragma prefer_hlslcc gles
 			#pragma exclude_renderers d3d11_9x
@@ -1025,7 +1025,7 @@ Shader "Custom/My Transparent Shader"
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
 			#define _EMISSION
-			#define ASE_SRP_VERSION 999999
+			#define ASE_SRP_VERSION 70108
 
 			#pragma prefer_hlslcc gles
 			#pragma exclude_renderers d3d11_9x
@@ -1321,7 +1321,7 @@ Shader "Custom/My Transparent Shader"
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
 			#define _EMISSION
-			#define ASE_SRP_VERSION 999999
+			#define ASE_SRP_VERSION 70108
 			#define REQUIRE_OPAQUE_TEXTURE 1
 
 			#pragma prefer_hlslcc gles
@@ -1722,7 +1722,7 @@ Shader "Custom/My Transparent Shader"
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
 			#define _EMISSION
-			#define ASE_SRP_VERSION 999999
+			#define ASE_SRP_VERSION 70108
 			#define REQUIRE_OPAQUE_TEXTURE 1
 
 			#pragma enable_d3d11_debug_symbols
@@ -2044,7 +2044,7 @@ Shader "Custom/My Transparent Shader"
 }
 /*ASEBEGIN
 Version=18400
-1927;7;1906;1015;1356.867;-196.2134;2.007765;True;False
+1927;7;1906;1015;1356.867;-196.2133;2.007765;True;False
 Node;AmplifyShaderEditor.Vector3Node;30;-1280,1664;Half;False;Property;_NoiseSpeed;Noise Speed;3;0;Create;True;0;0;False;0;False;0.5,0.5,0;0.5,0.5,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.SimpleTimeNode;31;-1280,1824;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.NegateNode;36;-1088,1664;Inherit;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
@@ -2109,4 +2109,4 @@ WireConnection;85;4;55;0
 WireConnection;85;6;81;0
 WireConnection;85;8;48;0
 ASEEND*/
-//CHKSM=DE571AB270BD84E8E50750AE3D17713B6DC2D130
+//CHKSM=078B6F093CC68EC29D40BB64FECBE986D59AC3AF
