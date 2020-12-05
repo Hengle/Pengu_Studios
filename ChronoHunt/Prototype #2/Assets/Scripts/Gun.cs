@@ -18,16 +18,15 @@ public class Gun : MonoBehaviour
     Vector3 _recoilSmotherDampVel;
     Vector3 _vel;
     bool _triggerReleasedSinceLastShot;
+    bool canFire;
 
     //recoil
-    float _recoilStrength = 9;
-    float _maxRecoil = 9;
     Player _player;
 
     //Reloading
     [SerializeField]int _projectilesPerMag;
     int _projectilesRemainingInMag;
-    bool _isReloading;
+    [HideInInspector] public bool isReloading;
     [SerializeField]float _reloadTime;
     [SerializeField] Transform _bolt;
 
@@ -53,21 +52,17 @@ public class Gun : MonoBehaviour
     }
     private void Update()
     {
-        if (!_isReloading && _projectilesRemainingInMag == 0)
+        if(!isReloading && _projectilesRemainingInMag <= 0)
         {
-            Reload();
+            canFire = false;
+        }
+        else
+        {
+            canFire = true;
         }
         if (nextShotTime >= 0)
         {
             nextShotTime -= Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            _recoilStrength = 4;
-        }
-        else
-        {
-            _recoilStrength = _maxRecoil;
         }
     }
     public void Aim(Vector3 point)
@@ -76,9 +71,9 @@ public class Gun : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(direction.normalized);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _smoothTime * Time.deltaTime);
     }
-    void Shoot()
+    void Shoot(float maxRecoil, float recoilStrength)
     {
-        if (!_isReloading && nextShotTime <= 0 && _projectilesRemainingInMag > 0)
+        if (!isReloading && nextShotTime <= 0 && _projectilesRemainingInMag > 0)
         {
             if(_fireMode == FireMode._Burst)
             {
@@ -105,7 +100,7 @@ public class Gun : MonoBehaviour
             Instantiate(_shell, _shellEjection.position, _shellEjection.rotation);
             _muzzleFlash.Activate();
             transform.localPosition -= new Vector3(.5f,0,.5f) * Random.Range(.7f, 1);
-            _player.rb.velocity = Vector3.Lerp(_player.rb.velocity, _player.rb.velocity - (_muzzles[0].transform.position - transform.position) * _recoilStrength, 1f);
+            _player.rb.velocity = Vector3.Lerp(_player.rb.velocity, _player.rb.velocity - (_muzzles[0].transform.position - transform.position) * recoilStrength, 1f);
         }
     }
 
@@ -115,7 +110,7 @@ public class Gun : MonoBehaviour
     }
     IEnumerator AnimateReload()
     {
-        _isReloading = true;
+        isReloading = true;
         yield return new WaitForSeconds(.2f);
 
         float reloadSpeed = 1 / _reloadTime;
@@ -135,13 +130,17 @@ public class Gun : MonoBehaviour
 
             yield return null;
         }
-        _isReloading = false;
+        isReloading = false;
         _projectilesRemainingInMag = _projectilesPerMag;
     }
 
-    public void OnTriggerHold()
+    public void OnTriggerHold(float maxRecoil, float recoilStrength)
     {
-        Shoot();
+        if(canFire)
+        {
+            Shoot(maxRecoil, recoilStrength);
+        }
+
         _triggerReleasedSinceLastShot = false;
     }
     public void OnTriggerRelease()

@@ -7,7 +7,10 @@ public class GunController : MonoBehaviour
     public Transform weaponHold;
     public Gun startingGun;
     Gun _equippedGun;
+    [HideInInspector] public bool isReloading;
     [HideInInspector] public float shotTime;
+    public float maxRecoil;
+    public float recoilStrength;
     private void Start()
     {
         if (startingGun != null)
@@ -29,7 +32,7 @@ public class GunController : MonoBehaviour
     {
         if (_equippedGun != null)
         {
-            _equippedGun.OnTriggerHold();
+            _equippedGun.OnTriggerHold(maxRecoil, recoilStrength);
         }
     }
     public void OnTriggerRelease()

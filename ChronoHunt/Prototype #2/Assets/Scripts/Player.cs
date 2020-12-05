@@ -88,10 +88,18 @@ public class Player : LivingEntity
         {
             _gunController.Aim(_point);
         }
-        //Weapon input
-        if (Input.GetKeyDown(KeyCode.R))
+        //Weapon 
+        if (!_gunController.isReloading && Input.GetKeyDown(KeyCode.R))
         {
             _gunController.Reload();
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _gunController.recoilStrength = 4;
+        }
+        else
+        {
+            _gunController.recoilStrength = _gunController.maxRecoil;
         }
         if (Input.GetMouseButton(0))
         {

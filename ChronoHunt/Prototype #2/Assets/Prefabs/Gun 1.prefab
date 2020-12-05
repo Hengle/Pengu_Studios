@@ -221,7 +221,8 @@ MonoBehaviour:
   _smoothTime: 5
   shotTime: 2
   _projectilesPerMag: 2
-  _reloadTime: 1
+  isReloading: 0
+  _reloadTime: 0.6
   _bolt: {fileID: 6304697921569988934}
   _shell: {fileID: 4510996431171402105, guid: 2097c90d50cbde54697cccc2613a8adc, type: 3}
   _shellEjection: {fileID: 5548071490061693367}
