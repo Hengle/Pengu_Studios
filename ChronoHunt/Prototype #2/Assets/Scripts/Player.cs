@@ -20,6 +20,7 @@ public class Player : LivingEntity
     [SerializeField] Crosshairs _crosshair;
     [SerializeField] Animator _playerAnim;
     Vector3 _point;
+    [SerializeField]Gun startingGun;
     protected override void Start()
     {
         base.Start();
@@ -46,6 +47,8 @@ public class Player : LivingEntity
 
         //set animations
         _playerAnim.SetBool("Running", _controller.running);
+        _playerAnim.SetBool("Stopping", _controller.stopping);
+        _playerAnim.SetBool("Moving", _controller.moving);
         _playerAnim.SetFloat("WalkVelX", _controller.walkVelocity.x);
         _playerAnim.SetFloat("WalkVelY", _controller.walkVelocity.y);
 
@@ -89,6 +92,10 @@ public class Player : LivingEntity
             _gunController.Aim(_point);
         }
         //Weapon 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            _gunController.EquipGun(startingGun);
+        }
         if (!_gunController.isReloading && Input.GetKeyDown(KeyCode.R))
         {
             _gunController.Reload();

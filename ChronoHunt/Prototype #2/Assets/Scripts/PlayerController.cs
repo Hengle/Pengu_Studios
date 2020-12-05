@@ -8,7 +8,7 @@ public class PlayerController : Controller
     //fine tune control variables
     float _maxSpeed = 6;
     float _timeZeroToMax = .5f;
-    float _timeMaxToZero = .5f;
+    float _timeMaxToZero = 1f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _maxInteractDistance = 30;
@@ -37,6 +37,8 @@ public class PlayerController : Controller
     //player state
     [SerializeField]float _forwardVelocity;
     [HideInInspector] public bool running;
+    [HideInInspector] public bool stopping;
+    [HideInInspector] public bool moving;
     bool _sliding;
     void Start()
     {
@@ -73,6 +75,7 @@ public class PlayerController : Controller
 
     private void Update()
     {
+        // sliding
         if (_sliding)
         {
             _maxSpeed = 3;
@@ -81,13 +84,27 @@ public class PlayerController : Controller
         {
             _maxSpeed = 6;
         }
-        if (_forwardVelocity >= 1)
+
+        //Running
+        if(_forwardVelocity == 0)
+        {
+            moving = false;
+            stopping = false;
+            running = false;
+        }
+        else 
+        {
+            moving = true;
+        }
+        if (_forwardVelocity >= 3)
         {
             running = true;
+            stopping = false;
         }
-        else if (_forwardVelocity <= 5)
+        else if(_forwardVelocity <= 3 && running)
         {
             running = false;
+            stopping = true;
         }
     }
 
@@ -119,7 +136,7 @@ public class PlayerController : Controller
             {
                 transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime;
             }
-            if(!newInput)
+            else
             {  
                 Accelerate(_decelRatePerSecond);
                 transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime;

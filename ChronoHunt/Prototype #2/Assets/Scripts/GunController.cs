@@ -5,19 +5,12 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     public Transform weaponHold;
-    public Gun startingGun;
     Gun _equippedGun;
     [HideInInspector] public bool isReloading;
     [HideInInspector] public float shotTime;
     public float maxRecoil;
     public float recoilStrength;
-    private void Start()
-    {
-        if (startingGun != null)
-        {
-            EquipGun(startingGun);
-        }
-    }
+
     public void EquipGun (Gun gunToEquip)
     {
         if(_equippedGun != null)
@@ -45,7 +38,6 @@ public class GunController : MonoBehaviour
 
     public void Aim(Vector3 aimPoint)
     {
-        shotTime = _equippedGun.nextShotTime;
         if (_equippedGun != null)
         {
             _equippedGun.Aim(aimPoint);

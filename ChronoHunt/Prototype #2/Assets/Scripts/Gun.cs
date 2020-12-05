@@ -96,6 +96,7 @@ public class Gun : MonoBehaviour
                 Projectile newProjectile = Instantiate(_projectile, _muzzles[i].position, _muzzles[i].rotation) as Projectile;
                 newProjectile.SetSpeed(_muzzleVelocity);
             }
+            DrawBackBolt();
             _projectilesRemainingInMag--;
             Instantiate(_shell, _shellEjection.position, _shellEjection.rotation);
             _muzzleFlash.Activate();
@@ -106,7 +107,14 @@ public class Gun : MonoBehaviour
 
     public void Reload()
     {
-        StartCoroutine(AnimateReload());
+        if(_projectilesRemainingInMag != _projectilesPerMag)
+        {
+            StartCoroutine(AnimateReload());
+        }
+    }
+    void DrawBackBolt()
+    {
+        StartCoroutine(AnimateBolt());
     }
     IEnumerator AnimateReload()
     {
@@ -116,22 +124,36 @@ public class Gun : MonoBehaviour
         float reloadSpeed = 1 / _reloadTime;
         float percent = 0;
         Vector3 initialRot = transform.localEulerAngles;
-        float maxReloadAngle = 10;
-        float maxDrawBack = .07f;
+        float maxReloadAngle = 30;
 
         while(percent < 1)
         {
             percent += Time.deltaTime * reloadSpeed;
             float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
             float reloadAngle = Mathf.Lerp(0, maxReloadAngle, interpolation);
-            float drawBack = Mathf.Lerp(0, maxDrawBack, interpolation);
-            _bolt.localPosition = _bolt.localPosition - Vector3.right * drawBack;
             transform.localEulerAngles = initialRot + Vector3.forward * reloadAngle;
 
             yield return null;
         }
         isReloading = false;
         _projectilesRemainingInMag = _projectilesPerMag;
+    }
+    IEnumerator AnimateBolt()
+    {
+        yield return new WaitForSeconds(.2f);
+        float reloadSpeed = 1 / _reloadTime;
+        float percent = 0;
+        float maxDrawBack = .07f;
+
+        while (percent < 1)
+        {
+            percent += Time.deltaTime * reloadSpeed;
+            float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
+            float drawBack = Mathf.Lerp(0, maxDrawBack, interpolation);
+            _bolt.localPosition = _bolt.localPosition - Vector3.right * drawBack;
+
+            yield return null;
+        }
     }
 
     public void OnTriggerHold(float maxRecoil, float recoilStrength)
