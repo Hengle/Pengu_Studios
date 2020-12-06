@@ -10,13 +10,11 @@ public class Projectile : MonoBehaviour
     float _lifeTime = 3;
     float _skinWidth = .1f;
     public Color trailColor;
+    Rigidbody rb;
 
-    public void SetSpeed (float newSpeed)
-    {
-        _speed = newSpeed;
-    }
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         Destroy(gameObject, _lifeTime);
         //GetComponent<TrailRenderer>().material.SetColor("_TintColor", trailColor);
         Collider[] initialCollisions = Physics.OverlapSphere(transform.position, .1f, collisionMask);
@@ -30,7 +28,7 @@ public class Projectile : MonoBehaviour
     {
         float moveDistance = _speed * Time.deltaTime;
         CheckCollisions(moveDistance);
-        transform.Translate(Vector3.forward * moveDistance);
+        transform.rotation = Quaternion.LookRotation(rb.velocity);
     }
 
     void CheckCollisions (float moveDistance)

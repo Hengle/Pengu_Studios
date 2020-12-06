@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
     int _shotsRemaingingInBurst;
     [SerializeField] Transform[] _muzzles;
     [SerializeField] Projectile _projectile;
-    float _muzzleVelocity = 50f;
+    float _muzzleVelocity = 90f;
     public float nextShotTime = 2;
     [SerializeField]float _smoothTime = 5;
     public float shotTime = 2;
@@ -19,7 +19,8 @@ public class Gun : MonoBehaviour
     Vector3 _vel;
     bool _triggerReleasedSinceLastShot;
     bool canFire;
-
+    Crosshairs crosshair;
+    Quaternion rotation;
     //recoil
     Player _player;
 
@@ -40,6 +41,7 @@ public class Gun : MonoBehaviour
 
     void Start()
     {
+        crosshair = FindObjectOfType<Crosshairs>();
         _shotsRemaingingInBurst = _burstCount;
         _muzzleFlash = GetComponent<Muzzleflash>();
         _player = FindObjectOfType<Player>();
@@ -71,7 +73,7 @@ public class Gun : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(direction.normalized);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _smoothTime * Time.deltaTime);
     }
-    void Shoot(float maxRecoil, float recoilStrength)
+    void Shoot(float recoilStrength)
     {
         if (!isReloading && nextShotTime <= 0 && _projectilesRemainingInMag > 0)
         {
@@ -93,8 +95,8 @@ public class Gun : MonoBehaviour
             for(int i = 0; i < _muzzles.Length; i++)
             {
                 nextShotTime = shotTime;
-                Projectile newProjectile = Instantiate(_projectile, _muzzles[i].position, _muzzles[i].rotation) as Projectile;
-                newProjectile.SetSpeed(_muzzleVelocity);
+                Projectile newProjectile = Instantiate(_projectile, _muzzles[i].position, Quaternion.identity) as Projectile;
+                newProjectile.GetComponent<Rigidbody>().velocity = _muzzles[i].transform.forward * _muzzleVelocity;
             }
             DrawBackBolt();
             _projectilesRemainingInMag--;
@@ -160,7 +162,7 @@ public class Gun : MonoBehaviour
     {
         if(canFire)
         {
-            Shoot(maxRecoil, recoilStrength);
+            Shoot(recoilStrength);
         }
 
         _triggerReleasedSinceLastShot = false;

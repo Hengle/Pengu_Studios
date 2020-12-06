@@ -7,7 +7,7 @@ public class Player : LivingEntity
 {
     float _interactDistance = 5;
     float _outerInteractDistance = 20;
-    float _maxRayDistance = 20f;
+    float _maxRayDistance = 30f;
     [SerializeField] LayerMask _interactables;
     [SerializeField] LayerMask _enemies;
     [SerializeField] LayerMask _layerMask;
@@ -34,7 +34,10 @@ public class Player : LivingEntity
     void FixedUpdate()
     {
         //Movement input
-        _controller.Move();
+        if (_controller.canMove)
+        {
+            _controller.Move();
+        }
     }
 
     void Update()

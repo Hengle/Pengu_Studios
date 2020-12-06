@@ -59,7 +59,7 @@ public class KeyBoardTracker : DeviceTracker
 
         for (int i = 0; i < buttonKeys.Length; i++)
         {
-            if (Input.GetKeyDown(buttonKeys[i]))
+            if (Input.GetKey(buttonKeys[i]))
             {
                 data.buttons[i] = true;
                 newData = true;

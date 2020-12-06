@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerController : Controller
+public class PlayerController : MonoBehaviour
 {
     //fine tune control variables
     float _maxSpeed = 6;
     float _timeZeroToMax = .5f;
     float _timeMaxToZero = 1f;
+    float _timeSlideToZero = 1f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
+    float _slideDecelRatePerSecond;
     float _maxInteractDistance = 30;
     [HideInInspector]public Vector3 walkVelocity;
     [SerializeField]float _turnSpeed = 1;
@@ -18,7 +20,7 @@ public class PlayerController : Controller
     Quaternion _targetRotation;
     //groundChecks
     Vector3 _groundNormal;
-    public bool isGrounded;
+    [HideInInspector]public bool isGrounded;
     float _height = 1f;
     [SerializeField]float _heightPadding = .05f;
     [SerializeField] LayerMask _ground;
@@ -30,12 +32,13 @@ public class PlayerController : Controller
     Camera _cam;
     [HideInInspector]public GameObject target;
     //bools
-    [HideInInspector]public bool isScopedIn = false;
-    [HideInInspector]public bool isLockedOn = false;
+    [HideInInspector] public bool isScopedIn = false;
+    [HideInInspector] public bool isLockedOn = false;
+    [HideInInspector]public bool canMove = true;
     //layermasks
     [SerializeField] LayerMask _enemy;
     //player state
-    [SerializeField]float _forwardVelocity;
+    float _forwardVelocity;
     [HideInInspector] public bool running;
     [HideInInspector] public bool stopping;
     [HideInInspector] public bool moving;
@@ -46,47 +49,51 @@ public class PlayerController : Controller
         isGrounded = true;
         _accelRatePerSecond = _maxSpeed / _timeZeroToMax;
         _decelRatePerSecond = -_maxSpeed / _timeMaxToZero;
+        _slideDecelRatePerSecond = -_maxSpeed / _timeSlideToZero;
         _cam = Camera.main;
     }
-    public override void ReadInput(InputData data)
+     void ReadInput()
     {
+        Vector2 movement = new Vector3(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"), 0).normalized;
         // Takes input from the input manager
-        if (data.axes[0] != 0)
+        if (canMove)
         {
-            Accelerate(_accelRatePerSecond);
-            walkVelocity += Vector3.up * data.axes[0];
+            if (movement.x != 0)
+            {
+                Accelerate(_accelRatePerSecond);
+                walkVelocity += Vector3.up * movement.x;
+            }
+            if (movement.y != 0)
+            {
+                Accelerate(_accelRatePerSecond);
+                walkVelocity += Vector3.right * movement.y;
+            }
         }
-        if (data.axes[1] != 0)
-        {
-            Accelerate(_accelRatePerSecond);
-            walkVelocity += Vector3.right * data.axes[1];
-        }
-        if(data.buttons[0])
+
+        if(Input.GetKey(KeyCode.LeftShift))
         {
             _sliding = true;
+            canMove = false;
         }
         else
         {
             _sliding = false;
+            canMove = true;
         }
+
         walkVelocity = walkVelocity.normalized;
-        newInput = true;
-    }
+     }
 
     private void Update()
     {
+        ReadInput();
         // sliding
         if (_sliding)
         {
-            _maxSpeed = 3;
+            Slide();
         }
-        else
-        {
-            _maxSpeed = 6;
-        }
-
         //Running
-        if(_forwardVelocity == 0)
+        if (_forwardVelocity == 0)
         {
             moving = false;
             stopping = false;
@@ -108,31 +115,12 @@ public class PlayerController : Controller
         }
     }
 
-    public void CreateRay ()
-    {
-        //Creates a ray to dectect if the player hit an enemy
-        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, _maxInteractDistance, _enemy, QueryTriggerInteraction.Collide)) 
-        {
-            Debug.DrawLine(ray.origin, hit.point, Color.red);
-            if (hit.collider.tag == ("Enemy")) 
-            {
-                print("Hit");
-                //isLockedOn = true;
-                //target = hit.collider.gameObject;
-            }
-        }
-        
-    }
     public void Move ()
     {
-        // self explanatory....
-        CheckGroundStatus();
         if(isGrounded)
         {
             if (_groundAngle >= _maxGroundAngle) return;
-            if (newInput)
+            if (Input.anyKey)
             {
                 transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime;
             }
@@ -142,9 +130,14 @@ public class PlayerController : Controller
                 transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime;
             }
         }
-        newInput = false;
     }
-    
+
+    void Slide()
+    {
+        Accelerate(_slideDecelRatePerSecond);
+        transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime * 1.3f;
+    }
+  
     public void CalculateDirection()
     {
         _angle = Mathf.Atan2(walkVelocity.x, walkVelocity.y);
@@ -161,6 +154,23 @@ public class PlayerController : Controller
         // increases and decreases the forwardvelocity float.
         _forwardVelocity += accel * Time.fixedDeltaTime;
         _forwardVelocity = Mathf.Clamp(_forwardVelocity, 0, _maxSpeed);
+    }
+    public void CreateRay()
+    {
+        //Creates a ray to dectect if the player hit an enemy
+        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, _maxInteractDistance, _enemy, QueryTriggerInteraction.Collide))
+        {
+            Debug.DrawLine(ray.origin, hit.point, Color.red);
+            if (hit.collider.tag == ("Enemy"))
+            {
+                print("Hit");
+                //isLockedOn = true;
+                //target = hit.collider.gameObject;
+            }
+        }
+
     }
 
     void CheckGroundStatus()
