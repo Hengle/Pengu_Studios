@@ -996,6 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb7bfa26b49bf94e91e81e4037a73d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slidePercent: 0
   walkVelocity: {x: 0, y: 0, z: 0}
   _turnSpeed: 5
   isGrounded: 0

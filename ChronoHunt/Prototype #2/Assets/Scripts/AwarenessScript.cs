@@ -57,14 +57,14 @@ public class AwarenessScript : MonoBehaviour
 
         foreach (InteractableObject inRange in _interactablesInOuterRangeToHit)
         {
-            _currentColor = inRange.GetComponent<Renderer>().material;
-            _currentColor.color = inRange.StartingColor;
+            //_currentColor = inRange.GetComponent<Renderer>().material;
+            //_currentColor.color = inRange.StartingColor;
         }
 
         foreach (InteractableObject interactable in _interactablesToHit)
         {
-            _interactColor = interactable.GetComponent<Renderer>().material;
-            _interactColor.color = Color.white;
+            //_interactColor = interactable.GetComponent<Renderer>().material;
+            //_interactColor.color = Color.white;
         }
 
     }

@@ -8,12 +8,16 @@ public class PlayerController : MonoBehaviour
     //fine tune control variables
     float _maxSpeed = 6;
     float _timeZeroToMax = .5f;
-    float _timeMaxToZero = 1f;
+    float _timeMaxToZero = .3f;
     float _timeSlideToZero = 1f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _slideDecelRatePerSecond;
     float _maxInteractDistance = 30;
+    //slide
+    [SerializeField]float _slidePercent;
+    float _slideTime = 1f;
+    //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
     [SerializeField]float _turnSpeed = 1;
     float _angle;
@@ -43,8 +47,10 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool stopping;
     [HideInInspector] public bool moving;
     bool _sliding;
+    Quaternion intialRotation;
     void Start()
     {
+        intialRotation = transform.rotation;
         _groundNormal = Vector3.zero;
         isGrounded = true;
         _accelRatePerSecond = _maxSpeed / _timeZeroToMax;
@@ -75,10 +81,11 @@ public class PlayerController : MonoBehaviour
             _sliding = true;
             canMove = false;
         }
-        else
+        else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
             _sliding = false;
             canMove = true;
+            _slidePercent = 0;
         }
 
         walkVelocity = walkVelocity.normalized;
@@ -90,7 +97,7 @@ public class PlayerController : MonoBehaviour
         // sliding
         if (_sliding)
         {
-            Slide();
+            StartCoroutine("Slide");
         }
         //Running
         if (_forwardVelocity == 0)
@@ -132,12 +139,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Slide()
+    void  Slide()
     {
+        Vector3 initialRot = transform.eulerAngles;
+        float _maxRotateAngle = 60;
+        float interpolation = (Mathf.Pow(2, -_slidePercent));
+        float slideAngle = Mathf.Lerp(0, _maxRotateAngle, interpolation);
+        _slidePercent += Time.deltaTime * _slideTime;
+        
+        transform.rotation = Quaternion.Euler(slideAngle,0,0);
+        
         Accelerate(_slideDecelRatePerSecond);
         transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime * 1.3f;
     }
-  
+    IEnumerator ResetRotation()
+    {
+        yield return new WaitForSeconds(.3f);
+        float _percent = 0;
+        while(_percent < 1)
+        {
+            _percent += Time.deltaTime / 2;
+            transform.rotation = Quaternion.Lerp(transform.rotation, intialRotation, _percent);
+        }
+        
+    }
+
     public void CalculateDirection()
     {
         _angle = Mathf.Atan2(walkVelocity.x, walkVelocity.y);
