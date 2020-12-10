@@ -40,6 +40,7 @@ public class GunController : MonoBehaviour
     {
         if (_equippedGun != null)
         {
+            shotTime = _equippedGun.nextShotTime;
             _equippedGun.Aim(aimPoint);
         }
     }

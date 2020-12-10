@@ -34,10 +34,8 @@ public class Player : LivingEntity
     void FixedUpdate()
     {
         //Movement input
-        if (_controller.canMove)
-        {
-            _controller.Move();
-        }
+        _controller.Move();
+        
     }
 
     void Update()
@@ -47,6 +45,7 @@ public class Player : LivingEntity
         _controller.CalculateForward();
         _controller.CalculateGroundAngle();
         _controller.SetRotation();
+        //_controller.CheckGroundStatus();
 
         //set animations
         _playerAnim.SetBool("Running", _controller.running);
@@ -115,9 +114,10 @@ public class Player : LivingEntity
         {
             _gunController.OnTriggerHold();
         }
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             _gunController.OnTriggerRelease();
         }
+
     }
 }

@@ -6,17 +6,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //fine tune control variables
-    float _maxSpeed = 6;
+    [SerializeField]float _maxSpeed = 200;
     float _timeZeroToMax = .5f;
-    float _timeMaxToZero = .3f;
-    float _timeSlideToZero = 1f;
+    float _timeMaxToZero = .7f;
+    float _timeSlideToZero = 5f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _slideDecelRatePerSecond;
     float _maxInteractDistance = 30;
     //slide
     [SerializeField]float _slidePercent;
-    float _slideTime = 1f;
+    float _slideTime = 100f;
+    bool _hasRotatedForSlide;
+    float _intitalHeight;
+    float _heightChangeVertical = .5f;
+    float _heightChangeHorizontal = .4f;
     //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
     [SerializeField]float _turnSpeed = 1;
@@ -24,17 +28,18 @@ public class PlayerController : MonoBehaviour
     Quaternion _targetRotation;
     //groundChecks
     Vector3 _groundNormal;
-    [HideInInspector]public bool isGrounded;
+    public bool isGrounded;
     float _height = 1f;
     [SerializeField]float _heightPadding = .05f;
     [SerializeField] LayerMask _ground;
-    float _maxGroundAngle = 120;
+    float _maxGroundAngle = 150;
     float _groundAngle;
     Vector3 _forward;
     RaycastHit _hitInfo;
     //gameobjects/components
     Camera _cam;
     [HideInInspector]public GameObject target;
+    Rigidbody rb;
     //bools
     [HideInInspector] public bool isScopedIn = false;
     [HideInInspector] public bool isLockedOn = false;
@@ -50,7 +55,9 @@ public class PlayerController : MonoBehaviour
     Quaternion intialRotation;
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         intialRotation = transform.rotation;
+        _intitalHeight = transform.localScale.y;
         _groundNormal = Vector3.zero;
         isGrounded = true;
         _accelRatePerSecond = _maxSpeed / _timeZeroToMax;
@@ -76,15 +83,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift) & !_sliding)
         {
             _sliding = true;
             canMove = false;
+            _hasRotatedForSlide = false;
+            _slidePercent = 0f;
         }
         else if(Input.GetKeyUp(KeyCode.LeftShift))
         {
             _sliding = false;
             canMove = true;
+            StartCoroutine("ResetRotation");
             _slidePercent = 0;
         }
 
@@ -110,12 +120,12 @@ public class PlayerController : MonoBehaviour
         {
             moving = true;
         }
-        if (_forwardVelocity >= 3)
+        if (_forwardVelocity >= (_maxSpeed * .5f))
         {
             running = true;
             stopping = false;
         }
-        else if(_forwardVelocity <= 3 && running)
+        else if(_forwardVelocity <= (_maxSpeed * .5f) && running)
         {
             running = false;
             stopping = true;
@@ -124,44 +134,49 @@ public class PlayerController : MonoBehaviour
 
     public void Move ()
     {
-        if(isGrounded)
+        CheckGroundStatus();
+        if (isGrounded)
         {
             if (_groundAngle >= _maxGroundAngle) return;
             if (Input.anyKey)
             {
-                transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime;
+                rb.velocity = transform.forward * _forwardVelocity * Time.fixedDeltaTime;
             }
             else
             {  
                 Accelerate(_decelRatePerSecond);
-                transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime;
+                rb.velocity = transform.forward * _forwardVelocity * Time.fixedDeltaTime;
             }
         }
     }
 
     void  Slide()
-    {
-        Vector3 initialRot = transform.eulerAngles;
-        float _maxRotateAngle = 60;
-        float interpolation = (Mathf.Pow(2, -_slidePercent));
-        float slideAngle = Mathf.Lerp(0, _maxRotateAngle, interpolation);
-        _slidePercent += Time.deltaTime * _slideTime;
-        
-        transform.rotation = Quaternion.Euler(slideAngle,0,0);
-        
+    {   
+        if (_slidePercent < 1)
+        {
+            _slidePercent += Time.fixedDeltaTime;
+            Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
+            if (!_hasRotatedForSlide)
+            {
+                rb.transform.localScale = Vector3.Lerp(transform.localScale, _newHeight, _slideTime);
+                _hasRotatedForSlide = true;
+            }
+        }
         Accelerate(_slideDecelRatePerSecond);
-        transform.position += transform.forward * _forwardVelocity * Time.fixedDeltaTime * 1.3f;
+        rb.velocity = transform.forward * _forwardVelocity * Time.fixedDeltaTime;
     }
     IEnumerator ResetRotation()
     {
         yield return new WaitForSeconds(.3f);
-        float _percent = 0;
-        while(_percent < 1)
+        float _returnPercent = 0;
+        Vector3 _originalHeight = new Vector3(transform.localScale.x, transform.localScale.y + _heightChangeVertical, transform.localScale.z);
+        while (_returnPercent < 1 && transform.localScale.y < _originalHeight.y)
         {
-            _percent += Time.deltaTime / 2;
-            transform.rotation = Quaternion.Lerp(transform.rotation, intialRotation, _percent);
+            _returnPercent += Time.fixedDeltaTime;
+            float height = transform.localScale.y;
+            height += _originalHeight.y/10;
+            rb.transform.localScale = new Vector3(transform.localScale.x, height, transform.localScale.z);
         }
-        
     }
 
     public void CalculateDirection()
@@ -199,7 +214,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void CheckGroundStatus()
+    public void CheckGroundStatus()
     {
         Debug.DrawLine(transform.position, transform.position + _forward * _height * 2, Color.blue);
         Debug.DrawLine(transform.position, transform.position - Vector3.up * (_height + _heightPadding), Color.red);

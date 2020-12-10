@@ -14,7 +14,7 @@ public class Gun : MonoBehaviour
     float _muzzleVelocity = 90f;
     public float nextShotTime = 2;
     [SerializeField]float _smoothTime = 5;
-    public float shotTime = 2;
+    [SerializeField] float shotTime = 2;
     Vector3 _recoilSmotherDampVel;
     Vector3 _vel;
     bool _triggerReleasedSinceLastShot;
@@ -145,7 +145,7 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         float reloadSpeed = 1 / _reloadTime;
         float percent = 0;
-        float maxDrawBack = .07f;
+        float maxDrawBack = .03f;
 
         while (percent < 1)
         {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28521618, g: 0.37109196, b: 0.4917979, a: 1}
+  m_IndirectSpecularColor: {r: 0.2852174, g: 0.37109366, b: 0.49179968, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 140792510}
   - component: {fileID: 140792509}
   - component: {fileID: 140792508}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle (2)
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 245295315}
   - component: {fileID: 245295314}
   - component: {fileID: 245295318}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 408085001}
   - component: {fileID: 408085000}
   - component: {fileID: 408084999}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle (1)
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -808,7 +808,7 @@ GameObject:
   - component: {fileID: 529086925}
   - component: {fileID: 529086924}
   - component: {fileID: 529086923}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle (1)
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -996,11 +996,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb7bfa26b49bf94e91e81e4037a73d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxSpeed: 200
   _slidePercent: 0
   walkVelocity: {x: 0, y: 0, z: 0}
-  _turnSpeed: 5
+  _turnSpeed: 15
   isGrounded: 0
-  _heightPadding: 0.2
+  _heightPadding: 0.1
   _ground:
     serializedVersion: 2
     m_Bits: 1024
@@ -1025,9 +1026,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5344663
-  m_Height: 2.9275875
+  m_Height: 3.1987133
   m_Direction: 1
-  m_Center: {x: -0.005930066, y: 0.47302192, z: 0.011888891}
+  m_Center: {x: -0.005930066, y: 0.7236309, z: 0.011888891}
 --- !u!114 &624153546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,7 +1206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771766106}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,7 +1600,7 @@ GameObject:
   - component: {fileID: 1094850099}
   - component: {fileID: 1094850098}
   - component: {fileID: 1094850097}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle (2)
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -1875,7 +1876,7 @@ GameObject:
   - component: {fileID: 1307536017}
   - component: {fileID: 1307536016}
   - component: {fileID: 1307536015}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle (1)
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -2130,7 +2131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1473351035}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ramp (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2745,7 +2746,7 @@ GameObject:
   - component: {fileID: 1839709385}
   - component: {fileID: 1839709384}
   - component: {fileID: 1839709383}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle (2)
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -3027,7 +3028,7 @@ GameObject:
   - component: {fileID: 1938773395}
   - component: {fileID: 1938773394}
   - component: {fileID: 1938773393}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle (1)
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -3138,7 +3139,7 @@ GameObject:
   - component: {fileID: 2115652091}
   - component: {fileID: 2115652090}
   - component: {fileID: 2115652089}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Obstacle (2)
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -3245,7 +3246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121157960}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ramp (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
