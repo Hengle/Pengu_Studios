@@ -119,5 +119,28 @@ public class Player : LivingEntity
             _gunController.OnTriggerRelease();
         }
 
+        //PlayerController Input
+        _controller.ReadInput();
+        //Running
+        if (_controller.forwardVelocity == 0)
+        {
+            _controller.moving = false;
+            _controller.stopping = false;
+            _controller.running = false;
+        }
+        else
+        {
+            _controller.moving = true;
+        }
+        if (_controller.forwardVelocity >= (_controller.maxSpeed * .5f))
+        {
+            _controller.running = true;
+            _controller.stopping = false;
+        }
+        else if (_controller.forwardVelocity <= (_controller.maxSpeed * .5f) && _controller.running)
+        {
+            _controller.running = false;
+            _controller.stopping = true;
+        }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2852174, g: 0.37109366, b: 0.49179968, a: 1}
+  m_IndirectSpecularColor: {r: 0.28521618, g: 0.37109196, b: 0.4917979, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -982,7 +982,7 @@ MonoBehaviour:
     m_Bits: 1024
   rb: {fileID: 624153547}
   _crosshair: {fileID: 1821351469}
-  _playerAnim: {fileID: 1196352542}
+  _playerAnim: {fileID: 1196352543}
   startingGun: {fileID: 1682663373935392573, guid: 30d6bdb9634b6244b8affea7f320df50, type: 3}
 --- !u!114 &624153544
 MonoBehaviour:
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb7bfa26b49bf94e91e81e4037a73d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 200
+  maxSpeed: 10
   _slidePercent: 0
   walkVelocity: {x: 0, y: 0, z: 0}
   _turnSpeed: 15
@@ -1012,9 +1012,11 @@ MonoBehaviour:
   _enemy:
     serializedVersion: 2
     m_Bits: 256
+  forwardVelocity: 0
   running: 0
   stopping: 0
   moving: 0
+  sliding: 0
 --- !u!136 &624153545
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1067,7 +1069,7 @@ Transform:
   m_GameObject: {fileID: 624153542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.25, y: 1.53, z: -5.38}
-  m_LocalScale: {x: 0.8, y: 0.9, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 559484197}
   - {fileID: 1196352538}
@@ -1710,7 +1712,7 @@ GameObject:
   - component: {fileID: 1196352540}
   - component: {fileID: 1196352539}
   - component: {fileID: 1196352541}
-  - component: {fileID: 1196352542}
+  - component: {fileID: 1196352543}
   m_Layer: 0
   m_Name: GFX
   m_TagString: Untagged
@@ -1748,7 +1750,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 8d9be202ab847824a8dbb9eef94b4f1e, type: 2}
@@ -1781,7 +1783,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!114 &1196352540
 MonoBehaviour:
@@ -1807,7 +1809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ea55225957719479fcb5f0c65244a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1196352542
+--- !u!95 &1196352543
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

@@ -6,21 +6,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //fine tune control variables
-    [SerializeField]float _maxSpeed = 200;
-    float _timeZeroToMax = .5f;
+    public float maxSpeed = 200;
+    float _timeZeroToMax = 1f;
     float _timeMaxToZero = .7f;
-    float _timeSlideToZero = 5f;
+    float _timeSlideToZero = 1f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _slideDecelRatePerSecond;
     float _maxInteractDistance = 30;
     //slide
     [SerializeField]float _slidePercent;
-    float _slideTime = 100f;
+    float _slideSpeed;
     bool _hasRotatedForSlide;
+    bool _hasReturnedFromSlide;
     float _intitalHeight;
     float _heightChangeVertical = .5f;
-    float _heightChangeHorizontal = .4f;
     //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
     [SerializeField]float _turnSpeed = 1;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     Quaternion _targetRotation;
     //groundChecks
     Vector3 _groundNormal;
-    public bool isGrounded;
+    [HideInInspector]public bool isGrounded;
     float _height = 1f;
     [SerializeField]float _heightPadding = .05f;
     [SerializeField] LayerMask _ground;
@@ -47,25 +47,24 @@ public class PlayerController : MonoBehaviour
     //layermasks
     [SerializeField] LayerMask _enemy;
     //player state
-    float _forwardVelocity;
+    public float forwardVelocity;
     [HideInInspector] public bool running;
     [HideInInspector] public bool stopping;
     [HideInInspector] public bool moving;
-    bool _sliding;
-    Quaternion intialRotation;
+    public bool sliding;
     void Start()
     {
+        _slideSpeed = maxSpeed * .1f;
         rb = GetComponent<Rigidbody>();
-        intialRotation = transform.rotation;
         _intitalHeight = transform.localScale.y;
         _groundNormal = Vector3.zero;
         isGrounded = true;
-        _accelRatePerSecond = _maxSpeed / _timeZeroToMax;
-        _decelRatePerSecond = -_maxSpeed / _timeMaxToZero;
-        _slideDecelRatePerSecond = -_maxSpeed / _timeSlideToZero;
+        _accelRatePerSecond = maxSpeed / _timeZeroToMax;
+        _decelRatePerSecond = -maxSpeed / _timeMaxToZero;
+        _slideDecelRatePerSecond = -maxSpeed / _timeSlideToZero;
         _cam = Camera.main;
     }
-     void ReadInput()
+     public void ReadInput()
     {
         Vector2 movement = new Vector3(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"), 0).normalized;
         // Takes input from the input manager
@@ -83,52 +82,25 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.LeftShift) & !_sliding)
+        if(Input.GetKey(KeyCode.LeftShift) & !sliding && forwardVelocity >= maxSpeed)
         {
-            _sliding = true;
+            sliding = true;
             canMove = false;
             _hasRotatedForSlide = false;
             _slidePercent = 0f;
         }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            _sliding = false;
-            canMove = true;
-            StartCoroutine("ResetRotation");
-            _slidePercent = 0;
+            _hasReturnedFromSlide = false;
         }
 
         walkVelocity = walkVelocity.normalized;
      }
-
     private void Update()
     {
-        ReadInput();
-        // sliding
-        if (_sliding)
+        if (sliding)
         {
             StartCoroutine("Slide");
-        }
-        //Running
-        if (_forwardVelocity == 0)
-        {
-            moving = false;
-            stopping = false;
-            running = false;
-        }
-        else 
-        {
-            moving = true;
-        }
-        if (_forwardVelocity >= (_maxSpeed * .5f))
-        {
-            running = true;
-            stopping = false;
-        }
-        else if(_forwardVelocity <= (_maxSpeed * .5f) && running)
-        {
-            running = false;
-            stopping = true;
         }
     }
 
@@ -140,43 +112,51 @@ public class PlayerController : MonoBehaviour
             if (_groundAngle >= _maxGroundAngle) return;
             if (Input.anyKey)
             {
-                rb.velocity = transform.forward * _forwardVelocity * Time.fixedDeltaTime;
+                transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime;
             }
             else
             {  
                 Accelerate(_decelRatePerSecond);
-                rb.velocity = transform.forward * _forwardVelocity * Time.fixedDeltaTime;
+                transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime;
             }
         }
     }
 
     void  Slide()
     {   
-        if (_slidePercent < 1)
+        if (_slidePercent <= 1)
         {
             _slidePercent += Time.fixedDeltaTime;
             Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
             if (!_hasRotatedForSlide)
             {
-                rb.transform.localScale = Vector3.Lerp(transform.localScale, _newHeight, _slideTime);
+                transform.localScale = Vector3.Lerp(transform.localScale, _newHeight, _timeSlideToZero);
                 _hasRotatedForSlide = true;
             }
         }
+        if (_slidePercent >= 1 && !_hasReturnedFromSlide)
+        {
+            StartCoroutine("ResetRotation");
+        }
         Accelerate(_slideDecelRatePerSecond);
-        rb.velocity = transform.forward * _forwardVelocity * Time.fixedDeltaTime;
+        transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime * _slideSpeed;
     }
-    IEnumerator ResetRotation()
+    public IEnumerator ResetRotation()
     {
-        yield return new WaitForSeconds(.3f);
+        _hasReturnedFromSlide = true;
+        yield return new WaitForSeconds(.1f);
+        sliding = false;
+        canMove = true;
         float _returnPercent = 0;
-        Vector3 _originalHeight = new Vector3(transform.localScale.x, transform.localScale.y + _heightChangeVertical, transform.localScale.z);
-        while (_returnPercent < 1 && transform.localScale.y < _originalHeight.y)
+        Vector3 _originalHeight = new Vector3(transform.localScale.x, (transform.localScale.y + _heightChangeVertical), transform.localScale.z);
+        while (_returnPercent < 1 && transform.localScale.y < _originalHeight.y )
         {
             _returnPercent += Time.fixedDeltaTime;
             float height = transform.localScale.y;
             height += _originalHeight.y/10;
-            rb.transform.localScale = new Vector3(transform.localScale.x, height, transform.localScale.z);
+            transform.localScale = new Vector3(transform.localScale.x, height, transform.localScale.z);
         }
+
     }
 
     public void CalculateDirection()
@@ -193,8 +173,8 @@ public class PlayerController : MonoBehaviour
     public void Accelerate(float accel)
     {
         // increases and decreases the forwardvelocity float.
-        _forwardVelocity += accel * Time.fixedDeltaTime;
-        _forwardVelocity = Mathf.Clamp(_forwardVelocity, 0, _maxSpeed);
+        forwardVelocity += accel * Time.fixedDeltaTime;
+        forwardVelocity = Mathf.Clamp(forwardVelocity, 0, maxSpeed);
     }
     public void CreateRay()
     {
