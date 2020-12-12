@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     bool _hasReturnedFromSlide;
     float _intitalHeight;
     float _heightChangeVertical = .5f;
+    CapsuleCollider col;
     //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
     [SerializeField]float _turnSpeed = 1;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         _slideSpeed = maxSpeed * .1f;
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<CapsuleCollider>();
         _intitalHeight = transform.localScale.y;
         _groundNormal = Vector3.zero;
         isGrounded = true;
@@ -124,15 +126,12 @@ public class PlayerController : MonoBehaviour
 
     void  Slide()
     {   
-        if (_slidePercent <= 1)
+        while (_slidePercent < 1)
         {
             _slidePercent += Time.fixedDeltaTime;
             Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
-            if (!_hasRotatedForSlide)
-            {
-                transform.localScale = Vector3.Lerp(transform.localScale, _newHeight, _timeSlideToZero);
-                _hasRotatedForSlide = true;
-            }
+            col.height = _newHeight.y;
+            col.center = new Vector3(col.center.x, -.2f, col.center.z);
         }
         if (_slidePercent >= 1 && !_hasReturnedFromSlide)
         {
@@ -149,12 +148,12 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         float _returnPercent = 0;
         Vector3 _originalHeight = new Vector3(transform.localScale.x, (transform.localScale.y + _heightChangeVertical), transform.localScale.z);
-        while (_returnPercent < 1 && transform.localScale.y < _originalHeight.y )
+        while (_returnPercent < 1 && col.height < _originalHeight.y )
         {
             _returnPercent += Time.fixedDeltaTime;
             float height = transform.localScale.y;
             height += _originalHeight.y/10;
-            transform.localScale = new Vector3(transform.localScale.x, height, transform.localScale.z);
+            col.height = height;
         }
 
     }
