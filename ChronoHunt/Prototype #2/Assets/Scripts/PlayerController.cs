@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 200;
     float _timeZeroToMax = 1f;
     float _timeMaxToZero = .7f;
-    float _timeSlideToZero = 1f;
+    float _timeSlideToZero = .7f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _slideDecelRatePerSecond;
@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     //slide
     [SerializeField]float _slidePercent;
     float _slideSpeed;
-    bool _hasRotatedForSlide;
     bool _hasReturnedFromSlide;
     float _intitalHeight;
     float _heightChangeVertical = .5f;
@@ -58,7 +57,7 @@ public class PlayerController : MonoBehaviour
         _slideSpeed = maxSpeed * .1f;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
-        _intitalHeight = transform.localScale.y;
+        _intitalHeight = col.height;
         _groundNormal = Vector3.zero;
         isGrounded = true;
         _accelRatePerSecond = maxSpeed / _timeZeroToMax;
@@ -88,7 +87,6 @@ public class PlayerController : MonoBehaviour
         {
             sliding = true;
             canMove = false;
-            _hasRotatedForSlide = false;
             _slidePercent = 0f;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -147,13 +145,11 @@ public class PlayerController : MonoBehaviour
         sliding = false;
         canMove = true;
         float _returnPercent = 0;
-        Vector3 _originalHeight = new Vector3(transform.localScale.x, (transform.localScale.y + _heightChangeVertical), transform.localScale.z);
-        while (_returnPercent < 1 && col.height < _originalHeight.y )
+        while (_returnPercent < 1 && col.height <= _intitalHeight)
         {
             _returnPercent += Time.fixedDeltaTime;
-            float height = transform.localScale.y;
-            height += _originalHeight.y/10;
-            col.height = height;
+            col.height = _intitalHeight;
+            col.center = new Vector3(col.center.x, .7236309f, col.center.z);
         }
 
     }
