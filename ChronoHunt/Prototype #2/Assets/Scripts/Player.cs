@@ -45,12 +45,12 @@ public class Player : LivingEntity
         _controller.CalculateForward();
         _controller.CalculateGroundAngle();
         _controller.SetRotation();
-        //_controller.CheckGroundStatus();
 
         //set animations
         _playerAnim.SetBool("Running", _controller.running);
         _playerAnim.SetBool("Stopping", _controller.stopping);
         _playerAnim.SetBool("Moving", _controller.moving);
+        _playerAnim.SetBool("IsSliding", _controller.sliding);
         _playerAnim.SetFloat("WalkVelX", _controller.walkVelocity.x);
         _playerAnim.SetFloat("WalkVelY", _controller.walkVelocity.y);
 

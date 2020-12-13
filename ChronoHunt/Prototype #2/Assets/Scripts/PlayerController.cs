@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //fine tune control variables
-    public float maxSpeed = 200;
+    public float maxSpeed = 10;
     float _timeZeroToMax = 1f;
     float _timeMaxToZero = .7f;
     float _timeSlideToZero = .7f;
@@ -15,20 +15,20 @@ public class PlayerController : MonoBehaviour
     float _slideDecelRatePerSecond;
     float _maxInteractDistance = 30;
     //slide
-    [SerializeField]float _slidePercent;
+    float _slidePercent;
     float _slideSpeed;
     bool _hasReturnedFromSlide;
     float _intitalHeight;
     float _heightChangeVertical = .5f;
+    float _centerChangeVertical = -.39f;
     CapsuleCollider col;
     //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
-    [SerializeField]float _turnSpeed = 1;
+    float _turnSpeed = 15;
     float _angle;
     Quaternion _targetRotation;
     //groundChecks
     Vector3 _groundNormal;
-    [HideInInspector]public bool isGrounded;
     float _height = 1f;
     [SerializeField]float _heightPadding = .05f;
     [SerializeField] LayerMask _ground;
@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool running;
     [HideInInspector] public bool stopping;
     [HideInInspector] public bool moving;
-    public bool sliding;
+    [HideInInspector]public bool sliding;
+    public bool isGrounded;
     void Start()
     {
         _slideSpeed = maxSpeed * .1f;
@@ -69,13 +70,14 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 movement = new Vector3(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"), 0).normalized;
         // Takes input from the input manager
-        if (canMove)
+        if (canMove && isGrounded)
         {
             if (movement.x != 0)
             {
                 Accelerate(_accelRatePerSecond);
                 walkVelocity += Vector3.up * movement.x;
             }
+
             if (movement.y != 0)
             {
                 Accelerate(_accelRatePerSecond);
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.LeftShift) & !sliding && forwardVelocity >= maxSpeed)
+        if(Input.GetKey(KeyCode.LeftShift) & !sliding && forwardVelocity <= maxSpeed + 2)
         {
             sliding = true;
             canMove = false;
@@ -92,6 +94,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _hasReturnedFromSlide = false;
+            _slidePercent = 0;
         }
 
         walkVelocity = walkVelocity.normalized;
@@ -100,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         if (sliding)
         {
-            StartCoroutine("Slide");
+            Slide();
         }
     }
 
@@ -124,19 +127,22 @@ public class PlayerController : MonoBehaviour
 
     void  Slide()
     {   
-        while (_slidePercent < 1)
+        if(isGrounded)
         {
-            _slidePercent += Time.fixedDeltaTime;
-            Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
-            col.height = _newHeight.y;
-            col.center = new Vector3(col.center.x, -.2f, col.center.z);
+            while (_slidePercent < 1)
+            {
+                _slidePercent += Time.fixedDeltaTime / 10;
+                Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
+                col.height = _newHeight.y;
+                col.center = new Vector3(col.center.x, _centerChangeVertical, col.center.z);
+            }
+            if (_slidePercent >= 1 && !_hasReturnedFromSlide)
+            {
+                StartCoroutine("ResetRotation");
+            }
+            Accelerate(_slideDecelRatePerSecond);
+            transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime * _slideSpeed;
         }
-        if (_slidePercent >= 1 && !_hasReturnedFromSlide)
-        {
-            StartCoroutine("ResetRotation");
-        }
-        Accelerate(_slideDecelRatePerSecond);
-        transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime * _slideSpeed;
     }
     public IEnumerator ResetRotation()
     {
