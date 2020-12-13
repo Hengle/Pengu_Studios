@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     //fine tune control variables
     public float maxSpeed = 10;
     float _timeZeroToMax = 1f;
-    float _timeMaxToZero = .7f;
-    float _timeSlideToZero = .7f;
+    float _timeMaxToZero = .5f;
+    float _timeSlideToZero = 1.7f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _slideDecelRatePerSecond;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     float _heightChangeVertical = .5f;
     float _centerChangeVertical = -.39f;
     CapsuleCollider col;
+    BoxCollider footCollider;
     //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
     float _turnSpeed = 15;
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     Quaternion _targetRotation;
     //groundChecks
     Vector3 _groundNormal;
-    float _height = 1f;
+    [SerializeField]float _height = 1f;
     [SerializeField]float _heightPadding = .05f;
     [SerializeField] LayerMask _ground;
     float _maxGroundAngle = 150;
@@ -55,9 +56,10 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     void Start()
     {
-        _slideSpeed = maxSpeed * .1f;
+        _slideSpeed = maxSpeed * .05f;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+        footCollider = GetComponent<BoxCollider>();
         _intitalHeight = col.height;
         _groundNormal = Vector3.zero;
         isGrounded = true;
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.LeftShift) & !sliding && forwardVelocity <= maxSpeed + 2)
+        if(Input.GetKey(KeyCode.LeftShift) & !sliding && forwardVelocity <= maxSpeed + 1)
         {
             sliding = true;
             canMove = false;
@@ -109,40 +111,35 @@ public class PlayerController : MonoBehaviour
 
     public void Move ()
     {
-        CheckGroundStatus();
-        if (isGrounded)
+        if (_groundAngle >= _maxGroundAngle) return;
+        if (Input.anyKey)
         {
-            if (_groundAngle >= _maxGroundAngle) return;
-            if (Input.anyKey)
-            {
-                transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime;
-            }
-            else
-            {  
-                Accelerate(_decelRatePerSecond);
-                transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime;
-            }
+            transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime;
         }
+        else
+        {  
+            Accelerate(_decelRatePerSecond);
+            transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime;
+        }
+        
     }
 
     void  Slide()
     {   
-        if(isGrounded)
+        while (_slidePercent < 1)
         {
-            while (_slidePercent < 1)
-            {
-                _slidePercent += Time.fixedDeltaTime / 10;
-                Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
-                col.height = _newHeight.y;
-                col.center = new Vector3(col.center.x, _centerChangeVertical, col.center.z);
-            }
-            if (_slidePercent >= 1 && !_hasReturnedFromSlide)
-            {
-                StartCoroutine("ResetRotation");
-            }
-            Accelerate(_slideDecelRatePerSecond);
-            transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime * _slideSpeed;
+            _slidePercent += Time.fixedDeltaTime / 10;
+            Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
+            col.height = _newHeight.y;
+            col.center = new Vector3(col.center.x, _centerChangeVertical, col.center.z);
         }
+        if (_slidePercent >= 1 && !_hasReturnedFromSlide)
+        {
+            StartCoroutine("ResetRotation");
+        }
+        Accelerate(_slideDecelRatePerSecond);
+        transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime * _slideSpeed;
+        
     }
     public IEnumerator ResetRotation()
     {
@@ -197,6 +194,7 @@ public class PlayerController : MonoBehaviour
 
     public void CheckGroundStatus()
     {
+        
         Debug.DrawLine(transform.position, transform.position + _forward * _height * 2, Color.blue);
         Debug.DrawLine(transform.position, transform.position - Vector3.up * (_height + _heightPadding), Color.red);
         // 0.1f is a small offset to start the ray from inside the character
@@ -212,6 +210,7 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+        
     }
     public void CalculateForward()
     {

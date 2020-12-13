@@ -996,8 +996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb7bfa26b49bf94e91e81e4037a73d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 6.5
   walkVelocity: {x: 0, y: 0, z: 0}
+  _height: 1
   _heightPadding: 0.1
   _ground:
     serializedVersion: 2
@@ -3044,7 +3045,7 @@ MonoBehaviour:
   CameraDistance: 0
   CameraCollisionFilter:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 0
   IgnoreTag: 
   CameraRadius: 0.2
 --- !u!114 &1813702537
