@@ -22,10 +22,14 @@ public class PlayerController : MonoBehaviour
     float _heightChangeVertical = .5f;
     float _centerChangeVertical = -.39f;
     CapsuleCollider col;
-    BoxCollider footCollider;
+    //Dodge
+    [SerializeField] float _dodgeDistance;
+    [SerializeField] float _dodgeTime;
+    [SerializeField] float _dodgeHeight;
+    public bool isDodging;
     //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
-    float _turnSpeed = 15;
+    [SerializeField]float _turnSpeed = 15;
     float _angle;
     Quaternion _targetRotation;
     //groundChecks
@@ -49,17 +53,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _enemy;
     //player state
     public float forwardVelocity;
-    [HideInInspector] public bool running;
-    [HideInInspector] public bool stopping;
-    [HideInInspector] public bool moving;
-    [HideInInspector]public bool sliding;
+    [HideInInspector] public bool isRunning;
+    [HideInInspector] public bool isStopping;
+    [HideInInspector] public bool isMoving;
+    [HideInInspector] public bool isSliding;
     public bool isGrounded;
     void Start()
     {
-        _slideSpeed = maxSpeed * .05f;
+        _slideSpeed = maxSpeed * .1f;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
-        footCollider = GetComponent<BoxCollider>();
         _intitalHeight = col.height;
         _groundNormal = Vector3.zero;
         isGrounded = true;
@@ -68,8 +71,9 @@ public class PlayerController : MonoBehaviour
         _slideDecelRatePerSecond = -maxSpeed / _timeSlideToZero;
         _cam = Camera.main;
     }
-     public void ReadInput()
+    public void ReadInput()
     {
+        //movement
         Vector2 movement = new Vector3(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"), 0).normalized;
         // Takes input from the input manager
         if (canMove && isGrounded)
@@ -86,10 +90,10 @@ public class PlayerController : MonoBehaviour
                 walkVelocity += Vector3.right * movement.y;
             }
         }
-
-        if(Input.GetKey(KeyCode.LeftShift) & !sliding && forwardVelocity <= maxSpeed + 1)
+        //slide
+        if(Input.GetKey(KeyCode.LeftShift) & !isSliding && forwardVelocity <= maxSpeed + 1)
         {
-            sliding = true;
+            isSliding = true;
             canMove = false;
             _slidePercent = 0f;
         }
@@ -98,16 +102,13 @@ public class PlayerController : MonoBehaviour
             _hasReturnedFromSlide = false;
             _slidePercent = 0;
         }
-
+        //dodge
+        if(Input.GetKeyDown(KeyCode.Space) && !isDodging && forwardVelocity >= maxSpeed - 1 && !isSliding)
+        {
+            isDodging = true;
+        }
         walkVelocity = walkVelocity.normalized;
      }
-    private void Update()
-    {
-        if (sliding)
-        {
-            Slide();
-        }
-    }
 
     public void Move ()
     {
@@ -124,28 +125,30 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void  Slide()
+    public void Slide()
     {   
-        while (_slidePercent < 1)
+        if(isGrounded)
         {
-            _slidePercent += Time.fixedDeltaTime / 10;
-            Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
-            col.height = _newHeight.y;
-            col.center = new Vector3(col.center.x, _centerChangeVertical, col.center.z);
+            while (_slidePercent < 1)
+            {
+                _slidePercent += Time.fixedDeltaTime / 10;
+                Vector3 _newHeight = new Vector3(transform.localScale.x, transform.localScale.y - _heightChangeVertical, transform.localScale.z);
+                col.height = _newHeight.y;
+                col.center = new Vector3(col.center.x, _centerChangeVertical, col.center.z);
+            }
+            if (_slidePercent >= 1 && !_hasReturnedFromSlide)
+            {
+                StartCoroutine("ResetRotation");
+            }
+            Accelerate(_slideDecelRatePerSecond);
+            transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime * _slideSpeed;
         }
-        if (_slidePercent >= 1 && !_hasReturnedFromSlide)
-        {
-            StartCoroutine("ResetRotation");
-        }
-        Accelerate(_slideDecelRatePerSecond);
-        transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime * _slideSpeed;
-        
     }
     public IEnumerator ResetRotation()
     {
         _hasReturnedFromSlide = true;
         yield return new WaitForSeconds(.1f);
-        sliding = false;
+        isSliding = false;
         canMove = true;
         float _returnPercent = 0;
         while (_returnPercent < 1 && col.height <= _intitalHeight)
@@ -157,22 +160,25 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void CalculateDirection()
+    public void Dodge()
     {
-        _angle = Mathf.Atan2(walkVelocity.x, walkVelocity.y);
-        _angle = Mathf.Rad2Deg * _angle;
-        _angle += _cam.transform.eulerAngles.y;
-    }
-    public void SetRotation()
-    {
-        _targetRotation = Quaternion.Euler(0, _angle, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, _turnSpeed * Time.deltaTime);
+        if(isGrounded)
+        {
+            rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(rb.transform.forward.x, rb.transform.forward.y + _dodgeHeight, rb.transform.forward.z) * _dodgeDistance, _dodgeTime);
+            isDodging = false;
+        }
     }
     public void Accelerate(float accel)
     {
         // increases and decreases the forwardvelocity float.
         forwardVelocity += accel * Time.fixedDeltaTime;
         forwardVelocity = Mathf.Clamp(forwardVelocity, 0, maxSpeed);
+    }
+
+    public void SetRotation()
+    {
+        _targetRotation = Quaternion.Euler(0, _angle, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, _turnSpeed * Time.deltaTime);
     }
     public void CreateRay()
     {
@@ -191,7 +197,12 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    public void CalculateDirection()
+    {
+        _angle = Mathf.Atan2(walkVelocity.x, walkVelocity.y);
+        _angle = Mathf.Rad2Deg * _angle;
+        _angle += _cam.transform.eulerAngles.y;
+    }
     public void CheckGroundStatus()
     {
         
@@ -230,6 +241,7 @@ public class PlayerController : MonoBehaviour
         }
         _groundAngle = Vector3.Angle(_groundNormal, transform.forward);
     }
+
 
 }
 

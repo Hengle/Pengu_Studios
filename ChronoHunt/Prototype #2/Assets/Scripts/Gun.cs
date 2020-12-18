@@ -12,9 +12,9 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform[] _muzzles;
     [SerializeField] Projectile _projectile;
     float _muzzleVelocity = 90f;
-    public float nextShotTime = 2;
-    [SerializeField]float _smoothTime = 5;
-    [SerializeField] float shotTime = 2;
+    [HideInInspector]public float nextShotTime = 2;
+    float _smoothTime = 4;
+    float shotTime = 2;
     Vector3 _recoilSmotherDampVel;
     Vector3 _vel;
     bool _triggerReleasedSinceLastShot;

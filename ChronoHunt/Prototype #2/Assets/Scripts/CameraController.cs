@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour
 
     Quaternion _targetRotation;
     Vector3 _targetPos;
-    bool _smoothRotating = false;
     private void Awake()
     {
         _cam = Camera.main;
@@ -26,15 +25,15 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         MoveWithTarget();
-        LookAtTarget();
-        if(Input.GetKey(KeyCode.F) && !_smoothRotating)
+        if (Input.GetKey(KeyCode.F))
         {
-            StartCoroutine(RotateAroundTarget(90));
+            RotateCamera(-2f);
         }
-        if (Input.GetKey(KeyCode.G) && !_smoothRotating)
+        if(Input.GetKey(KeyCode.G))
         {
-            StartCoroutine(RotateAroundTarget(-90));
+            RotateCamera(2f);
         }
+        //LookAtTarget();
     }
 
     void MoveWithTarget()
@@ -44,24 +43,13 @@ public class CameraController : MonoBehaviour
     }
     void LookAtTarget()
     {
-        _targetRotation = Quaternion.LookRotation(_target.position - _cam.transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, _turnSpeed * Time.fixedDeltaTime);
+        //_targetRotation = Quaternion.LookRotation(_target.position - _cam.transform.position);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, _turnSpeed * Time.fixedDeltaTime);
     }
-    IEnumerator RotateAroundTarget(float angle)
+    void RotateCamera(float angle)
     {
-        Vector3 _vel = Vector3.zero;
-        Vector3 _targetOffsetPos = Quaternion.Euler(0, angle, 0) * _offsetPos;
-        float dist = Vector3.Distance(_offsetPos, _targetOffsetPos);
-        _smoothRotating = true;
+        _targetRotation = Quaternion.LookRotation(transform.position - new Vector3(transform.position.x, transform.position.y, transform.position.z + angle));
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(30, _targetRotation.z, 0), _turnSpeed * Time.fixedDeltaTime);
 
-        while (dist > 0.02f)
-        {
-            _offsetPos = Vector3.SmoothDamp(_offsetPos, _targetOffsetPos, ref _vel, _smoothSpeed);
-            dist = Vector3.Distance(_offsetPos, _targetOffsetPos);
-            yield return null;
-        }
-        _smoothRotating = false;
-        _offsetPos = _targetOffsetPos;
     }
-    
 }
