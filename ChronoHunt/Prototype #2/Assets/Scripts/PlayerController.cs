@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 10;
     float _timeZeroToMax = 1f;
     float _timeMaxToZero = .5f;
-    float _timeSlideToZero = 1.7f;
+    float _timeSlideToZero = .7f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _slideDecelRatePerSecond;
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _dodgeDistance;
     [SerializeField] float _dodgeTime;
     [SerializeField] float _dodgeHeight;
-    public bool isDodging;
+    public bool isDodging = false;
     //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
     [SerializeField]float _turnSpeed = 15;
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     public void Move ()
     {
         if (_groundAngle >= _maxGroundAngle) return;
-        if (Input.anyKey)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             transform.position += transform.forward * forwardVelocity * Time.fixedDeltaTime;
         }
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
         isSliding = false;
         canMove = true;
         float _returnPercent = 0;
-        while (_returnPercent < 1 && col.height <= _intitalHeight)
+        while (_returnPercent < 1)
         {
             _returnPercent += Time.fixedDeltaTime;
             col.height = _intitalHeight;

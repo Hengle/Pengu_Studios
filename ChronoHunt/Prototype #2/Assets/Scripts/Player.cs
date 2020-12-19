@@ -94,7 +94,7 @@ public class Player : LivingEntity
             _gunController.Aim(_point);
         }
         //Weapon 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.F))
         {
             _gunController.EquipGun(startingGun);
         }
@@ -121,6 +121,7 @@ public class Player : LivingEntity
 
         //PlayerController Input
         _controller.ReadInput();
+        _controller.CheckGroundStatus();
         //Running
         if (_controller.forwardVelocity == 0)
         {
