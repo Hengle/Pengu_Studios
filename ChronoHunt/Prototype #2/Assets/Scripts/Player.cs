@@ -47,10 +47,10 @@ public class Player : LivingEntity
         _controller.SetRotation();
 
         //set animations
-        _playerAnim.SetBool("Running", _controller.running);
-        _playerAnim.SetBool("Stopping", _controller.stopping);
-        _playerAnim.SetBool("Moving", _controller.moving);
-        _playerAnim.SetBool("IsSliding", _controller.sliding);
+        _playerAnim.SetBool("Running", _controller.isRunning);
+        _playerAnim.SetBool("Stopping", _controller.isStopping);
+        _playerAnim.SetBool("Moving", _controller.isMoving);
+        _playerAnim.SetBool("IsSliding", _controller.isSliding);
         _playerAnim.SetFloat("WalkVelX", _controller.walkVelocity.x);
         _playerAnim.SetFloat("WalkVelY", _controller.walkVelocity.y);
 
@@ -94,7 +94,7 @@ public class Player : LivingEntity
             _gunController.Aim(_point);
         }
         //Weapon 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.E))
         {
             _gunController.EquipGun(startingGun);
         }
@@ -124,23 +124,33 @@ public class Player : LivingEntity
         //Running
         if (_controller.forwardVelocity == 0)
         {
-            _controller.moving = false;
-            _controller.stopping = false;
-            _controller.running = false;
+            _controller.isMoving = false;
+            _controller.isStopping = false;
+            _controller.isRunning = false;
         }
         else
         {
-            _controller.moving = true;
+            _controller.isMoving = true;
         }
         if (_controller.forwardVelocity >= (_controller.maxSpeed * .5f))
         {
-            _controller.running = true;
-            _controller.stopping = false;
+            _controller.isRunning = true;
+            _controller.isStopping = false;
         }
-        else if (_controller.forwardVelocity <= (_controller.maxSpeed * .5f) && _controller.running)
+        else if (_controller.forwardVelocity <= (_controller.maxSpeed * .5f) && _controller.isRunning)
         {
-            _controller.running = false;
-            _controller.stopping = true;
+            _controller.isRunning = false;
+            _controller.isStopping = true;
+        }
+        //Sliding
+        if(_controller.isSliding)
+        {
+            _controller.Slide();
+        }
+        //Dodging
+        if(_controller.isDodging)
+        {
+            _controller.Dodge();
         }
     }
 }
