@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2852174, g: 0.37109366, b: 0.49179968, a: 1}
+  m_IndirectSpecularColor: {r: 0.28521618, g: 0.37109196, b: 0.4917979, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -997,10 +997,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 6
-  _dodgeDistance: 10
-  _dodgeTime: 1
-  _dodgeHeight: 0.7
   isDodging: 0
+  hasDodged: 0
   walkVelocity: {x: 0, y: 0, z: 0}
   _turnSpeed: 10
   _height: 1

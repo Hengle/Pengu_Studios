@@ -51,6 +51,8 @@ public class Player : LivingEntity
         _playerAnim.SetBool("Stopping", _controller.isStopping);
         _playerAnim.SetBool("Moving", _controller.isMoving);
         _playerAnim.SetBool("IsSliding", _controller.isSliding);
+        _playerAnim.SetBool("IsDodging", _controller.isDodging);
+        _playerAnim.SetBool("HasDodged", _controller.hasDodged);
         _playerAnim.SetFloat("WalkVelX", _controller.walkVelocity.x);
         _playerAnim.SetFloat("WalkVelY", _controller.walkVelocity.y);
 

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 10;
     float _timeZeroToMax = 1f;
     float _timeMaxToZero = .5f;
-    float _timeSlideToZero = .7f;
+    float _timeSlideToZero = 1f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _slideDecelRatePerSecond;
@@ -23,10 +23,11 @@ public class PlayerController : MonoBehaviour
     float _centerChangeVertical = -.39f;
     CapsuleCollider col;
     //Dodge
-    [SerializeField] float _dodgeDistance;
-    [SerializeField] float _dodgeTime;
-    [SerializeField] float _dodgeHeight;
-    public bool isDodging = false;
+    float _dodgeSpeed;
+    float _dodgeTime = 1;
+    float _dodgeHeight;
+    [HideInInspector]public bool isDodging = false;
+    [HideInInspector]public bool hasDodged;
     //Camera Stuff
     [HideInInspector]public Vector3 walkVelocity;
     [SerializeField]float _turnSpeed = 15;
@@ -60,12 +61,10 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     void Start()
     {
-        _slideSpeed = maxSpeed * .1f;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
         _intitalHeight = col.height;
         _groundNormal = Vector3.zero;
-        isGrounded = true;
         _accelRatePerSecond = maxSpeed / _timeZeroToMax;
         _decelRatePerSecond = -maxSpeed / _timeMaxToZero;
         _slideDecelRatePerSecond = -maxSpeed / _timeSlideToZero;
@@ -76,7 +75,7 @@ public class PlayerController : MonoBehaviour
         //movement
         Vector2 movement = new Vector3(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal"), 0).normalized;
         // Takes input from the input manager
-        if (canMove && isGrounded)
+        if (canMove)
         {
             if (movement.x != 0)
             {
@@ -103,13 +102,24 @@ public class PlayerController : MonoBehaviour
             _slidePercent = 0;
         }
         //dodge
-        if(Input.GetKeyDown(KeyCode.Space) && !isDodging && forwardVelocity >= maxSpeed - 1 && !isSliding)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             isDodging = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isDodging = false;
+            hasDodged = false;
         }
         walkVelocity = walkVelocity.normalized;
      }
 
+    private void Update()
+    {
+        _slideSpeed = forwardVelocity * .1f;
+        _dodgeSpeed = forwardVelocity * 1.2f;
+        _dodgeHeight = _dodgeSpeed * .1f;
+    }
     public void Move ()
     {
         if (_groundAngle >= _maxGroundAngle) return;
@@ -162,11 +172,24 @@ public class PlayerController : MonoBehaviour
 
     public void Dodge()
     {
-        if(isGrounded)
+        if (_groundAngle >= _maxGroundAngle) return;
+        if (isGrounded & !hasDodged)
         {
-            rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(rb.transform.forward.x, rb.transform.forward.y + _dodgeHeight, rb.transform.forward.z) * _dodgeDistance, _dodgeTime);
-            isDodging = false;
+            StartCoroutine("StartDodge");
+            Invoke("HasDodged", .2f);
         }
+    }
+    IEnumerator StartDodge()
+    {
+        yield return new WaitForSeconds(.1f);
+        rb.velocity = Vector3.Lerp(rb.velocity, new Vector3(rb.transform.forward.x, rb.transform.forward.y + _dodgeHeight, rb.transform.forward.z) * _dodgeSpeed, _dodgeTime);
+        col.direction = 2;
+
+    }
+    void HasDodged()
+    {
+        col.direction = 1;
+        hasDodged = true;
     }
     public void Accelerate(float accel)
     {
@@ -202,6 +225,7 @@ public class PlayerController : MonoBehaviour
         _angle = Mathf.Atan2(walkVelocity.x, walkVelocity.y);
         _angle = Mathf.Rad2Deg * _angle;
         _angle += _cam.transform.eulerAngles.y;
+        
     }
     public void CheckGroundStatus()
     {
