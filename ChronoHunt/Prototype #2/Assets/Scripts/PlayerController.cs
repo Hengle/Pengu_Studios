@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 10;
     float _timeZeroToMax = 1f;
     float _timeMaxToZero = .5f;
-    float _timeSlideToZero = 1f;
+    float _timeSlideToZero = 2f;
     float _accelRatePerSecond;
     float _decelRatePerSecond;
     float _slideDecelRatePerSecond;
