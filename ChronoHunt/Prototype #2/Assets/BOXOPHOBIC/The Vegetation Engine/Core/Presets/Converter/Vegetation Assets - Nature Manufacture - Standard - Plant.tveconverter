@@ -31,6 +31,7 @@ Material SET_FLOAT _GlobalSize 0
 Material SET_FLOAT _GlobalSizeFade 0
 Material SET_FLOAT _RenderNormals 0
 Material SET_FLOAT _SubsurfaceAngleValue 1
+Material SET_FLOAT _SubsurfaceMaskValue 0
 Material SET_FLOAT _MainMaskMinValue 1
 Material SET_FLOAT _MainMaskMaxValue 0
 

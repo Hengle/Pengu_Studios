@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4315594286020914}
   - component: {fileID: 205440876915844376}
-  - component: {fileID: 556654391855416977}
-  m_Layer: 0
+  - component: {fileID: 3524246331727175813}
+  m_Layer: 20
   m_Name: TVE_Clover_01_Var3_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 66
+  m_StaticEditorFlags: 81
   m_IsActive: 1
 --- !u!4 &4315594286020914
 Transform:
@@ -62,7 +62,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 23404332678561088}
   m_Enabled: 1
---- !u!114 &556654391855416977
+--- !u!114 &3524246331727175813
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,8 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   styledBanner: 0
-  storedPrefabBackup: {fileID: 1042777077932012, guid: 8e93ef19f8af485e9d5a8eac60b4c79e,
-    type: 3}
+  storedPrefabBackup: {fileID: 1042777077932012, guid: 81c196cce03b2f245bc1777c6dfea5e8, type: 3}
   storedMaxBoundsInfo: {x: 1.284389, y: 0.107770495, z: 1.284389, w: 0}
   storedPreset: Vegetation Assets/The Vegetation Engine/Demo Clover
 --- !u!1 &1701192376757830
@@ -90,12 +89,12 @@ GameObject:
   - component: {fileID: 4099770856483610}
   - component: {fileID: 33630830084702298}
   - component: {fileID: 23007805449928690}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Clovers_01_Var3_Lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 66
+  m_StaticEditorFlags: 80
   m_IsActive: 1
 --- !u!4 &4099770856483610
 Transform:
@@ -133,6 +132,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -144,6 +145,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -156,6 +158,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1862077746076172
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,12 +170,12 @@ GameObject:
   - component: {fileID: 4300629458561356}
   - component: {fileID: 33832944551779090}
   - component: {fileID: 23404332678561088}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Clovers_01_Var3_Lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 66
+  m_StaticEditorFlags: 80
   m_IsActive: 1
 --- !u!4 &4300629458561356
 Transform:
@@ -210,6 +213,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -221,6 +226,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -233,6 +239,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1997580230536636
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,12 +251,12 @@ GameObject:
   - component: {fileID: 4604021636450606}
   - component: {fileID: 33507219659829462}
   - component: {fileID: 23946097438709744}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Clovers_01_Var3_Lod0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 66
+  m_StaticEditorFlags: 81
   m_IsActive: 1
 --- !u!4 &4604021636450606
 Transform:
@@ -287,6 +294,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -298,6 +307,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 0
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -310,3 +320,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

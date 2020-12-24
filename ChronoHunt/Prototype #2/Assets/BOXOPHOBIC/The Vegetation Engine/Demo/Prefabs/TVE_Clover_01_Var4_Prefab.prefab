@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4489680504431348}
   - component: {fileID: 205228974888315742}
-  - component: {fileID: 3027410266052680544}
-  m_Layer: 0
+  - component: {fileID: 8219237345787806821}
+  m_Layer: 20
   m_Name: TVE_Clover_01_Var4_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 80
+  m_StaticEditorFlags: 81
   m_IsActive: 1
 --- !u!4 &4489680504431348
 Transform:
@@ -62,7 +62,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 23277173380490292}
   m_Enabled: 1
---- !u!114 &3027410266052680544
+--- !u!114 &8219237345787806821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,8 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   styledBanner: 0
-  storedPrefabBackup: {fileID: 1257942402551930, guid: 39d5a3a93d4b4361a8f2f9c0d6965140,
-    type: 3}
+  storedPrefabBackup: {fileID: 1257942402551930, guid: 9f03714e5bd1fba46be062e22a7e6166, type: 3}
   storedMaxBoundsInfo: {x: 3.3612542, y: 0.09738604, z: 3.3612542, w: 0}
   storedPreset: Vegetation Assets/The Vegetation Engine/Demo Clover
 --- !u!1 &1510480191395608
@@ -90,7 +89,7 @@ GameObject:
   - component: {fileID: 4832532137336150}
   - component: {fileID: 33558196458799218}
   - component: {fileID: 23281669740045074}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Clovers_01_Var4_Lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,6 +132,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -144,6 +145,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -156,6 +158,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1683936678385206
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,12 +170,12 @@ GameObject:
   - component: {fileID: 4701716592985850}
   - component: {fileID: 33850865412325314}
   - component: {fileID: 23116669899532562}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Clovers_01_Var4_Lod0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 80
+  m_StaticEditorFlags: 81
   m_IsActive: 1
 --- !u!4 &4701716592985850
 Transform:
@@ -210,6 +213,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -221,6 +226,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 0
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -233,6 +239,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1717666657616944
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +251,7 @@ GameObject:
   - component: {fileID: 4203017072701336}
   - component: {fileID: 33010174019628882}
   - component: {fileID: 23277173380490292}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Clovers_01_Var4_Lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,6 +294,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -298,6 +307,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -310,3 +320,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6610836305396197048}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -39,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6610836305396197048}
-  m_Mesh: {fileID: 4300002, guid: ba54c1401f1ebd3409aa51649e84c4d8, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 37aa6d987084f444eb492ae6bc99cba6, type: 2}
 --- !u!23 &6610836305394268280
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -54,10 +54,12 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1a6882fcb5982349b45178d05b768d5, type: 2}
+  - {fileID: 2100000, guid: d9bde5af03a60cb4c94001fe2f83b1cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -65,6 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -77,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6610836305396197052
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6610836305396038300}
   - component: {fileID: 6610836305378815548}
+  - component: {fileID: 1734956901985270588}
   m_Layer: 0
   m_Name: prefab_grass_01_2
   m_TagString: Untagged
@@ -133,6 +138,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 6610836305394268280}
   m_Enabled: 1
+--- !u!114 &1734956901985270588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6610836305396197052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089e7123bacb77a429df24ec08d2d672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  styledBanner: 0
+  storedPrefabBackup: {fileID: 6610836305396197052, guid: 89e1b79e2e1fc7843a1d50d9c6b87756, type: 3}
+  storedMaxBoundsInfo: {x: 0.3855445, y: 0.36775905, z: 0.3855445, w: 0}
+  storedPreset: Vegetation Assets/Nature Manufacture/SRP/Grass
 --- !u!1 &6610836305396197054
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +179,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6610836305396197054}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -172,7 +193,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6610836305396197054}
-  m_Mesh: {fileID: 4300000, guid: ba54c1401f1ebd3409aa51649e84c4d8, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e7145228f20231c4683c4d48e0e3b237, type: 2}
 --- !u!23 &6610836305394268286
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -187,10 +208,12 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1a6882fcb5982349b45178d05b768d5, type: 2}
+  - {fileID: 2100000, guid: d9bde5af03a60cb4c94001fe2f83b1cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,6 +221,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -210,3 +234,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

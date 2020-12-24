@@ -42,8 +42,6 @@ public class Player : LivingEntity
     {
         //Movement checks
         _controller.CalculateDirection();
-        _controller.CalculateForward();
-        _controller.CalculateGroundAngle();
         _controller.SetRotation();
 
         //set animations

@@ -11,14 +11,14 @@ Material:
   m_Shader: {fileID: 4800000, guid: 5bcf549c936e31b4999f2c7e28ba5e31, type: 3}
   m_ShaderKeywords: TVE_DETAIL_MAPS_STANDARD TVE_DETAIL_MODE_OFF TVE_DETAIL_TYPE_VERTEX_BLUE
     TVE_VERTEX_DATA_OBJECT _ALPHATEST_ON
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 2000
   stringTagMap:
     DisableBatching: true
     NatureRendererInstancing: true
-    RenderType: Opaque
+    RenderType: AlphaTest
   disabledShaderPasses:
   - DistortionVectors
   - TransparentBackfaceDebugDisplay
@@ -349,10 +349,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _tex4coord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -435,6 +431,8 @@ Material:
     - _EnableSpecularOcclusion: 0
     - _EnableWind: 3
     - _EnergyConservingSpecularColor: 1
+    - _Float18: 1
+    - _Float19: 1
     - _Float6: 0.5
     - _FullDetailNormalBlendThreshold: 1
     - _FullDetailNormalBlendWidth: 0.05
@@ -444,15 +442,13 @@ Material:
     - _GlobalLeaves: 1
     - _GlobalOverlay: 1
     - _GlobalSize: 1
-    - _GlobalSizeFade: 0
+    - _GlobalSizeFade: 1
     - _GlobalSpace: 0
     - _GlobalWetness: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GradientCat: 0
-    - _GradientHeightMaxValue: 1
-    - _GradientHeightMinValue: 0
     - _GradientMaxValue: 1
     - _GradientMinValue: 0
     - _GrassPerspectiveAngleValue: 0
@@ -471,7 +467,7 @@ Material:
     - _HorizonFade: 1
     - _IOR: 1
     - _InitialBend: 1
-    - _InteractionAmplitude: 1.5
+    - _InteractionAmplitude: 2
     - _InteractionVariation: 0
     - _InvTilingScale: 1
     - _Ior: 1
@@ -488,40 +484,37 @@ Material:
     - _LeafMessage: 0
     - _LeavesVariationValue: 0
     - _LinkDetailsWithBase: 1
-    - _LocalCat: 0
     - _LocalLeaves: 1
     - _LocalSize: 1
-    - _LocalSpace: 0
     - _MainCat: 0
     - _MainMaskMaxValue: 1
     - _MainMaskMinValue: 0
     - _MainMessage: 0
     - _MainMetallicValue: 0
-    - _MainNormalValue: 2
-    - _MainOcclusionValue: 0.5
-    - _MainSmoothnessValue: 0
+    - _MainNormalValue: 1
+    - _MainOcclusionValue: 1
+    - _MainSmoothnessValue: 1
     - _MaskMapEncoding: 1
     - _MaskMode: 0
     - _MaterialID: 5
     - _Metallic: 0
     - _Mode: 3
     - _MoiseCat: 0
-    - _MotionAmplitude_10: 0.5
-    - _MotionAmplitude_20: 0
-    - _MotionAmplitude_30: 0
+    - _MotionAmplitude_10: 0.244
+    - _MotionAmplitude_20: 0.1
+    - _MotionAmplitude_30: 0.5
     - _MotionAmplitude_32: 0.1
-    - _MotionCat: 0
-    - _MotionScale_10: 1
+    - _MotionScale_10: 6.532
     - _MotionScale_20: 0
-    - _MotionScale_30: 30
+    - _MotionScale_30: 10
     - _MotionScale_32: 10
     - _MotionSpeed_10: 6
-    - _MotionSpeed_20: 5
-    - _MotionSpeed_30: 15
+    - _MotionSpeed_20: 6
+    - _MotionSpeed_30: 8
     - _MotionSpeed_32: 30
-    - _MotionVariation_10: 3
-    - _MotionVariation_20: 0
-    - _MotionVariation_30: 30
+    - _MotionVariation_10: 1.086
+    - _MotionVariation_20: 5
+    - _MotionVariation_30: 10
     - _MotionVariation_32: 10
     - _MotionVectorScale: 1
     - _MotionVectorsWorldspaceScaled: 0
@@ -542,7 +535,7 @@ Material:
     - _OcclusionCat: 0
     - _OcclusionStrength: 0
     - _OverlayContrast: 0
-    - _OverlayContrastValue: 1
+    - _OverlayContrastValue: 4
     - _OverlayVariation: 0
     - _OverlayVariationValue: 0
     - _PPDLodThreshold: 5
@@ -553,8 +546,8 @@ Material:
     - _Parallax: 0.02
     - _PerspectiveAngleValue: 1
     - _PerspectiveCat: 0
-    - _PerspectiveNoiseValue: 0.25
-    - _PerspectivePushValue: 1
+    - _PerspectiveNoiseValue: 0
+    - _PerspectivePushValue: 0
     - _PivotsMessage: 0
     - _PreRefractionPass: 0
     - _RefractionMode: 0
@@ -563,7 +556,6 @@ Material:
     - _RenderBlend: 0
     - _RenderClip: 1
     - _RenderCull: 0
-    - _RenderCutoff: 0.5
     - _RenderMode: 0
     - _RenderNormals: 0
     - _RenderPriority: 0
@@ -589,11 +581,11 @@ Material:
     - _StencilWriteMask: 135
     - _StencilWriteMaskMV: 128
     - _Stiffness: 1
-    - _SubsurfaceAngleValue: 2
+    - _SubsurfaceAngleValue: 8
     - _SubsurfaceCat: 0
     - _SubsurfaceLightValue: 1
     - _SubsurfaceMask: 1
-    - _SubsurfaceMaskValue: 0
+    - _SubsurfaceMaskValue: 1
     - _SubsurfaceMaxValue: 0
     - _SubsurfaceMinValue: 0
     - _SubsurfaceMode: 1
@@ -638,10 +630,9 @@ Material:
     - _VertexDataMode: 0
     - _VertexMotionMode: 0
     - _VertexMotionSpace: 0
-    - _VertexOcclusionValue: 1
+    - _VertexOcclusionValue: 0
     - _VertexPivotMode: 1
-    - _VertexPivotModeFetch: 1
-    - _VertexVariationMode: 0
+    - _VertexVariationMode: 1
     - _WindElasticityLvl0: 1
     - _WindElasticityLvl1: 1
     - _WindElasticityLvlB: 0.2
@@ -662,14 +653,13 @@ Material:
     - _WindRangeRadius: 1.7
     - _WorldDataMessage: 0
     - _ZTestDepthEqualForOpaque: 3
-    - _ZTestGBuffer: 3
+    - _ZTestGBuffer: 4
     - _ZTestMode: 8
     - _ZTestModeDistortion: 8
     - _ZWrite: 1
     - __dirty: 1
     - _material_batching: 0
     - _render_blend: 0
-    - _render_clip: 1
     - _render_cull: 0
     - _render_cutoff: 0.5
     - _render_dst: 0
@@ -684,7 +674,7 @@ Material:
     - _BackfaceBaseColorScale: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 0.7960573, g: 0.80477035, b: 0.8396226, a: 1}
     - _BaseColorRandomize: {r: 0, g: 0, b: 0, a: 0.05}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.7960573, g: 0.80477035, b: 0.8396226, a: 1}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
@@ -697,7 +687,7 @@ Material:
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _MainUVs: {r: 1, g: 1, b: 0, a: 0}
     - _MaxBoundsInfo: {r: 4.124504, g: 0.6932245, b: 4.124504, a: 0}
-    - _MotionHighlightColor: {r: 2.5882354, g: 2.9960785, b: 0.8, a: 1}
+    - _MotionHighlightColor: {r: 2, g: 2, b: 2, a: 1}
     - _NoiseTintOne: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseTintTwo: {r: 1, g: 1, b: 1, a: 1}
     - _PeeledBarkColor: {r: 1, g: 1, b: 1, a: 1}
@@ -705,12 +695,13 @@ Material:
     - _PeeledBarkUVRangeScale: {r: 0, g: 1, b: 2, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SubsurfaceColor: {r: 0.2956671, g: 0.3396226, b: 0.001601997, a: 1}
+    - _SubsurfaceColor: {r: 0.3315085, g: 0.490566, b: 0, a: 1}
     - _SubsurfaceDiffusion_asset: {r: 0, g: 0, b: 0, a: 0}
     - _ThicknessRemap: {r: 0, g: 0.6239516, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _VertexOcclusionColor: {r: 0.1695888, g: 0.2177895, b: 0.3490566, a: 0}
+    - _VertexOcclusionColor: {r: 0, g: 0, b: 0, a: 0}
     - _render_normals_options: {r: -1, g: -1, b: -1, a: 0}
+  m_BuildTextureStacks: []

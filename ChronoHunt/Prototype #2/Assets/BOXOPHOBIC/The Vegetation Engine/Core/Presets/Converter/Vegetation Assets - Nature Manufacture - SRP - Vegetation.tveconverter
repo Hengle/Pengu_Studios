@@ -29,6 +29,7 @@ Mesh Motion3 GET_MASK_3RD_PARTY 3
 // Set Default values
 Material SET_FLOAT _GlobalSize 0
 Material SET_FLOAT _GlobalSizeFade 0
+Material SET_FLOAT _SubsurfaceMaskValue 0
 
 *******************************************************************
 

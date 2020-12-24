@@ -92,28 +92,28 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Motion Direction"
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
+			uniform half _Message;
+			uniform half _Banner;
 			uniform half _IsMotionShader;
-			uniform half _ElementLayerObjectsMessage;
-			uniform half _ElementLayerCustomMessage;
-			uniform half _ElementCat;
-			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayer;
+			uniform half _IsElementShader;
+			uniform half4 _WinterColor;
+			uniform half4 _SummerColor;
 			uniform half _ElementLayerVegetationMessage;
-			uniform half _IsVersion;
-			uniform half _SummerValue;
-			uniform half _RenderCat;
+			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayerObjectsMessage;
+			uniform half _ElementCat;
+			uniform half _ElementLayerCustomMessage;
+			uniform half _AdvancedCat;
+			uniform half _WinterValue;
 			uniform half _AutumnValue;
 			uniform half _SpringValue;
+			uniform half _RenderCat;
+			uniform half _IsVersion;
+			uniform half _SummerValue;
 			uniform half4 _SpringColor;
 			uniform half4 _AutumnColor;
 			uniform half _ElementFadeMessage;
-			uniform half _WinterValue;
-			uniform half _AdvancedCat;
-			uniform half _ElementLayer;
-			uniform half4 _SummerColor;
-			uniform half _IsElementShader;
-			uniform half4 _WinterColor;
-			uniform half _Message;
-			uniform half _Banner;
 			uniform half _MotionDirectionX;
 			uniform half _MotionDirectionZ;
 			uniform sampler2D _MainTex;
@@ -166,10 +166,11 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Motion Direction"
 				float4 tex2DNode17_g18787 = tex2D( _MainTex, i.ase_texcoord1.xy );
 				float4 break469_g18787 = tex2DNode17_g18787;
 				half MainTex_R73_g18787 = break469_g18787.r;
-				float temp_output_7_0_g18792 = TVE_ElementFadeContrast;
-				float2 temp_cast_0 = (temp_output_7_0_g18792).xx;
+				float temp_output_7_0_g18794 = TVE_ElementFadeContrast;
+				float2 temp_cast_0 = (temp_output_7_0_g18794).xx;
+				float2 break649_g18787 = pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_0 ) / ( 1.0 - temp_output_7_0_g18794 ) ) ) , 2.0 );
 				half Enable_Fade_Support454_g18787 = _ElementFadeSupport;
-				float lerpResult654_g18787 = lerp( 1.0 , ( 1.0 - saturate( ( pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_0 ) / ( 1.0 - temp_output_7_0_g18792 ) ) ) , 2.0 ).x + 0.0 ) ) ) , Enable_Fade_Support454_g18787);
+				float lerpResult654_g18787 = lerp( 1.0 , ( 1.0 - saturate( ( break649_g18787.x + break649_g18787.y ) ) ) , Enable_Fade_Support454_g18787);
 				half FadeOut_Mask656_g18787 = lerpResult654_g18787;
 				half Element_Intensity56_g18787 = ( _ElementIntensity * i.ase_color.a * FadeOut_Mask656_g18787 );
 				half Final_MotionDirection_A523_g18787 = ( MainTex_R73_g18787 * Element_Intensity56_g18787 );
@@ -189,11 +190,11 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Motion Direction"
 /*ASEBEGIN
 Version=18600
 1927;1;1906;1020;1472.441;1663.934;1;True;False
-Node;AmplifyShaderEditor.RangedFloatNode;115;-480,-1280;Half;False;Property;_Message;Message;1;0;Create;True;0;0;True;1;StyledMessage(Info, Use the Motion Direction elements to change the wind direction. Element Texture R is used as alpha mask. Particle Color A is used as Element Intensity multiplier., 0,0);False;0;0;1;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;95;-640,-1280;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Motion Direction Element);False;0;0;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;117;-304,-1280;Inherit;False;Is Motion Shader;46;;18786;6eebc31017d99e84e811285e6a5d199d;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;153;-640,-1024;Inherit;False;Base Element;2;;18787;0e972c73cae2ee54ea51acc9738801d0;6,477,0,478,0,145,3,481,2,576,0,491,0;0;1;FLOAT4;0
+Node;AmplifyShaderEditor.RangedFloatNode;115;-480,-1280;Half;False;Property;_Message;Message;1;0;Create;True;0;0;True;1;StyledMessage(Info, Use the Motion Direction elements to change the wind direction. Element Texture R is used as alpha mask. Particle Color A is used as Element Intensity multiplier., 0,0);False;0;0;1;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;95;-640,-1280;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Motion Direction Element);False;0;0;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;-320,-1024;Float;False;True;-1;2;TVEShaderElementGUI;0;1;BOXOPHOBIC/The Vegetation Engine/Elements/Default/Motion Direction;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;2;5;False;-1;10;False;-1;0;1;False;-1;0;False;-1;True;0;False;-1;0;False;-1;False;False;False;False;False;False;True;0;False;-1;True;2;False;-1;True;True;True;False;False;0;False;-1;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;0;False;-1;True;False;0;False;-1;0;False;-1;True;3;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;PreviewType=Plane;True;0;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=ForwardBase;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;1;True;False;;False;0
 WireConnection;0;0;153;0
 ASEEND*/
-//CHKSM=CE5B43B221E1226E20DB2A7BC8B904C57AFDA7E8
+//CHKSM=10CB3515E42980D2BD33FE4A72CFEB2945CD32BE

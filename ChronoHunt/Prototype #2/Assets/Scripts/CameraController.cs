@@ -7,20 +7,12 @@ public class CameraController : MonoBehaviour
     /// <summary>
     // Objects
     [SerializeField] Transform _target;
-    Camera _cam;
     /// </summary>
 
     [SerializeField] Vector3 _offsetPos = Vector3.zero;
-    [SerializeField] float _smoothSpeed = 5f;
     [SerializeField] float _turnSpeed = 10;
-    [SerializeField] float _moveSpeed = 5;
 
-    Quaternion _nextRotation;
     Vector3 _targetPos;
-    private void Awake()
-    {
-        _cam = Camera.main;
-    }
 
     private void Update()
     {
@@ -38,7 +30,7 @@ public class CameraController : MonoBehaviour
 
     void MoveWithTarget()
     {
-        _targetPos = _target.transform.position + _offsetPos;
+        _targetPos = _target.transform.position;
         transform.position = _targetPos;
     }
     void LookAtTarget()
@@ -49,7 +41,7 @@ public class CameraController : MonoBehaviour
     void RotateCamera(float angle)
     {
         transform.rotation *= Quaternion.AngleAxis(angle * _turnSpeed, Vector2.up);
-        Vector3 rot = new Vector3(30, transform.localEulerAngles.y, 0);
+        Vector3 rot = new Vector3(0, transform.localEulerAngles.y, 0);
         transform.localEulerAngles = rot;
     }
 }

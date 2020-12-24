@@ -93,28 +93,28 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Motion Interaction"
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
+			uniform half _Message;
+			uniform half _Banner;
 			uniform half _IsMotionShader;
-			uniform half _ElementLayerObjectsMessage;
-			uniform half _ElementLayerCustomMessage;
-			uniform half _ElementCat;
-			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayer;
+			uniform half _IsElementShader;
+			uniform half4 _WinterColor;
+			uniform half4 _SummerColor;
 			uniform half _ElementLayerVegetationMessage;
-			uniform half _IsVersion;
-			uniform half _SummerValue;
-			uniform half _RenderCat;
+			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayerObjectsMessage;
+			uniform half _ElementCat;
+			uniform half _ElementLayerCustomMessage;
+			uniform half _AdvancedCat;
+			uniform half _WinterValue;
 			uniform half _AutumnValue;
 			uniform half _SpringValue;
+			uniform half _RenderCat;
+			uniform half _IsVersion;
+			uniform half _SummerValue;
 			uniform half4 _SpringColor;
 			uniform half4 _AutumnColor;
 			uniform half _ElementFadeMessage;
-			uniform half _WinterValue;
-			uniform half _AdvancedCat;
-			uniform half _ElementLayer;
-			uniform half4 _SummerColor;
-			uniform half _IsElementShader;
-			uniform half4 _WinterColor;
-			uniform half _Message;
-			uniform half _Banner;
 			uniform sampler2D _MainTex;
 			uniform float _InvertX;
 			uniform float _InvertY;
@@ -169,21 +169,22 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Motion Interaction"
 				float3 appendResult274_g18578 = (float3(-(MainTex_R73_g18578*2.0 + -1.0) , 0.0 , -(MainTex_G265_g18578*2.0 + -1.0)));
 				float3 temp_output_275_0_g18578 = mul( unity_ObjectToWorld, float4( appendResult274_g18578 , 0.0 ) ).xyz;
 				float3 ase_objectScale = float3( length( unity_ObjectToWorld[ 0 ].xyz ), length( unity_ObjectToWorld[ 1 ].xyz ), length( unity_ObjectToWorld[ 2 ].xyz ) );
-				float temp_output_7_0_g18653 = -ase_objectScale.x;
-				half normalX_WS284_g18578 = ( ( temp_output_275_0_g18578.x - temp_output_7_0_g18653 ) / ( ase_objectScale.x - temp_output_7_0_g18653 ) );
+				float temp_output_7_0_g18662 = -ase_objectScale.x;
+				half normalX_WS284_g18578 = ( ( temp_output_275_0_g18578.x - temp_output_7_0_g18662 ) / ( ase_objectScale.x - temp_output_7_0_g18662 ) );
 				half Invert_Texture_X489_g18578 = _InvertX;
 				float lerpResult353_g18578 = lerp( normalX_WS284_g18578 , ( 1.0 - normalX_WS284_g18578 ) , Invert_Texture_X489_g18578);
-				float temp_output_7_0_g18646 = -ase_objectScale.z;
-				half normalZ_WS285_g18578 = ( ( temp_output_275_0_g18578.z - temp_output_7_0_g18646 ) / ( ase_objectScale.z - temp_output_7_0_g18646 ) );
+				float temp_output_7_0_g18660 = -ase_objectScale.z;
+				half normalZ_WS285_g18578 = ( ( temp_output_275_0_g18578.z - temp_output_7_0_g18660 ) / ( ase_objectScale.z - temp_output_7_0_g18660 ) );
 				half Invert_Texture_Y545_g18578 = _InvertY;
 				float lerpResult354_g18578 = lerp( normalZ_WS285_g18578 , ( 1.0 - normalZ_WS285_g18578 ) , Invert_Texture_Y545_g18578);
 				float3 appendResult292_g18578 = (float3(lerpResult353_g18578 , lerpResult354_g18578 , 1.0));
 				half3 Final_MotionInteraction_RGB303_g18578 = appendResult292_g18578;
 				half MainTex_A74_g18578 = break469_g18578.a;
-				float temp_output_7_0_g18652 = TVE_ElementFadeContrast;
-				float2 temp_cast_4 = (temp_output_7_0_g18652).xx;
+				float temp_output_7_0_g18661 = TVE_ElementFadeContrast;
+				float2 temp_cast_4 = (temp_output_7_0_g18661).xx;
+				float2 break649_g18578 = pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_4 ) / ( 1.0 - temp_output_7_0_g18661 ) ) ) , 2.0 );
 				half Enable_Fade_Support454_g18578 = _ElementFadeSupport;
-				float lerpResult654_g18578 = lerp( 1.0 , ( 1.0 - saturate( ( pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_4 ) / ( 1.0 - temp_output_7_0_g18652 ) ) ) , 2.0 ).x + 0.0 ) ) ) , Enable_Fade_Support454_g18578);
+				float lerpResult654_g18578 = lerp( 1.0 , ( 1.0 - saturate( ( break649_g18578.x + break649_g18578.y ) ) ) , Enable_Fade_Support454_g18578);
 				half FadeOut_Mask656_g18578 = lerpResult654_g18578;
 				half Element_Intensity56_g18578 = ( _ElementIntensity * i.ase_color.a * FadeOut_Mask656_g18578 );
 				half Final_MotionInteraction_A305_g18578 = ( MainTex_A74_g18578 * Element_Intensity56_g18578 );
@@ -203,11 +204,11 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Motion Interaction"
 /*ASEBEGIN
 Version=18600
 1927;1;1906;1020;1236.803;1668.791;1;True;False
-Node;AmplifyShaderEditor.RangedFloatNode;115;-480,-1280;Half;False;Property;_Message;Message;1;0;Create;True;0;0;True;1;StyledMessage(Info, Use the Motion Interaction elements to add touch bending to the vegetation objects. Element Texture XY is used a World XZ bending and Texture A is used as interaction mask. Particle Color A is used as Element Intensity multiplier., 0,0);False;0;0;1;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;95;-640,-1280;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Motion Interaction Element);False;0;0;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;117;-304,-1280;Inherit;False;Is Motion Shader;46;;18553;6eebc31017d99e84e811285e6a5d199d;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;145;-640,-1024;Inherit;False;Base Element;2;;18578;0e972c73cae2ee54ea51acc9738801d0;6,477,0,478,0,145,3,481,0,576,0,491,0;0;1;FLOAT4;0
+Node;AmplifyShaderEditor.RangedFloatNode;115;-480,-1280;Half;False;Property;_Message;Message;1;0;Create;True;0;0;True;1;StyledMessage(Info, Use the Motion Interaction elements to add touch bending to the vegetation objects. Element Texture XY is used a World XZ bending and Texture A is used as interaction mask. Particle Color A is used as Element Intensity multiplier., 0,0);False;0;0;1;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;95;-640,-1280;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Motion Interaction Element);False;0;0;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;-320,-1024;Float;False;True;-1;2;TVEShaderElementGUI;0;1;BOXOPHOBIC/The Vegetation Engine/Elements/Default/Motion Interaction;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;2;5;False;-1;10;False;-1;2;5;False;-1;10;False;-1;True;0;False;-1;0;False;-1;False;False;False;False;False;False;True;0;False;-1;True;2;False;-1;True;True;True;False;True;0;False;-1;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;0;False;-1;True;False;0;False;-1;0;False;-1;True;3;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;PreviewType=Plane;True;0;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=ForwardBase;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;1;True;False;;False;0
 WireConnection;0;0;145;0
 ASEEND*/
-//CHKSM=43CADEA5FDE99B6DF5853B9C029E92CAD70A8CCD
+//CHKSM=787EBC6A750C1B4F3AF0B3E1EBD42B8723D9AC09

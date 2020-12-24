@@ -57,7 +57,7 @@ namespace TheVegetationEngine
         "GPU Instancer (Instanced Indirect)",
         };
 
-        string coreFolder = "Assets/BOXOPHOBIC/The Vegetation Engine";
+        string assetFolder = "Assets/BOXOPHOBIC/The Vegetation Engine";
         string userFolder = "Assets/BOXOPHOBIC/User";
 
         string[] corePackagePaths;
@@ -73,14 +73,15 @@ namespace TheVegetationEngine
         int corePackageIndex = 0;
         int coreEngineIndex = 0;
 
-        int coreVersion;
+        int assetVersion;
         int userVersion;
         int unityMajorVersion;
 
         bool upgradeIsNeeded = false;
         bool packageIsImported = false;
-        bool rendererOverrides = false;
-        bool rendererOverridesOld = false;
+        bool saveCurrentScene = true;
+        bool showAdvancedSettings = false;
+        bool showAdvancedSettingsOld = false;
 
         GUIStyle stylePopup;
         GUIStyle styleLabel;
@@ -110,8 +111,8 @@ namespace TheVegetationEngine
             {
                 if (AssetDatabase.GUIDToAssetPath(searchFolders[i]).EndsWith("The Vegetation Engine.pdf"))
                 {
-                    coreFolder = AssetDatabase.GUIDToAssetPath(searchFolders[i]);
-                    coreFolder = coreFolder.Replace("/The Vegetation Engine.pdf", "");
+                    assetFolder = AssetDatabase.GUIDToAssetPath(searchFolders[i]);
+                    assetFolder = assetFolder.Replace("/The Vegetation Engine.pdf", "");
                 }
             }
 
@@ -152,12 +153,12 @@ namespace TheVegetationEngine
             }
 
             // Add corect paths for VSP and GPUI
-            engineVegetationStudio[1] = engineVegetationStudio[1].Replace("XXX", coreFolder);
-            engineVegetationStudioHD[1] = engineVegetationStudioHD[1].Replace("XXX", coreFolder);
+            engineVegetationStudio[1] = engineVegetationStudio[1].Replace("XXX", assetFolder);
+            engineVegetationStudioHD[1] = engineVegetationStudioHD[1].Replace("XXX", assetFolder);
             engineGPUInstancer[1] = engineGPUInstancer[1].Replace("XXX", cgincGPUI);
             engineNatureRenderer[1] = engineNatureRenderer[1].Replace("XXX", cgincNR);
 
-            corePackagesPath = coreFolder + "/Core/Packages";
+            corePackagesPath = assetFolder + "/Core/Packages";
 
             GetPackages();
             GetCoreShaders();
@@ -194,7 +195,7 @@ namespace TheVegetationEngine
                 AssetDatabase.Refresh();
             }
 
-            coreVersion = SettingsUtils.LoadSettingsData(coreFolder + "/Core/Editor/TVEVersion.asset", -99);
+            assetVersion = SettingsUtils.LoadSettingsData(assetFolder + "/Core/Editor/TVEVersion.asset", -99);
             userVersion = SettingsUtils.LoadSettingsData(userFolder + "Version.asset", -99);
             unityMajorVersion = int.Parse(Application.unityVersion.Substring(0, 4));
 
@@ -215,13 +216,13 @@ namespace TheVegetationEngine
             }
 
             // User Version exist and need upgrade
-            if (userVersion != -99 && userVersion < coreVersion)
+            if (userVersion != -99 && userVersion < assetVersion)
             {
                 upgradeIsNeeded = true;
             }
 
             // Curent version was installed but deleted and reimported
-            if (userVersion == coreVersion)
+            if (userVersion == assetVersion)
             {
                 upgradeIsNeeded = false;
             }
@@ -242,7 +243,7 @@ namespace TheVegetationEngine
                 }
             }
 
-            bannerVersion = coreVersion.ToString();
+            bannerVersion = assetVersion.ToString();
             bannerVersion = bannerVersion.Insert(1, ".");
             bannerVersion = bannerVersion.Insert(3, ".");
 
@@ -271,17 +272,30 @@ namespace TheVegetationEngine
 
             scrollPosition = GUILayout.BeginScrollView(scrollPosition, false, false, GUILayout.Width(this.position.width - 28), GUILayout.Height(this.position.height - 80));
 
-            if (File.Exists(coreFolder + "/Core/Editor/TVEHubAutoRun.cs"))
+            if (File.Exists(assetFolder + "/Core/Editor/TVEHubAutoRun.cs"))
             {
                 if (upgradeIsNeeded)
                 {
                     EditorGUILayout.HelpBox("Previous version detected! The Vegetation Engine will check all project materials and upgrade them if needed. " +
                                             "Make sure you read the Upgrading Steps to upgrade to a new version. Do not close Unity during the upgrade!", MessageType.Info, true);
 
-                    GUILayout.Space(15);
+                    GUILayout.Space(10);
+
+                    if (SceneManager.GetActiveScene().name != "")
+                    {
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.Label("Save Current Scene", GUILayout.Width(220));
+                        saveCurrentScene = EditorGUILayout.Toggle(saveCurrentScene);
+
+                        GUILayout.EndHorizontal();
+
+                        GUILayout.Space(10);
+                    }
 
                     if (GUILayout.Button("Upgrade Materials And Install", GUILayout.Height(24)))
                     {
+                        RestartActiveScene(true);
                         UpgradeAsset();
                         InstallAsset();
                     }
@@ -303,11 +317,11 @@ namespace TheVegetationEngine
             {
                 if (packageIsImported)
                 {
-                    EditorGUILayout.HelpBox("The Render Pipeline is not yet installed! Choose and Install the desired Render Engine to finish the setup!", MessageType.Warning, true);
+                    EditorGUILayout.HelpBox("The Render Pipeline is not yet installed! Choose and Install the desired Render Engine to finish the setup!", MessageType.Error, true);
                 }
                 else
                 {
-                    EditorGUILayout.HelpBox("Click the Render Pipeline Import button then click the Render Engine Install button to use The Vegetation Engine with another render pipeline. Click the Render Engine Install button to update the shader render engine only. The selected features are shared across all TVE shaders. Enable Render Engine Overrides to select per shader Render Engine.", MessageType.Info, true);
+                    EditorGUILayout.HelpBox("Click the Render Pipeline Import button then click the Render Engine Update button to use The Vegetation Engine with another render pipeline. Click the Render Engine Install button to update the shader render engine only. The selected features are shared across all TVE shaders. Enable Render Engine Overrides to select per shader Render Engine.", MessageType.Info, true);
                 }
 
                 GUILayout.Space(15);
@@ -347,7 +361,7 @@ namespace TheVegetationEngine
                     }
 
                     // Refresh overrides if opened
-                    rendererOverridesOld = false;
+                    showAdvancedSettingsOld = false;
                     packageIsImported = false;
 
                     GUIUtility.ExitGUI();
@@ -359,26 +373,22 @@ namespace TheVegetationEngine
 
                 GUILayout.BeginHorizontal();
 
-                GUILayout.Label("Show Advanced Options", GUILayout.Width(220));
-                rendererOverrides = EditorGUILayout.Toggle(rendererOverrides);
+                GUILayout.Label("Show Advanced Settings", GUILayout.Width(220));
+                showAdvancedSettings = EditorGUILayout.Toggle(showAdvancedSettings);
 
                 GUILayout.EndHorizontal();
 
-                if (rendererOverrides == true)
+                if (showAdvancedSettings == true)
                 {
-                    if (rendererOverridesOld != rendererOverrides)
+                    if (showAdvancedSettingsOld != showAdvancedSettings)
                     {
                         for (int i = 0; i < coreShaderPaths.Count; i++)
                         {
                             GetRenderEngineFromShader(coreShaderPaths[i], i);
                         }
 
-                        rendererOverridesOld = rendererOverrides;
+                        showAdvancedSettingsOld = showAdvancedSettings;
                     }
-
-                    GUILayout.Space(10);
-
-                    EditorGUILayout.HelpBox("Use this section to override the installed Render Engine compatibility.", MessageType.Info, true);
 
                     GUILayout.Space(10);
 
@@ -471,14 +481,13 @@ namespace TheVegetationEngine
 
         void InstallAsset()
         {
-            RestartActiveScene();
             UpdateShaders();
 
-            SettingsUtils.SaveSettingsData(userFolder + "Version.asset", coreVersion);
+            SettingsUtils.SaveSettingsData(userFolder + "Version.asset", assetVersion);
             SettingsUtils.SaveSettingsData(userFolder + "Pipeline.asset", "Standard");
             SettingsUtils.SaveSettingsData(userFolder + "Engine.asset", engineOptions[coreEngineIndex]);
 
-            FileUtil.DeleteFileOrDirectory(coreFolder + "/Core/Editor/TVEHubAutorun.cs");
+            FileUtil.DeleteFileOrDirectory(assetFolder + "/Core/Editor/TVEHubAutorun.cs");
             AssetDatabase.Refresh();
 
             SetDefineSymbols("Standard");
@@ -599,10 +608,17 @@ namespace TheVegetationEngine
             EditorUtility.ClearProgressBar();
         }
 
-        void RestartActiveScene()
+        void RestartActiveScene(bool saveScene)
         {
             if (SceneManager.GetActiveScene().name != "")
             {
+                if (saveScene && saveCurrentScene)
+                {
+                    EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), SceneManager.GetActiveScene().path);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                }
+
                 aciveScene = SceneManager.GetActiveScene().path;
                 EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
                 EditorSceneManager.OpenScene(aciveScene);
@@ -850,6 +866,35 @@ namespace TheVegetationEngine
                     if (lines[i].Contains("Subsurface Use Mask") && !lines[i].Contains("mask"))
                     {
                         lines[i] = lines[i].Replace("Subsurface Use Mask", "Subsurface Use Mask (main mask)");
+                    }
+                }
+
+                // Set keyword to global for unity < 2019
+                if (unityMajorVersion >= 2019)
+                {
+                    if (lines[i].Contains("shader_feature _ALPHATEST_ON"))
+                    {
+                        lines[i] = lines[i].Replace("shader_feature _ALPHATEST_ON", "shader_feature_local _ALPHATEST_ON");
+                    }
+
+                    if (lines[i].Contains("shader_feature TVE_DETAIL_MODE_OFF"))
+                    {
+                        lines[i] = lines[i].Replace("shader_feature TVE_DETAIL_MODE_OFF", "shader_feature_local TVE_DETAIL_MODE_OFF");
+                    }
+
+                    if (lines[i].Contains("shader_feature TVE_DETAIL_MAPS_STANDARD"))
+                    {
+                        lines[i] = lines[i].Replace("shader_feature TVE_DETAIL_MAPS_STANDARD", "shader_feature_local TVE_DETAIL_MAPS_STANDARD");
+                    }
+
+                    if (lines[i].Contains("shader_feature TVE_DETAIL_TYPE_VERTEX_BLUE"))
+                    {
+                        lines[i] = lines[i].Replace("shader_feature_ TVE_DETAIL_TYPE_VERTEX_BLUE", "shader_feature_local TVE_DETAIL_TYPE_VERTEX_BLUE");
+                    }
+
+                    if (lines[i].Contains("shader_feature TVE_VERTEX_DATA_OBJECT"))
+                    {
+                        lines[i] = lines[i].Replace("shader_feature TVE_VERTEX_DATA_OBJECT", "shader_feature_local TVE_VERTEX_DATA_OBJECT");
                     }
                 }
 

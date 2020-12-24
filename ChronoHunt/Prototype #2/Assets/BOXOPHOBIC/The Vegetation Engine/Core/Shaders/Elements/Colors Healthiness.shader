@@ -95,28 +95,28 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Colors Healthiness"
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
-			uniform half _Message;
-			uniform half _Banner;
 			uniform half _IsColorsShader;
-			uniform half _ElementLayerObjectsMessage;
-			uniform half _ElementLayerCustomMessage;
-			uniform half _ElementCat;
-			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayer;
+			uniform half _IsElementShader;
+			uniform half4 _WinterColor;
+			uniform half4 _SummerColor;
 			uniform half _ElementLayerVegetationMessage;
-			uniform half _IsVersion;
-			uniform half _SummerValue;
-			uniform half _RenderCat;
+			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayerObjectsMessage;
+			uniform half _ElementCat;
+			uniform half _ElementLayerCustomMessage;
+			uniform half _AdvancedCat;
+			uniform half _WinterValue;
 			uniform half _AutumnValue;
 			uniform half _SpringValue;
+			uniform half _RenderCat;
+			uniform half _IsVersion;
+			uniform half _SummerValue;
 			uniform half4 _SpringColor;
 			uniform half4 _AutumnColor;
 			uniform half _ElementFadeMessage;
-			uniform half _WinterValue;
-			uniform half _AdvancedCat;
-			uniform half _ElementLayer;
-			uniform half4 _SummerColor;
-			uniform half _IsElementShader;
-			uniform half4 _WinterColor;
+			uniform half _Message;
+			uniform half _Banner;
 			uniform half _MainValue;
 			uniform half4 TVE_SeasonOptions;
 			uniform half _AdditionalValue1;
@@ -192,22 +192,23 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Colors Healthiness"
 				half Element_Mode55_g18619 = _ElementMode;
 				half lerpResult413_g18619 = lerp( ( 1.0 - ( Value_Main157_g18619 * i.ase_color.r ) ) , ( ( ( TVE_SeasonOptions_X50_g18619 * lerpResult419_g18619 ) + ( TVE_SeasonOptions_Y51_g18619 * lerpResult422_g18619 ) + ( TVE_SeasonOptions_Z52_g18619 * lerpResult407_g18619 ) + ( TVE_SeasonOptions_W53_g18619 * lerpResult415_g18619 ) ) * i.ase_color.r ) , Element_Mode55_g18619);
 				half Base_Extras_A423_g18619 = ( 1.0 - lerpResult413_g18619 );
-				half temp_output_7_0_g18652 = TVE_ElementFadeContrast;
-				half2 temp_cast_0 = (temp_output_7_0_g18652).xx;
+				half temp_output_7_0_g18661 = TVE_ElementFadeContrast;
+				half2 temp_cast_0 = (temp_output_7_0_g18661).xx;
+				half2 break649_g18619 = pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_0 ) / ( 1.0 - temp_output_7_0_g18661 ) ) ) , 2.0 );
 				half Enable_Fade_Support454_g18619 = _ElementFadeSupport;
-				half lerpResult654_g18619 = lerp( 1.0 , ( 1.0 - saturate( ( pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_0 ) / ( 1.0 - temp_output_7_0_g18652 ) ) ) , 2.0 ).x + 0.0 ) ) ) , Enable_Fade_Support454_g18619);
+				half lerpResult654_g18619 = lerp( 1.0 , ( 1.0 - saturate( ( break649_g18619.x + break649_g18619.y ) ) ) , Enable_Fade_Support454_g18619);
 				half FadeOut_Mask656_g18619 = lerpResult654_g18619;
 				half Element_Intensity56_g18619 = ( _ElementIntensity * i.ase_color.a * FadeOut_Mask656_g18619 );
 				half lerpResult388_g18619 = lerp( 1.0 , Base_Extras_A423_g18619 , Element_Intensity56_g18619);
-				half temp_output_9_0_g18655 = lerpResult388_g18619;
-				half sRGB8_g18655 = temp_output_9_0_g18655;
-				half localGammaToLinearFloatFast8_g18655 = GammaToLinearFloatFast( sRGB8_g18655 );
+				half temp_output_9_0_g18658 = lerpResult388_g18619;
+				half sRGB8_g18658 = temp_output_9_0_g18658;
+				half localGammaToLinearFloatFast8_g18658 = GammaToLinearFloatFast( sRGB8_g18658 );
 				#ifdef UNITY_COLORSPACE_GAMMA
-				float staticSwitch1_g18655 = temp_output_9_0_g18655;
+				float staticSwitch1_g18658 = temp_output_9_0_g18658;
 				#else
-				float staticSwitch1_g18655 = localGammaToLinearFloatFast8_g18655;
+				float staticSwitch1_g18658 = localGammaToLinearFloatFast8_g18658;
 				#endif
-				half Final_Subsurface_A363_g18619 = staticSwitch1_g18655;
+				half Final_Subsurface_A363_g18619 = staticSwitch1_g18658;
 				half4 appendResult476_g18619 = (half4(Final_Subsurface_RGB365_g18619 , Final_Subsurface_A363_g18619));
 				
 				
@@ -224,11 +225,11 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Colors Healthiness"
 /*ASEBEGIN
 Version=18600
 1927;1;1906;1020;1285.134;1840.896;1;True;False
-Node;AmplifyShaderEditor.FunctionNode;130;80,-1408;Inherit;False;Is Colors Shader;46;;18618;378049ebac362e14aae08c2daa8ed737;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.FunctionNode;136;-256,-1152;Inherit;False;Base Element;2;;18619;0e972c73cae2ee54ea51acc9738801d0;6,477,1,478,3,145,3,481,0,576,1,491,1;0;1;FLOAT4;0
 Node;AmplifyShaderEditor.RangedFloatNode;124;-96,-1408;Half;False;Property;_Message;Message;1;0;Create;True;0;0;True;1;StyledMessage(Info, Use the Healthiness elements to control the subsurface effect on autumn foliage or dead leaves. Element Texture R is used as alpha mask. Particle Color R is used as values multiplier and Alpha as Element Intensity multiplier., 0,0);False;0;0;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;115;-256,-1408;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Healthiness Element);False;0;0;1;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.FunctionNode;130;80,-1408;Inherit;False;Is Colors Shader;46;;18618;378049ebac362e14aae08c2daa8ed737;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.FunctionNode;136;-256,-1152;Inherit;False;Base Element;2;;18619;0e972c73cae2ee54ea51acc9738801d0;6,477,1,478,3,145,3,481,0,576,1,491,1;0;1;FLOAT4;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;80,-1152;Half;False;True;-1;2;TVEShaderElementGUI;0;1;BOXOPHOBIC/The Vegetation Engine/Elements/Default/Colors Healthiness;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;0;5;False;-1;10;False;-1;6;2;False;-1;0;False;-1;True;0;False;-1;0;False;-1;False;False;False;False;False;False;True;0;False;-1;True;2;False;-1;True;False;False;False;True;0;False;-1;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;0;False;-1;True;False;0;False;-1;0;False;-1;True;3;RenderType=Opaque=RenderType;Queue=Transparent=Queue=0;PreviewType=Plane;True;0;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=ForwardBase;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;1;True;False;;False;0
 WireConnection;0;0;136;0
 ASEEND*/
-//CHKSM=74C9E2D248C1AF2B4CAC168588EB15D00CCF2DE9
+//CHKSM=013AA0315A38B2EC57417BB8A4E91BB93A1A3804

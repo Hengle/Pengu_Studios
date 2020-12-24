@@ -95,28 +95,28 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Extras Wetness"
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
+			uniform half _Message;
+			uniform half _Banner;
 			uniform half _IsExtrasShader;
-			uniform half _ElementLayerObjectsMessage;
-			uniform half _ElementLayerCustomMessage;
-			uniform half _ElementCat;
-			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayer;
+			uniform half _IsElementShader;
+			uniform half4 _WinterColor;
+			uniform half4 _SummerColor;
 			uniform half _ElementLayerVegetationMessage;
-			uniform half _IsVersion;
-			uniform half _SummerValue;
-			uniform half _RenderCat;
+			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayerObjectsMessage;
+			uniform half _ElementCat;
+			uniform half _ElementLayerCustomMessage;
+			uniform half _AdvancedCat;
+			uniform half _WinterValue;
 			uniform half _AutumnValue;
 			uniform half _SpringValue;
+			uniform half _RenderCat;
+			uniform half _IsVersion;
+			uniform half _SummerValue;
 			uniform half4 _SpringColor;
 			uniform half4 _AutumnColor;
 			uniform half _ElementFadeMessage;
-			uniform half _WinterValue;
-			uniform half _AdvancedCat;
-			uniform half _ElementLayer;
-			uniform half4 _SummerColor;
-			uniform half _IsElementShader;
-			uniform half4 _WinterColor;
-			uniform half _Message;
-			uniform half _Banner;
 			uniform half _MainValue;
 			uniform half4 TVE_SeasonOptions;
 			uniform half _AdditionalValue1;
@@ -192,10 +192,11 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Extras Wetness"
 				half Element_Mode55_g18614 = _ElementMode;
 				half lerpResult413_g18614 = lerp( ( 1.0 - ( Value_Main157_g18614 * i.ase_color.r ) ) , ( ( ( TVE_SeasonOptions_X50_g18614 * lerpResult419_g18614 ) + ( TVE_SeasonOptions_Y51_g18614 * lerpResult422_g18614 ) + ( TVE_SeasonOptions_Z52_g18614 * lerpResult407_g18614 ) + ( TVE_SeasonOptions_W53_g18614 * lerpResult415_g18614 ) ) * i.ase_color.r ) , Element_Mode55_g18614);
 				half Base_Extras_A423_g18614 = ( 1.0 - lerpResult413_g18614 );
-				half temp_output_7_0_g18652 = TVE_ElementFadeContrast;
-				half2 temp_cast_0 = (temp_output_7_0_g18652).xx;
+				half temp_output_7_0_g18661 = TVE_ElementFadeContrast;
+				half2 temp_cast_0 = (temp_output_7_0_g18661).xx;
+				half2 break649_g18614 = pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_0 ) / ( 1.0 - temp_output_7_0_g18661 ) ) ) , 2.0 );
 				half Enable_Fade_Support454_g18614 = _ElementFadeSupport;
-				half lerpResult654_g18614 = lerp( 1.0 , ( 1.0 - saturate( ( pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_0 ) / ( 1.0 - temp_output_7_0_g18652 ) ) ) , 2.0 ).x + 0.0 ) ) ) , Enable_Fade_Support454_g18614);
+				half lerpResult654_g18614 = lerp( 1.0 , ( 1.0 - saturate( ( break649_g18614.x + break649_g18614.y ) ) ) , Enable_Fade_Support454_g18614);
 				half FadeOut_Mask656_g18614 = lerpResult654_g18614;
 				half Element_Intensity56_g18614 = ( _ElementIntensity * i.ase_color.a * FadeOut_Mask656_g18614 );
 				half lerpResult378_g18614 = lerp( 1.0 , Base_Extras_A423_g18614 , Element_Intensity56_g18614);
@@ -224,11 +225,11 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Extras Wetness"
 /*ASEBEGIN
 Version=18600
 1927;1;1906;1020;682.6006;1998.539;1;True;False
-Node;AmplifyShaderEditor.RangedFloatNode;120;-96,-1536;Half;False;Property;_Message;Message;1;0;Create;True;0;0;True;1;StyledMessage(Info, Use the Wetness elements to dampen the global wetness effect on vegetation and props. Element Texture R is used as alpha mask. Particle Color R is used as values multiplier and Alpha as Element Intensity multiplier., 0,0);False;0;0;1;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;115;-256,-1536;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Wetness Element);False;0;0;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;124;80,-1536;Inherit;False;Is Extras Shader;46;;18613;adca672cb6779794dba5f669b4c5f8e3;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;132;-256,-1280;Inherit;False;Base Element;2;;18614;0e972c73cae2ee54ea51acc9738801d0;6,477,2,478,0,145,3,481,0,576,1,491,1;0;1;FLOAT4;0
+Node;AmplifyShaderEditor.RangedFloatNode;120;-96,-1536;Half;False;Property;_Message;Message;1;0;Create;True;0;0;True;1;StyledMessage(Info, Use the Wetness elements to dampen the global wetness effect on vegetation and props. Element Texture R is used as alpha mask. Particle Color R is used as values multiplier and Alpha as Element Intensity multiplier., 0,0);False;0;0;1;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;115;-256,-1536;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Wetness Element);False;0;0;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;80,-1280;Half;False;True;-1;2;TVEShaderElementGUI;0;1;BOXOPHOBIC/The Vegetation Engine/Elements/Default/Extras Wetness;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;0;5;False;-1;10;False;-1;6;2;False;-1;0;False;-1;True;0;False;-1;0;False;-1;False;False;False;False;False;False;True;0;False;-1;True;2;False;-1;True;False;False;False;True;0;False;-1;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;0;False;-1;True;False;0;False;-1;0;False;-1;True;3;RenderType=Opaque=RenderType;Queue=Transparent=Queue=0;PreviewType=Plane;True;0;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=ForwardBase;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;1;True;False;;False;0
 WireConnection;0;0;132;0
 ASEEND*/
-//CHKSM=E6A84F7DEBEE799F8195B6ECFE311BBA83ACAAAD
+//CHKSM=60BA98F1176852849C3863449F71610A13C1FB53

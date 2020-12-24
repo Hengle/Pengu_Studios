@@ -6,8 +6,6 @@ using System.Collections.Generic;
 
 public class TVEShaderElementGUI : ShaderGUI
 {
-    Material material;
-
     public override void AssignNewShaderToMaterial(Material material, Shader oldShader, Shader newShader)
     {
         base.AssignNewShaderToMaterial(material, oldShader, newShader);
@@ -17,14 +15,20 @@ public class TVEShaderElementGUI : ShaderGUI
 
     public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
     {
-        material = materialEditor.target as Material;
+        var materials = materialEditor.targets;
+        bool isSingleMaterial = true;
 
-        TheVegetationEngine.TVEShaderUtils.UpgradeElementTo200(material);
+        if (materials.Length > 1)
+            isSingleMaterial = false;
+        foreach (Material material in materials)
+        {
+            DrawDynamicInspector(material, materialEditor, props, isSingleMaterial);
 
-        DrawDynamicInspector(materialEditor, props);
+            TheVegetationEngine.TVEShaderUtils.UpgradeElementTo200(material);
+        }
     }
 
-    void DrawDynamicInspector(MaterialEditor materialEditor, MaterialProperty[] props)
+    void DrawDynamicInspector(Material material, MaterialEditor materialEditor, MaterialProperty[] props, bool isSingleMaterial)
     {
         var customPropsList = new List<MaterialProperty>();
 
@@ -92,8 +96,10 @@ public class TVEShaderElementGUI : ShaderGUI
 
             if (prop.type == MaterialProperty.PropType.Texture)
             {
+                EditorGUI.showMixedValue = !isSingleMaterial;
                 var tex = (Texture2D)EditorGUILayout.ObjectField(prop.displayName, prop.textureValue, typeof(Texture2D), true, GUILayout.Height(50));
                 prop.textureValue = tex;
+                EditorGUI.showMixedValue = false;
             }
             else
             {

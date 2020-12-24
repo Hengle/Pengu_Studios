@@ -45,7 +45,7 @@ namespace TheVegetationEngine
                 // Opaque
                 if (mode == 0)
                 {
-                    material.SetOverrideTag("RenderType", "Opaque");
+                    material.SetOverrideTag("RenderType", "AlphaTest");
                     material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
 
                     // Standard and Universal Render Pipeline
@@ -72,7 +72,7 @@ namespace TheVegetationEngine
                     material.SetInt("_ZWrite", 1);
                     material.SetInt("_TransparentZWrite", 1);
                     material.SetInt("_ZTestDepthEqualForOpaque", 3);
-                    material.SetInt("_ZTestGBuffer", 3);
+                    material.SetInt("_ZTestGBuffer", 4);
                     material.SetInt("_ZTestTransparent", 4);
                 }
                 // Transparent
@@ -107,7 +107,7 @@ namespace TheVegetationEngine
                         material.SetInt("_ZWrite", zwrite);
                         material.SetInt("_TransparentZWrite", zwrite);
                         material.SetInt("_ZTestDepthEqualForOpaque", 4);
-                        material.SetInt("_ZTestGBuffer", 3);
+                        material.SetInt("_ZTestGBuffer", 4);
                         material.SetInt("_ZTestTransparent", 4);
                     }
                     // Premultiply Blend
@@ -136,7 +136,7 @@ namespace TheVegetationEngine
                         material.SetInt("_ZWrite", zwrite);
                         material.SetInt("_TransparentZWrite", zwrite);
                         material.SetInt("_ZTestDepthEqualForOpaque", 4);
-                        material.SetInt("_ZTestGBuffer", 3);
+                        material.SetInt("_ZTestGBuffer", 4);
                         material.SetInt("_ZTestTransparent", 4);
                     }
                 }

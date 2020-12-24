@@ -121,7 +121,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AdvancedCat: 0
-    - _AlphaCutoff: 1
     - _Banner: 0
     - _BarkCategory: 0
     - _BarkMessage: 0
@@ -137,7 +136,6 @@ Material:
     - _DetailSpace: 0
     - _DetailTypeMode: 0
     - _DstBlend: 0
-    - _Float19: 1
     - _Float6: 0.5
     - _GlobalCat: 0
     - _GlobalColors: 1
@@ -294,4 +292,3 @@ Material:
     - _SubsurfaceDiffusion_asset: {r: 0, g: 0, b: 0, a: 0}
     - _VertexOcclusionColor: {r: 0, g: 0, b: 0, a: 0}
     - _render_normals_options: {r: -1, g: -1, b: -1, a: 0}
-  m_BuildTextureStacks: []

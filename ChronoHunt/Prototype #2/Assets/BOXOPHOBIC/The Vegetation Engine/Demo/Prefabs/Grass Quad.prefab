@@ -54,6 +54,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -65,6 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -77,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7831760998045315962
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +135,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -142,6 +148,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -154,6 +161,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7831760998045315966
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7831760998044823390}
   - component: {fileID: 7831760998058343418}
-  - component: {fileID: 2314881257875525009}
+  - component: {fileID: 8514050098222857599}
   m_Layer: 0
   m_Name: Grass Quad
   m_TagString: Untagged
@@ -211,7 +219,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7831760998043053496}
   m_Enabled: 1
---- !u!114 &2314881257875525009
+--- !u!114 &8514050098222857599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,7 +232,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   styledBanner: 0
-  storedPrefabBackup: {fileID: 7831760998045315966, guid: e230336af16586c4493c643313fb340f,
-    type: 3}
+  storedPrefabBackup: {fileID: 7831760998045315966, guid: 0aad183c11ee4bd44b8f29430b7e2491, type: 3}
   storedMaxBoundsInfo: {x: 0.5, y: 1, z: 1, w: 0}
   storedPreset: Procedural/Grass

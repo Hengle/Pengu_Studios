@@ -70,11 +70,6 @@ namespace TheVegetationEngine
         "Vegetation", "Static Object", "Terrain Detail", "Polyverse Prop",
         };
 
-        string[] ConversionSettingsEnum = new string[]
-        {
-        "Preset Settings", "Custom Settings",
-        };
-
         string[] SourceMaskEnum = new string[]
         {
         "None", "Channel", "Procedural", "3rd Party" /* "Texture", "Extra Mesh" */
@@ -129,8 +124,6 @@ namespace TheVegetationEngine
         {
         "Recalculate Normals", "Flat Shading (Low)", "Flat Shading (Medium)", "Flat Shading (Full)", "Spherical Shading",
         };
-
-        int conversionSettingsIndex = 0;
 
         int conversionTypeIndex = (int)ConversionOutput.Vegetation;
 
@@ -207,6 +200,7 @@ namespace TheVegetationEngine
 
         int conversionPresetIndex;
         int presetIndexOld = -1;
+        bool showAdvancedSettings = false;
         string[] allPresetPaths;
         List<string> presetPaths;
         List<string> presetLines;
@@ -446,9 +440,16 @@ namespace TheVegetationEngine
 
                 if (conversionTypeIndex == (int)ConversionOutput.Vegetation)
                 {
-                    conversionSettingsIndex = StyledPopup("Conversion Settings", conversionSettingsIndex, ConversionSettingsEnum);
+                    GUILayout.Space(10);
 
-                    if (conversionSettingsIndex == 1)
+                    GUILayout.BeginHorizontal();
+
+                    GUILayout.Label("Show Advanced Settings", GUILayout.Width(this.position.width / 2 - 21));
+                    showAdvancedSettings = EditorGUILayout.Toggle(showAdvancedSettings);
+
+                    GUILayout.EndHorizontal();
+
+                    if (showAdvancedSettings)
                     {
                         GUILayout.Space(10);
 
@@ -3874,6 +3875,7 @@ namespace TheVegetationEngine
 
             texImporter.ReadTextureSettings(sourceTexSettings[channel]);
 
+            texImporter.textureType = TextureImporterType.Default;
             texImporter.sRGBTexture = false;
             texImporter.mipmapEnabled = false;
             texImporter.maxTextureSize = 8192;

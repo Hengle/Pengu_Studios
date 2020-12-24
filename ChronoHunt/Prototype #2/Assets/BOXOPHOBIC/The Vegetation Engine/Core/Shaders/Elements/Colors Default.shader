@@ -103,25 +103,25 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Colors Default"
 			uniform half _Banner;
 			uniform half _IsColorsShader;
 			uniform half _Message;
-			uniform half _ElementLayerObjectsMessage;
-			uniform half _ElementLayerCustomMessage;
-			uniform half _ElementCat;
-			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayer;
+			uniform half _IsElementShader;
+			uniform half4 _WinterColor;
+			uniform half4 _SummerColor;
 			uniform half _ElementLayerVegetationMessage;
-			uniform half _IsVersion;
-			uniform half _SummerValue;
-			uniform half _RenderCat;
+			uniform half _ElementLayerGrassMessage;
+			uniform half _ElementLayerObjectsMessage;
+			uniform half _ElementCat;
+			uniform half _ElementLayerCustomMessage;
+			uniform half _AdvancedCat;
+			uniform half _WinterValue;
 			uniform half _AutumnValue;
 			uniform half _SpringValue;
+			uniform half _RenderCat;
+			uniform half _IsVersion;
+			uniform half _SummerValue;
 			uniform half4 _SpringColor;
 			uniform half4 _AutumnColor;
 			uniform half _ElementFadeMessage;
-			uniform half _WinterValue;
-			uniform half _AdvancedCat;
-			uniform half _ElementLayer;
-			uniform half4 _SummerColor;
-			uniform half _IsElementShader;
-			uniform half4 _WinterColor;
 			uniform half4 _MainColor;
 			uniform half4 TVE_SeasonOptions;
 			uniform half4 _AdditionalColor1;
@@ -196,14 +196,15 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Colors Default"
 				half4 lerpResult30_g18802 = lerp( Color_Main_RGBA49_g18802 , ( ( TVE_SeasonOptions_X50_g18802 * lerpResult13_g18802 ) + ( TVE_SeasonOptions_Y51_g18802 * lerpResult14_g18802 ) + ( TVE_SeasonOptions_Z52_g18802 * lerpResult15_g18802 ) + ( TVE_SeasonOptions_W53_g18802 * lerpResult12_g18802 ) ) , Element_Mode55_g18802);
 				half3 Final_Colors_RGB142_g18802 = (( lerpResult30_g18802 * i.ase_color )).rgb;
 				half4 tex2DNode17_g18802 = tex2D( _MainTex, ( ( i.ase_texcoord1.xy * (_MainUVs).xy ) + (_MainUVs).zw ) );
-				half temp_output_7_0_g18804 = _MainTexMinValue;
-				half4 temp_cast_0 = (temp_output_7_0_g18804).xxxx;
-				half4 break469_g18802 = saturate( ( ( tex2DNode17_g18802 - temp_cast_0 ) / ( _MainTexMaxValue - temp_output_7_0_g18804 ) ) );
+				half temp_output_7_0_g18807 = _MainTexMinValue;
+				half4 temp_cast_0 = (temp_output_7_0_g18807).xxxx;
+				half4 break469_g18802 = saturate( ( ( tex2DNode17_g18802 - temp_cast_0 ) / ( _MainTexMaxValue - temp_output_7_0_g18807 ) ) );
 				half MainTex_R73_g18802 = break469_g18802.r;
-				half temp_output_7_0_g18807 = TVE_ElementFadeContrast;
-				half2 temp_cast_1 = (temp_output_7_0_g18807).xx;
+				half temp_output_7_0_g18809 = TVE_ElementFadeContrast;
+				half2 temp_cast_1 = (temp_output_7_0_g18809).xx;
+				half2 break649_g18802 = pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_1 ) / ( 1.0 - temp_output_7_0_g18809 ) ) ) , 2.0 );
 				half Enable_Fade_Support454_g18802 = _ElementFadeSupport;
-				half lerpResult654_g18802 = lerp( 1.0 , ( 1.0 - saturate( ( pow( saturate( ( ( abs( (( (TVE_VolumeCoord).zw + ( (TVE_VolumeCoord).xy * (WorldPosition).xz ) )*2.0 + -1.0) ) - temp_cast_1 ) / ( 1.0 - temp_output_7_0_g18807 ) ) ) , 2.0 ).x + 0.0 ) ) ) , Enable_Fade_Support454_g18802);
+				half lerpResult654_g18802 = lerp( 1.0 , ( 1.0 - saturate( ( break649_g18802.x + break649_g18802.y ) ) ) , Enable_Fade_Support454_g18802);
 				half FadeOut_Mask656_g18802 = lerpResult654_g18802;
 				half Element_Intensity56_g18802 = ( _ElementIntensity * i.ase_color.a * FadeOut_Mask656_g18802 );
 				half Final_Colors_A144_g18802 = ( MainTex_R73_g18802 * Element_Intensity56_g18802 );
@@ -222,12 +223,12 @@ Shader "BOXOPHOBIC/The Vegetation Engine/Elements/Default/Colors Default"
 }
 /*ASEBEGIN
 Version=18600
-1927;1;1906;1020;1456.167;1079.316;1;True;False
-Node;AmplifyShaderEditor.RangedFloatNode;97;-640,-768;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Color Element);False;0;0;1;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.FunctionNode;108;-304,-768;Inherit;False;Is Colors Shader;46;;18801;378049ebac362e14aae08c2daa8ed737;0;0;1;FLOAT;0
+1927;1;1906;1020;1456.167;1076.316;1;True;False
 Node;AmplifyShaderEditor.RangedFloatNode;100;-480,-768;Half;False;Property;_Message;Message;1;0;Create;True;0;0;True;1;StyledMessage(Info, Use the Colors elements to add color tinting to the vegetation assets. Element Texture R is used as alpha mask. Particle Color RGB is used as Main multiplier and Alpha as Element Intensity multiplier., 0,0);False;0;0;1;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.FunctionNode;156;-640,-512;Inherit;False;Base Element;2;;18802;0e972c73cae2ee54ea51acc9738801d0;6,477,1,478,0,145,0,481,0,576,1,491,1;0;1;FLOAT4;0
+Node;AmplifyShaderEditor.RangedFloatNode;97;-640,-768;Half;False;Property;_Banner;Banner;0;0;Create;True;0;0;True;1;StyledBanner(Color Element);False;0;0;1;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.FunctionNode;108;-304,-768;Inherit;False;Is Colors Shader;46;;18801;378049ebac362e14aae08c2daa8ed737;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;-304,-512;Half;False;True;-1;2;TVEShaderElementGUI;0;1;BOXOPHOBIC/The Vegetation Engine/Elements/Default/Colors Default;0770190933193b94aaa3065e307002fa;True;Unlit;0;0;Unlit;2;True;2;5;False;-1;10;False;-1;0;1;False;-1;0;False;-1;True;0;False;-1;0;False;-1;False;False;False;False;False;False;True;0;False;-1;True;2;False;-1;True;True;True;True;False;0;False;-1;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;0;False;-1;True;False;0;False;-1;0;False;-1;True;3;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;PreviewType=Plane;True;0;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=ForwardBase;False;0;;0;0;Standard;1;Vertex Position,InvertActionOnDeselection;1;0;1;True;False;;False;0
 WireConnection;0;0;156;0
 ASEEND*/
-//CHKSM=6A140B2264445EAFCDAD31D08C3E417F817E14E4
+//CHKSM=700A7F092A849F0DC61294FF5AEC67D05069772C

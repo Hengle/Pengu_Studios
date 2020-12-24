@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4881073129422474}
   - component: {fileID: 205329961687919748}
-  - component: {fileID: 4716242718075365813}
+  - component: {fileID: 130236578817728016}
   m_Layer: 22
   m_Name: TVE_Fern_var03_Prefab
   m_TagString: Untagged
@@ -49,11 +49,11 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.21353415
+  - screenRelativeHeight: 0.45435068
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 23502313384024998}
-  - screenRelativeHeight: 0.06543606
+  - screenRelativeHeight: 0.13886383
     fadeTransitionWidth: 0.1
     renderers:
     - renderer: {fileID: 23902751934209644}
@@ -62,7 +62,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 23101331835621484}
   m_Enabled: 1
---- !u!114 &4716242718075365813
+--- !u!114 &130236578817728016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,10 +75,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   styledBanner: 0
-  storedPrefabBackup: {fileID: 1055727018099338, guid: 15f4ffe4e57e4da19d66679b550735a8,
-    type: 3}
-  storedMaxBoundsInfo: {x: 1.5089474, y: 0.91847914, z: 1.5089474, w: 0}
-  storedPreset: Vegetation Assets/The Vegetation Engine/Demo Fern
+  storedPrefabBackup: {fileID: 1055727018099338, guid: 8df23c18b69e9cc4491d500bfcbbd372, type: 3}
+  storedMaxBoundsInfo: {x: 0, y: 0, z: 0, w: 0}
+  storedPreset: Vegetation Assets/The Vegetation Engine/Demo Plants
 --- !u!1 &1193325950112690
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +117,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193325950112690}
-  m_Mesh: {fileID: 4300000, guid: 2eddf2915bec4ef79e0b4e54155ffe2e, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!23 &23902751934209644
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -133,10 +132,12 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 865b5e8c808d47f5833b35bcac8021d9, type: 2}
+  - {fileID: 2100000, guid: 842fd6c3954846342adc01b097a263e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,6 +145,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 0
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -156,6 +158,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1486753561181244
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +199,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486753561181244}
-  m_Mesh: {fileID: 4300000, guid: b4ef3d2a55554e33a2432d834f1e1550, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!23 &23502313384024998
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -211,10 +214,12 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 865b5e8c808d47f5833b35bcac8021d9, type: 2}
+  - {fileID: 2100000, guid: 842fd6c3954846342adc01b097a263e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -222,6 +227,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 0
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -234,6 +240,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &5685833504288298419
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -244,9 +251,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 0
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &1561445524583756
 GameObject:
@@ -287,7 +294,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561445524583756}
-  m_Mesh: {fileID: 4300000, guid: 248feffd4a194dfdb12f629aec32f7fa, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!23 &23101331835621484
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -302,10 +309,12 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 865b5e8c808d47f5833b35bcac8021d9, type: 2}
+  - {fileID: 2100000, guid: 842fd6c3954846342adc01b097a263e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -313,6 +322,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -325,3 +335,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

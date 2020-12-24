@@ -41,114 +41,113 @@ namespace TheVegetationEngine
 
         List<TVEMaterialData> motionData = new List<TVEMaterialData>
         {
-            new TVEMaterialData("_MotionHighlightColor", "Motion Highlight", new Color(-100, 0,0,0), true, true),
+            new TVEMaterialData("_MotionHighlightColor", "Motion Highlight", new Color(-1000, 0,0,0), true, true),
 
-            new TVEMaterialData("_MotionAmplitude_10", "Bending Amplitude", -100, 0, 2, false, true),
-            new TVEMaterialData("_MotionSpeed_10", "Bending Speed", -100, 0, 60, true, false),
-            new TVEMaterialData("_MotionScale_10", "Bending Scale", -100, 0, 20, false, false),
-            new TVEMaterialData("_MotionVariation_10", "Bending Variation", -100, 0, 20, false, false),
+            new TVEMaterialData("_MotionAmplitude_10", "Bending Amplitude", -1000, 0, 2, false, true),
+            new TVEMaterialData("_MotionSpeed_10", "Bending Speed", -1000, 0, 60, true, false),
+            new TVEMaterialData("_MotionScale_10", "Bending Scale", -1000, 0, 20, false, false),
+            new TVEMaterialData("_MotionVariation_10", "Bending Variation", -1000, 0, 20, false, false),
 
-            new TVEMaterialData("_MotionAmplitude_20", "Rolling Amplitude", -100, 0, 2, false, true),
-            new TVEMaterialData("_MotionSpeed_20", "Rolling Speed", -100, 0, 60, true, false),
-            new TVEMaterialData("_MotionScale_20", "Rolling Scale", -100, 0, 20, false, false),
-            new TVEMaterialData("_MotionVariation_20", "Rolling Variation", -100, 0, 20, false, false),
+            new TVEMaterialData("_MotionAmplitude_20", "Rolling Amplitude", -1000, 0, 2, false, true),
+            new TVEMaterialData("_MotionSpeed_20", "Rolling Speed", -1000, 0, 60, true, false),
+            new TVEMaterialData("_MotionScale_20", "Rolling Scale", -1000, 0, 20, false, false),
+            new TVEMaterialData("_MotionVariation_20", "Rolling Variation", -1000, 0, 20, false, false),
 
-            new TVEMaterialData("_MotionAmplitude_30", "Leaves Amplitude", -100, 0, 2, false, true),
-            new TVEMaterialData("_MotionSpeed_30", "Leaves Speed", -100, 0, 60, true, false),
-            new TVEMaterialData("_MotionScale_30", "Leaves Scale", -100, 0, 20, false, false),
-            new TVEMaterialData("_MotionVariation_30", "Leaves Variation", -100, 0, 20, false, false),
+            new TVEMaterialData("_MotionAmplitude_30", "Leaves Amplitude", -1000, 0, 2, false, true),
+            new TVEMaterialData("_MotionSpeed_30", "Leaves Speed", -1000, 0, 60, true, false),
+            new TVEMaterialData("_MotionScale_30", "Leaves Scale", -1000, 0, 20, false, false),
+            new TVEMaterialData("_MotionVariation_30", "Leaves Variation", -1000, 0, 20, false, false),
 
-            new TVEMaterialData("_MotionAmplitude_32", "Flutter Amplitude", -100, 0, 2, false, true),
-            new TVEMaterialData("_MotionSpeed_32", "Flutter Speed", -100, 0, 60, true, false),
-            new TVEMaterialData("_MotionScale_32", "Flutter Scale", -100, 0, 20, false, false),
-            new TVEMaterialData("_MotionVariation_32", "Flutter Variation", -100, 0, 20, false, false),
+            new TVEMaterialData("_MotionAmplitude_32", "Flutter Amplitude", -1000, 0, 2, false, true),
+            new TVEMaterialData("_MotionSpeed_32", "Flutter Speed", -1000, 0, 60, true, false),
+            new TVEMaterialData("_MotionScale_32", "Flutter Scale", -1000, 0, 20, false, false),
+            new TVEMaterialData("_MotionVariation_32", "Flutter Variation", -1000, 0, 20, false, false),
 
-            new TVEMaterialData("_InteractionAmplitude", "Interaction Amplitude", -100, 0, 10, false, true),
-            new TVEMaterialData("_InteractionVariation", "Interaction Variation", -100, 0, 1, false, false),
+            new TVEMaterialData("_InteractionAmplitude", "Interaction Amplitude", -1000, 0, 10, false, true),
+            new TVEMaterialData("_InteractionVariation", "Interaction Variation", -1000, 0, 1, false, false),
         };
 
         List<TVEMaterialData> globalData = new List<TVEMaterialData>
         {
-            new TVEMaterialData("_GlobalColors", "Global Colors", -100, 0, 1, false, true),
-            new TVEMaterialData("_GlobalOverlay", "Global Overlay", -100, 0, 1, false, false),
-            new TVEMaterialData("_GlobalWetness", "Global Wetness", -100, 0, 1, false, false),
-            new TVEMaterialData("_GlobalLeaves", "Global Leaves", -100, 0, 1, false, false),
-            new TVEMaterialData("_GlobalHealthiness", "Global Healthiness", -100, 0, 1, false, false),
-            new TVEMaterialData("_GlobalSize", "Global Size", -100, 0, 1, false, false),
-            new TVEMaterialData("_GlobalSizeFade", "Global Size Fade", -100, 0, 1, false, false),
+            new TVEMaterialData("_GlobalColors", "Global Colors", -1000, 0, 1, false, true),
+            new TVEMaterialData("_GlobalOverlay", "Global Overlay", -1000, 0, 1, false, false),
+            new TVEMaterialData("_GlobalWetness", "Global Wetness", -1000, 0, 1, false, false),
+            new TVEMaterialData("_GlobalLeaves", "Global Leaves", -1000, 0, 1, false, false),
+            new TVEMaterialData("_GlobalHealthiness", "Global Healthiness", -1000, 0, 1, false, false),
+            new TVEMaterialData("_GlobalSize", "Global Size", -1000, 0, 1, false, false),
+            new TVEMaterialData("_GlobalSizeFade", "Global Size Fade", -1000, 0, 1, false, false),
 
-            new TVEMaterialData("_ColorsMaskValue", "Colors Use Mask", -100, 0, 1, false, true),
-            new TVEMaterialData("_OverlayContrastValue", "Overlay Contrast", -100, 0, 10, false, false),
-            new TVEMaterialData("_OverlayVariationValue", "Overlay Variation", -100, 0, 1, false, false),
-            new TVEMaterialData("_LeavesVariationValue", "Leaves Variation", -100, 0, 1, false, false),
+            new TVEMaterialData("_ColorsMaskValue", "Colors Use Mask", -1000, 0, 1, false, true),
+            new TVEMaterialData("_OverlayContrastValue", "Overlay Contrast", -1000, 0, 10, false, false),
+            new TVEMaterialData("_OverlayVariationValue", "Overlay Variation", -1000, 0, 1, false, false),
+            new TVEMaterialData("_LeavesVariationValue", "Leaves Variation", -1000, 0, 1, false, false),
         };
 
         List<TVEMaterialData> subsurfaceData = new List<TVEMaterialData>
         {
-            new TVEMaterialData("_SubsurfaceValue", "Subsurface Intensity", -100, 0, 1, false, true),
-
-            new TVEMaterialData("_SubsurfaceColor", "Subsurface Color", new Color(-100, 0,0,0), true, true),
-            new TVEMaterialData("_SubsurfaceViewValue", "Subsurface View", -100, 0, 8, false, false),
-            new TVEMaterialData("_SubsurfaceAngleValue", "Subsurface Angle", -100, 0, 16, false, false),
-            new TVEMaterialData("_SubsurfaceMaskValue", "Subsurface Use Mask", -100, 0, 1, false, false),
-            new TVEMaterialData("_SubsurfaceLightValue", "Subsurface Use Light", -100, 0, 1, false, false),
+            new TVEMaterialData("_SubsurfaceColor", "Subsurface Color", new Color(-1000, 0,0,0), true, true),
+            new TVEMaterialData("_SubsurfaceValue", "Subsurface Intensity", -1000, 0, 1, false, false),
+            new TVEMaterialData("_SubsurfaceViewValue", "Subsurface View", -1000, 0, 8, false, false),
+            new TVEMaterialData("_SubsurfaceAngleValue", "Subsurface Angle", -1000, 0, 16, false, false),
+            new TVEMaterialData("_SubsurfaceMaskValue", "Subsurface Use Mask", -1000, 0, 1, false, false),
+            new TVEMaterialData("_SubsurfaceLightValue", "Subsurface Use Light", -1000, 0, 1, false, false),
         };
 
         List<TVEMaterialData> mainData = new List<TVEMaterialData>
         {
-            new TVEMaterialData("_RenderCutoff", "Alpha Treshold", -100, 0, 1, false, true),
+            new TVEMaterialData("_Cutoff", "Alpha Treshold", -1000, 0, 1, false, true),
 
-            new TVEMaterialData("_MainColor", "Main Color", new Color(-100, 0,0,0), true, true),
-            new TVEMaterialData("_MainNormalValue", "Main Normal", -100, -8, 8, false, false),
-            new TVEMaterialData("_MainMetallicValue", "Main Metallic", -100, 0, 1, false, false),
-            new TVEMaterialData("_MainOcclusionValue", "Main Occlusion", -100, 0, 1, false, false),
-            new TVEMaterialData("_MainSmoothnessValue", "Main Smoothness", -100, 0, 1, false, false),
+            new TVEMaterialData("_MainColor", "Main Color", new Color(-1000, 0,0,0), true, true),
+            new TVEMaterialData("_MainNormalValue", "Main Normal", -1000, -8, 8, false, false),
+            new TVEMaterialData("_MainMetallicValue", "Main Metallic", -1000, 0, 1, false, false),
+            new TVEMaterialData("_MainOcclusionValue", "Main Occlusion", -1000, 0, 1, false, false),
+            new TVEMaterialData("_MainSmoothnessValue", "Main Smoothness", -1000, 0, 1, false, false),
 
-            new TVEMaterialData("_MainMaskMinValue", "Main Mask Min", -100, 0, 1, false, true),
-            new TVEMaterialData("_MainMaskMaxValue", "Main Mask Max", -100, 0, 1, false, false),
+            new TVEMaterialData("_MainMaskMinValue", "Main Mask Min", -1000, 0, 1, false, true),
+            new TVEMaterialData("_MainMaskMaxValue", "Main Mask Max", -1000, 0, 1, false, false),
 
-            new TVEMaterialData("_VertexOcclusionColor", "Vertex Occlusion Color", new Color(-100, 0,0,0), true, true),
-            new TVEMaterialData("_VertexOcclusionValue", "Vertex Occlusion Power", -100, 0, 8, false, false),
+            new TVEMaterialData("_VertexOcclusionColor", "Vertex Occlusion Color", new Color(-1000, 0,0,0), true, true),
+            new TVEMaterialData("_VertexOcclusionValue", "Vertex Occlusion Power", -1000, 0, 8, false, false),
         };
 
         List<TVEMaterialData> secondData = new List<TVEMaterialData>
         {
-            new TVEMaterialData("_SecondColor", "Detail Color", new Color(-100, 0,0,0), true, true),
-            new TVEMaterialData("_SecondNormalValue", "Detail Normal", -100, -8, 8, false, false),
-            new TVEMaterialData("_SecondMetallicValue", "Detail Metallic", -100, 0, 1, false, false),
-            new TVEMaterialData("_SecondOcclusionValue", "Detail Occlusion", -100, 0, 1, false, false),
-            new TVEMaterialData("_SecondSmoothnessValue", "Detail Smoothness", -100, 0, 1, false, false),
+            new TVEMaterialData("_SecondColor", "Detail Color", new Color(-1000, 0,0,0), true, true),
+            new TVEMaterialData("_SecondNormalValue", "Detail Normal", -1000, -8, 8, false, false),
+            new TVEMaterialData("_SecondMetallicValue", "Detail Metallic", -1000, 0, 1, false, false),
+            new TVEMaterialData("_SecondOcclusionValue", "Detail Occlusion", -1000, 0, 1, false, false),
+            new TVEMaterialData("_SecondSmoothnessValue", "Detail Smoothness", -1000, 0, 1, false, false),
 
-            new TVEMaterialData("_DetailNormalValue", "Detail Use Main Normal", -100, 0, 1, false, true),
+            new TVEMaterialData("_DetailNormalValue", "Detail Use Main Normal", -1000, 0, 1, false, true),
 
-            new TVEMaterialData("_DetailMeshValue", "Detail Mask Offset", -100, -1, 1, false, true),
-            new TVEMaterialData("_DetailMaskValue", "Detail Mask Power", -100, -1, 1, false, false),
-            new TVEMaterialData("_DetailMaskContrast", "Detail Mask Contrast", -100, 0, 1, false, false),
+            new TVEMaterialData("_DetailMeshValue", "Detail Mask Offset", -1000, -1, 1, false, true),
+            new TVEMaterialData("_DetailMaskValue", "Detail Mask Power", -1000, -1, 1, false, false),
+            new TVEMaterialData("_DetailMaskContrast", "Detail Mask Contrast", -1000, 0, 1, false, false),
         };
 
         List<TVEMaterialData> gradientAndNoiseData = new List<TVEMaterialData>
         {
-            new TVEMaterialData("_GradientColorOne", "Gradient Color One", new Color(-100, 0,0,0), true, true),
-            new TVEMaterialData("_GradientColorTwo", "Gradient Color Two", new Color(-100, 0,0,0), true, false),
-            new TVEMaterialData("_GradientMinValue", "Gradient Mask Min", -100, 0, 1, false, false),
-            new TVEMaterialData("_GradientMaxValue", "Gradient Mask Max", -100, 0, 1, false, false),
+            new TVEMaterialData("_GradientColorOne", "Gradient Color One", new Color(-1000, 0,0,0), true, true),
+            new TVEMaterialData("_GradientColorTwo", "Gradient Color Two", new Color(-1000, 0,0,0), true, false),
+            new TVEMaterialData("_GradientMinValue", "Gradient Mask Min", -1000, 0, 1, false, false),
+            new TVEMaterialData("_GradientMaxValue", "Gradient Mask Max", -1000, 0, 1, false, false),
 
-            new TVEMaterialData("_NoiseScaleValue", "Noise Scale", -100, 0, 10, false, true),
-            new TVEMaterialData("_NoiseMinValue", "Noise Min", -100, 0, 1, false, false),
-            new TVEMaterialData("_NoiseMaxValue", "Noise Max", -100, 0, 1, false, false),
+            new TVEMaterialData("_NoiseScaleValue", "Noise Scale", -1000, 0, 10, false, true),
+            new TVEMaterialData("_NoiseMinValue", "Noise Min", -1000, 0, 1, false, false),
+            new TVEMaterialData("_NoiseMaxValue", "Noise Max", -1000, 0, 1, false, false),
 
-            new TVEMaterialData("_NoiseTintOne", "Noise Tint One", new Color(-100, 0,0,0), true, true),
-            new TVEMaterialData("_NoiseTintTwo", "Noise Tint Two", new Color(-100, 0,0,0), true, false),
+            new TVEMaterialData("_NoiseTintOne", "Noise Tint One", new Color(-1000, 0,0,0), true, true),
+            new TVEMaterialData("_NoiseTintTwo", "Noise Tint Two", new Color(-1000, 0,0,0), true, false),
         };
 
         List<TVEMaterialData> billboardAndGrassData = new List<TVEMaterialData>
         {
-            new TVEMaterialData("_BillboardFadeHValue", "Billboard Fade Horizontal", -100, 0, 4, false, true),
-            new TVEMaterialData("_BillboardFadeVValue", "Billboard Fade Vertical", -100, 0, 4, false, false),
+            new TVEMaterialData("_BillboardFadeHValue", "Billboard Fade Horizontal", -1000, 0, 4, false, true),
+            new TVEMaterialData("_BillboardFadeVValue", "Billboard Fade Vertical", -1000, 0, 4, false, false),
 
-            new TVEMaterialData("_PerspectivePushValue", "Perspective Push", -100, 0, 4, false, true),
-            new TVEMaterialData("_PerspectiveNoiseValue", "Perspective Noise", -100, 0, 4, false, false),
-            new TVEMaterialData("_PerspectiveAngleValue", "Perspective Angle", -100, 0, 8, false, false),
+            new TVEMaterialData("_PerspectivePushValue", "Perspective Push", -1000, 0, 4, false, true),
+            new TVEMaterialData("_PerspectiveNoiseValue", "Perspective Noise", -1000, 0, 4, false, false),
+            new TVEMaterialData("_PerspectiveAngleValue", "Perspective Angle", -1000, 0, 8, false, false),
         };
 
         List<GameObject> prefabObjects = new List<GameObject>();
@@ -570,12 +569,27 @@ namespace TheVegetationEngine
             {
                 mixedValue = GUILayout.HorizontalSlider(mixedValue, min, max);
 
-                GUILayout.Label("<color=#7f7f7f><size=10>Mixed</size></color>", styleCenteredMiniLabel, GUILayout.MaxWidth(60), GUILayout.Height(GUI_HEIGHT));
+                GUILayout.Label("<color=#7f7f7f><size=10>mixed</size></color>", styleCenteredMiniLabel, GUILayout.MaxWidth(60), GUILayout.Height(GUI_HEIGHT));
 
                 if (mixedValue != 0)
                 {
                     val = mixedValue;
                 }
+            }
+            else if (val == -1000)
+            {
+                GUI.enabled = false;
+
+                mixedValue = GUILayout.HorizontalSlider(mixedValue, min, max);
+
+                GUILayout.Label("<color=#7f7f7f><size=10>none</size></color>", styleCenteredMiniLabel, GUILayout.MaxWidth(60), GUILayout.Height(GUI_HEIGHT));
+
+                if (mixedValue != 0)
+                {
+                    val = mixedValue;
+                }
+
+                GUI.enabled = true;
             }
             else
             {
@@ -625,13 +639,27 @@ namespace TheVegetationEngine
 
             GUILayout.Label("");
 
-            if (HDR)
+            if (color.r == -1000)
             {
-                color = EditorGUILayout.ColorField(new GUIContent(""), color, true, true, true, GUILayout.MaxWidth(60));
+                GUI.enabled = false;
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("");
+                GUILayout.Label("<color=#7f7f7f><size=10>none</size></color>", styleCenteredMiniLabel, GUILayout.MaxWidth(60), GUILayout.Height(GUI_HEIGHT));
+                GUILayout.EndHorizontal();
+
+                GUI.enabled = true;
             }
             else
             {
-                color = EditorGUILayout.ColorField(color, GUILayout.MaxWidth(60));
+                if (HDR)
+                {
+                    color = EditorGUILayout.ColorField(new GUIContent(""), color, true, true, true, GUILayout.MaxWidth(60));
+                }
+                else
+                {
+                    color = EditorGUILayout.ColorField(color, GUILayout.MaxWidth(60));
+                }
             }
 
             GUILayout.EndHorizontal();
@@ -641,10 +669,26 @@ namespace TheVegetationEngine
 
         void Initialize()
         {
+            ResetMaterialData();
             GetPrefabObjects();
             GetPrefabMaterials();
             GetInitMaterialProperties();
             GetMaterialProperties();
+        }
+
+        void ResetMaterialData()
+        {
+            for (int d = 0; d < materialData.Count; d++)
+            {
+                if (materialData[d].type == TVEMaterialData.PropertyType.Range)
+                {
+                    materialData[d].value = -1000;
+                }
+                else if (materialData[d].type == TVEMaterialData.PropertyType.Color)
+                {
+                    materialData[d].color.r = -1000;
+                }
+            }
         }
 
         void GetPrefabObjects()
@@ -788,11 +832,11 @@ namespace TheVegetationEngine
                 {
                     if (materialData[d].type == TVEMaterialData.PropertyType.Range)
                     {
-                        materialData[d].value = -100;
+                        materialData[d].value = -1000;
                     }
                     else if (materialData[d].type == TVEMaterialData.PropertyType.Color)
                     {
-                        materialData[d].color = new Color(-100f, 0, 0, 0);
+                        materialData[d].color = new Color(-1000, 0, 0, 0);
                     }
                 }
             }
@@ -812,7 +856,7 @@ namespace TheVegetationEngine
                         {
                             var value = material.GetFloat(materialData[d].prop);
 
-                            if (materialData[d].value != value)
+                            if (materialData[d].value != -1000 && materialData[d].value != value)
                             {
                                 materialData[d].value = -100;
                             }
@@ -828,7 +872,7 @@ namespace TheVegetationEngine
                             {
                                 var color = material.GetColor(materialData[d].prop);
 
-                                if (materialData[d].color != color)
+                                if (materialData[d].color.r != -1000 && materialData[d].color != color)
                                 {
                                     materialData[d].color = new Color(-100f, 0, 0, 0);
                                 }
@@ -852,24 +896,21 @@ namespace TheVegetationEngine
                 // Maybe a better check for unfocus on Converter Convert button pressed
                 if (material != null)
                 {
-                    if (material.HasProperty("_IsTVEShader") || material.HasProperty("_IsTVEEXTShader"))
+                    for (int d = 0; d < materialData.Count; d++)
                     {
-                        for (int d = 0; d < materialData.Count; d++)
+                        if (materialData[d].type == TVEMaterialData.PropertyType.Range)
                         {
-                            if (materialData[d].type == TVEMaterialData.PropertyType.Range)
+                            if (material.HasProperty(materialData[d].prop) && materialData[d].value > -99)
                             {
-                                if (materialData[d].value > -99)
-                                {
-                                    material.SetFloat(materialData[d].prop, materialData[d].value);
-                                }
+                                material.SetFloat(materialData[d].prop, materialData[d].value);
                             }
+                        }
 
-                            else if (materialData[d].type == TVEMaterialData.PropertyType.Color)
+                        else if (materialData[d].type == TVEMaterialData.PropertyType.Color)
+                        {
+                            if (material.HasProperty(materialData[d].prop) && materialData[d].color.r > -99)
                             {
-                                if (materialData[d].color.r > -99)
-                                {
-                                    material.SetColor(materialData[d].prop, materialData[d].color);
-                                }
+                                material.SetColor(materialData[d].prop, materialData[d].color);
                             }
                         }
                     }
@@ -1094,6 +1135,10 @@ namespace TheVegetationEngine
                             {
                                 writer.WriteLine("Material SET_FLOAT " + saveData[i].prop + " " + saveData[i].value);
                             }
+                            else
+                            {
+                                writer.WriteLine("//Material SET_FLOAT " + saveData[i].prop + " " + saveData[i].value);
+                            }
                         }
 
                         if (saveData[i].type == TVEMaterialData.PropertyType.Color)
@@ -1101,6 +1146,10 @@ namespace TheVegetationEngine
                             if (saveData[i].color.r > -99)
                             {
                                 writer.WriteLine("Material SET_COLOR " + saveData[i].prop + " " + saveData[i].color.r + " " + saveData[i].color.g + " " + saveData[i].color.b + " " + saveData[i].color.a);
+                            }
+                            else
+                            {
+                                writer.WriteLine("//Material SET_COLOR " + saveData[i].prop + " " + saveData[i].color.r + " " + saveData[i].color.g + " " + saveData[i].color.b + " " + saveData[i].color.a);
                             }
                         }
                     }

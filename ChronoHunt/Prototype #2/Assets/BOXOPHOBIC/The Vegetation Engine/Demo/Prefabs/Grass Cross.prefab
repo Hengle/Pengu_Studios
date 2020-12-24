@@ -54,6 +54,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -65,6 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -77,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5350939314242229149
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5350939314242129853}
   - component: {fileID: 5350939314260663069}
-  - component: {fileID: 4475668714143705013}
+  - component: {fileID: 1340427910608121913}
   m_Layer: 0
   m_Name: Grass Cross
   m_TagString: Untagged
@@ -134,7 +138,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5350939314244423007}
   m_Enabled: 1
---- !u!114 &4475668714143705013
+--- !u!114 &1340427910608121913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,8 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   styledBanner: 0
-  storedPrefabBackup: {fileID: 5350939314242229149, guid: e1bba41f292a14c4f8ce20fcf2575bc1,
-    type: 3}
+  storedPrefabBackup: {fileID: 5350939314242229149, guid: 50bdd8faa7a8b2f4aa96207513d45e19, type: 3}
   storedMaxBoundsInfo: {x: 0.50000006, y: 1, z: 1, w: 0}
   storedPreset: Procedural/Grass
 --- !u!1 &5350939314242229151
@@ -205,6 +208,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -216,6 +221,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -228,3 +234,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

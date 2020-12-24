@@ -22,7 +22,7 @@ namespace Boxophobic.StyledGUI
 
         public override void OnGUI(Rect position, MaterialProperty prop, String label, MaterialEditor materialEditor)
         {
-            Material material = materialEditor.target as Material;
+            //Material material = materialEditor.target as Material;
 
             if (width == 0)
             {

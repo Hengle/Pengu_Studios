@@ -85,7 +85,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AdvancedCat: 0
-    - _AlphaCutoff: 0.25
     - _Banner: 0
     - _BatchingMessage: 0
     - _BumpScale: 1
@@ -98,7 +97,6 @@ Material:
     - _DetailSpace: 0
     - _DetailTypeMode: 0
     - _DstBlend: 0
-    - _Float18: 1
     - _GlobalCat: 0
     - _GlobalColors: 1
     - _GlobalHealthiness: 1
@@ -133,7 +131,6 @@ Material:
     - _MainCat: 0
     - _MainMaskMaxValue: 1
     - _MainMaskMinValue: 0
-    - _MainMetallicValue: 0
     - _MainNormalValue: 1
     - _MainOcclusionValue: 0.5
     - _MainSmoothnessValue: 0.2
@@ -239,4 +236,3 @@ Material:
     - _SubsurfaceDiffusion_asset: {r: 0, g: 0, b: 0, a: 0}
     - _VertexOcclusionColor: {r: 0, g: 0, b: 0, a: 0}
     - _render_normals_options: {r: -1, g: -1, b: -1, a: 0}
-  m_BuildTextureStacks: []

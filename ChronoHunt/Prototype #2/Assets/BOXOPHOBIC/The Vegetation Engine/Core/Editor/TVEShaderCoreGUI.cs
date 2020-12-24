@@ -6,21 +6,25 @@ using System.Collections.Generic;
 
 public class TVEShaderCoreGUI : ShaderGUI
 {
-    Material material;
-
     public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
     {
-        material = materialEditor.target as Material;
+        var materials = materialEditor.targets;
+        bool isSingleMaterial = true;
 
-        DrawDynamicInspector(materialEditor, props);
+        if (materials.Length > 1)
+            isSingleMaterial = false;
 
-        TheVegetationEngine.TVEShaderUtils.UpgradeMaterialTo200(material);
-        TheVegetationEngine.TVEShaderUtils.SetMaterialSettings(material);
+        foreach (Material material in materials)
+        {
+            DrawDynamicInspector(material, materialEditor, props, isSingleMaterial);
 
-        SetLegacyProps();
+            TheVegetationEngine.TVEShaderUtils.UpgradeMaterialTo200(material);
+            TheVegetationEngine.TVEShaderUtils.SetMaterialSettings(material);
+            SetLegacyProps(material);
+        }
     }
 
-    void SetLegacyProps()
+    void SetLegacyProps(Material material)
     {
         if (material.HasProperty("_MainAlbedoTex"))
         {
@@ -31,7 +35,7 @@ public class TVEShaderCoreGUI : ShaderGUI
         }
     }
 
-    void DrawDynamicInspector(MaterialEditor materialEditor, MaterialProperty[] props)
+    void DrawDynamicInspector(Material material, MaterialEditor materialEditor, MaterialProperty[] props, bool isSingleMaterial)
     {
         var customPropsList = new List<MaterialProperty>();
 
@@ -156,8 +160,10 @@ public class TVEShaderCoreGUI : ShaderGUI
 
             if (prop.type == MaterialProperty.PropType.Texture)
             {
+                EditorGUI.showMixedValue = !isSingleMaterial;
                 var tex = (Texture2D)EditorGUILayout.ObjectField(prop.displayName, prop.textureValue, typeof(Texture2D), true, GUILayout.Height(50));
                 prop.textureValue = tex;
+                EditorGUI.showMixedValue = false;
             }
             else
             {
