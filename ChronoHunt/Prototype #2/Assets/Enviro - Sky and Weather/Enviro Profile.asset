@@ -1677,7 +1677,7 @@ MonoBehaviour:
   showPlayerSetup: 0
   showRenderingSetup: 0
   showComponentsSetup: 0
-  showTimeUI: 0
+  showTimeUI: 1
   showWeatherUI: 0
   showAudioUI: 0
   showEffectsUI: 0

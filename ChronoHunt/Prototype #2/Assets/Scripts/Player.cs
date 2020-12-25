@@ -122,6 +122,7 @@ public class Player : LivingEntity
         //PlayerController Input
         _controller.ReadInput();
         _controller.CheckGroundStatus();
+        _controller.CheckForTurns();
         //Running
         if (_controller.forwardVelocity == 0)
         {
@@ -138,7 +139,7 @@ public class Player : LivingEntity
             _controller.isRunning = true;
             _controller.isStopping = false;
         }
-        else if (_controller.forwardVelocity <= (_controller.maxSpeed * .5f) && _controller.isRunning)
+        else if (_controller.forwardVelocity <= (_controller.maxSpeed * .7f) && _controller.isRunning)
         {
             _controller.isRunning = false;
             _controller.isStopping = true;
