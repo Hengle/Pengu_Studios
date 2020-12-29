@@ -548,6 +548,114 @@ TextureImporter:
   - first:
       213: -8548225353986139244
     second: Player_Anims_Sprites-Sheet_104
+  - first:
+      213: 1215366891282497378
+    second: Player_Anims_Sprites-Sheet_77
+  - first:
+      213: -6892470826967397177
+    second: Player_Anims_Sprites-Sheet_78
+  - first:
+      213: 3175191614459984919
+    second: Player_Anims_Sprites-Sheet_79
+  - first:
+      213: -2055143001548250669
+    second: Player_Anims_Sprites-Sheet_80
+  - first:
+      213: 8349642203058901517
+    second: Player_Anims_Sprites-Sheet_81
+  - first:
+      213: -727524301443860879
+    second: Player_Anims_Sprites-Sheet_82
+  - first:
+      213: 3296044287178545157
+    second: Player_Anims_Sprites-Sheet_83
+  - first:
+      213: -5306204747078960050
+    second: Player_Anims_Sprites-Sheet_84
+  - first:
+      213: 4496097449576294699
+    second: Player_Anims_Sprites-Sheet_85
+  - first:
+      213: 2474684519012548720
+    second: Player_Anims_Sprites-Sheet_86
+  - first:
+      213: -7370497404169433694
+    second: Player_Anims_Sprites-Sheet_87
+  - first:
+      213: 2604579668567916806
+    second: Player_Anims_Sprites-Sheet_88
+  - first:
+      213: -3485127516886573287
+    second: Player_Anims_Sprites-Sheet_89
+  - first:
+      213: 2091541362114103636
+    second: Player_Anims_Sprites-Sheet_90
+  - first:
+      213: 4548113193340978361
+    second: Player_Anims_Sprites-Sheet_91
+  - first:
+      213: -2221023097715075444
+    second: Player_Anims_Sprites-Sheet_92
+  - first:
+      213: -8078269493971804668
+    second: Player_Anims_Sprites-Sheet_93
+  - first:
+      213: -5191520916078150897
+    second: Player_Anims_Sprites-Sheet_94
+  - first:
+      213: -3437827060212476183
+    second: Player_Anims_Sprites-Sheet_95
+  - first:
+      213: 1867021314781894602
+    second: Player_Anims_Sprites-Sheet_96
+  - first:
+      213: -8368232848086724498
+    second: Player_Anims_Sprites-Sheet_97
+  - first:
+      213: -8770527482952991249
+    second: Player_Anims_Sprites-Sheet_98
+  - first:
+      213: 7579344359558854983
+    second: Player_Anims_Sprites-Sheet_99
+  - first:
+      213: -4371533380189551466
+    second: Player_Anims_Sprites-Sheet_100
+  - first:
+      213: -7788930154199107771
+    second: Player_Anims_Sprites-Sheet_101
+  - first:
+      213: 8298384177741206782
+    second: Player_Anims_Sprites-Sheet_102
+  - first:
+      213: 1185131368462251449
+    second: Player_Anims_Sprites-Sheet_103
+  - first:
+      213: -2490011728720706344
+    second: Player_Anims_Sprites-Sheet_104
+  - first:
+      213: 7466016749551732726
+    second: Player_Anims_Sprites-Sheet_105
+  - first:
+      213: 7284405528032938768
+    second: Player_Anims_Sprites-Sheet_106
+  - first:
+      213: 4120692126003749937
+    second: Player_Anims_Sprites-Sheet_107
+  - first:
+      213: -7791871803406551765
+    second: Player_Anims_Sprites-Sheet_108
+  - first:
+      213: 4622785238243073234
+    second: Player_Anims_Sprites-Sheet_109
+  - first:
+      213: 7450488238081268362
+    second: Player_Anims_Sprites-Sheet_110
+  - first:
+      213: -5998540174040990881
+    second: Player_Anims_Sprites-Sheet_111
+  - first:
+      213: 2249711362698878190
+    second: Player_Anims_Sprites-Sheet_112
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1010,7 +1118,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_23
       rect:
         serializedVersion: 2
-        x: 256
+        x: 0
         y: 384
         width: 128
         height: 128
@@ -1031,7 +1139,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_24
       rect:
         serializedVersion: 2
-        x: 384
+        x: 128
         y: 384
         width: 128
         height: 128
@@ -1052,7 +1160,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_25
       rect:
         serializedVersion: 2
-        x: 512
+        x: 256
         y: 384
         width: 128
         height: 128
@@ -1073,7 +1181,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_26
       rect:
         serializedVersion: 2
-        x: 640
+        x: 384
         y: 384
         width: 128
         height: 128
@@ -1094,7 +1202,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_27
       rect:
         serializedVersion: 2
-        x: 768
+        x: 512
         y: 384
         width: 128
         height: 128
@@ -1115,7 +1223,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_28
       rect:
         serializedVersion: 2
-        x: 896
+        x: 640
         y: 384
         width: 128
         height: 128
@@ -1136,7 +1244,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_29
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 768
         y: 384
         width: 128
         height: 128
@@ -1157,7 +1265,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_30
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 896
         y: 384
         width: 128
         height: 128
@@ -1178,7 +1286,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_31
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 1024
         y: 384
         width: 128
         height: 128
@@ -1199,7 +1307,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_32
       rect:
         serializedVersion: 2
-        x: 1408
+        x: 1152
         y: 384
         width: 128
         height: 128
@@ -1220,7 +1328,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_33
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 1280
         y: 384
         width: 128
         height: 128
@@ -1241,7 +1349,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_34
       rect:
         serializedVersion: 2
-        x: 1664
+        x: 1408
         y: 384
         width: 128
         height: 128
@@ -1262,7 +1370,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_35
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1536
         y: 384
         width: 128
         height: 128
@@ -1283,7 +1391,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_36
       rect:
         serializedVersion: 2
-        x: 1920
+        x: 1664
         y: 384
         width: 128
         height: 128
@@ -1304,7 +1412,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_37
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 1792
         y: 384
         width: 128
         height: 128
@@ -1325,7 +1433,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_38
       rect:
         serializedVersion: 2
-        x: 2176
+        x: 1920
         y: 384
         width: 128
         height: 128
@@ -1346,8 +1454,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_45
       rect:
         serializedVersion: 2
-        x: 384
-        y: 256
+        x: 2816
+        y: 384
         width: 128
         height: 128
       alignment: 0
@@ -1367,7 +1475,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_46
       rect:
         serializedVersion: 2
-        x: 512
+        x: 0
         y: 256
         width: 128
         height: 128
@@ -1388,7 +1496,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_47
       rect:
         serializedVersion: 2
-        x: 640
+        x: 128
         y: 256
         width: 128
         height: 128
@@ -1409,7 +1517,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_48
       rect:
         serializedVersion: 2
-        x: 768
+        x: 256
         y: 256
         width: 128
         height: 128
@@ -1430,7 +1538,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_49
       rect:
         serializedVersion: 2
-        x: 896
+        x: 384
         y: 256
         width: 128
         height: 128
@@ -1451,7 +1559,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_50
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 512
         y: 256
         width: 128
         height: 128
@@ -1472,7 +1580,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_51
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 640
         y: 256
         width: 128
         height: 128
@@ -1493,7 +1601,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_52
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 768
         y: 256
         width: 128
         height: 128
@@ -1514,7 +1622,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_53
       rect:
         serializedVersion: 2
-        x: 1408
+        x: 896
         y: 256
         width: 128
         height: 128
@@ -1535,7 +1643,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_54
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 1024
         y: 256
         width: 128
         height: 128
@@ -1556,7 +1664,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_55
       rect:
         serializedVersion: 2
-        x: 1664
+        x: 1152
         y: 256
         width: 128
         height: 128
@@ -1577,7 +1685,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_56
       rect:
         serializedVersion: 2
-        x: 1792
+        x: 1280
         y: 256
         width: 128
         height: 128
@@ -1598,7 +1706,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_57
       rect:
         serializedVersion: 2
-        x: 1920
+        x: 1408
         y: 256
         width: 128
         height: 128
@@ -1619,7 +1727,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_58
       rect:
         serializedVersion: 2
-        x: 2048
+        x: 1536
         y: 256
         width: 128
         height: 128
@@ -1640,7 +1748,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_59
       rect:
         serializedVersion: 2
-        x: 2176
+        x: 1664
         y: 256
         width: 128
         height: 128
@@ -1661,7 +1769,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_60
       rect:
         serializedVersion: 2
-        x: 2304
+        x: 1792
         y: 256
         width: 128
         height: 128
@@ -1787,8 +1895,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_21
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
+        x: 2688
+        y: 512
         width: 128
         height: 128
       alignment: 0
@@ -1808,8 +1916,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_22
       rect:
         serializedVersion: 2
-        x: 128
-        y: 384
+        x: 2816
+        y: 512
         width: 128
         height: 128
       alignment: 0
@@ -1829,7 +1937,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_39
       rect:
         serializedVersion: 2
-        x: 2304
+        x: 2048
         y: 384
         width: 128
         height: 128
@@ -1850,7 +1958,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_40
       rect:
         serializedVersion: 2
-        x: 2432
+        x: 2176
         y: 384
         width: 128
         height: 128
@@ -1871,7 +1979,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_41
       rect:
         serializedVersion: 2
-        x: 2560
+        x: 2304
         y: 384
         width: 128
         height: 128
@@ -1892,8 +2000,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_42
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
+        x: 2432
+        y: 384
         width: 128
         height: 128
       alignment: 0
@@ -1913,8 +2021,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_43
       rect:
         serializedVersion: 2
-        x: 128
-        y: 256
+        x: 2560
+        y: 384
         width: 128
         height: 128
       alignment: 0
@@ -1934,8 +2042,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_44
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
+        x: 2688
+        y: 384
         width: 128
         height: 128
       alignment: 0
@@ -1955,7 +2063,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_61
       rect:
         serializedVersion: 2
-        x: 2432
+        x: 1920
         y: 256
         width: 128
         height: 128
@@ -1976,7 +2084,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_62
       rect:
         serializedVersion: 2
-        x: 2560
+        x: 2048
         y: 256
         width: 128
         height: 128
@@ -1997,8 +2105,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_63
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 2176
+        y: 256
         width: 128
         height: 128
       alignment: 0
@@ -2018,8 +2126,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_64
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 2304
+        y: 256
         width: 128
         height: 128
       alignment: 0
@@ -2039,8 +2147,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_65
       rect:
         serializedVersion: 2
-        x: 256
-        y: 128
+        x: 2432
+        y: 256
         width: 128
         height: 128
       alignment: 0
@@ -2060,8 +2168,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_66
       rect:
         serializedVersion: 2
-        x: 384
-        y: 128
+        x: 2560
+        y: 256
         width: 128
         height: 128
       alignment: 0
@@ -2081,8 +2189,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_67
       rect:
         serializedVersion: 2
-        x: 512
-        y: 128
+        x: 2688
+        y: 256
         width: 128
         height: 128
       alignment: 0
@@ -2102,8 +2210,8 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_68
       rect:
         serializedVersion: 2
-        x: 640
-        y: 128
+        x: 2816
+        y: 256
         width: 128
         height: 128
       alignment: 0
@@ -2123,7 +2231,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_69
       rect:
         serializedVersion: 2
-        x: 768
+        x: 0
         y: 128
         width: 128
         height: 128
@@ -2144,7 +2252,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_70
       rect:
         serializedVersion: 2
-        x: 896
+        x: 128
         y: 128
         width: 128
         height: 128
@@ -2165,7 +2273,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_71
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 256
         y: 128
         width: 128
         height: 128
@@ -2186,7 +2294,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_72
       rect:
         serializedVersion: 2
-        x: 1152
+        x: 384
         y: 128
         width: 128
         height: 128
@@ -2207,7 +2315,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_73
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 512
         y: 128
         width: 128
         height: 128
@@ -2228,7 +2336,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_74
       rect:
         serializedVersion: 2
-        x: 1408
+        x: 640
         y: 128
         width: 128
         height: 128
@@ -2249,7 +2357,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_75
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 768
         y: 128
         width: 128
         height: 128
@@ -2270,7 +2378,7 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_76
       rect:
         serializedVersion: 2
-        x: 1664
+        x: 896
         y: 128
         width: 128
         height: 128
@@ -2291,6 +2399,132 @@ TextureImporter:
       name: Player_Anims_Sprites-Sheet_77
       rect:
         serializedVersion: 2
+        x: 1024
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26ff9a29fb9ddd010800000000000000
+      internalID: 1215366891282497378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Anims_Sprites-Sheet_78
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cc8dddfc460950a0800000000000000
+      internalID: -6892470826967397177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Anims_Sprites-Sheet_79
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71cbfa153fb801c20800000000000000
+      internalID: 3175191614459984919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Anims_Sprites-Sheet_80
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d12616245aaa73e0800000000000000
+      internalID: -2055143001548250669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Anims_Sprites-Sheet_81
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d029fea6853efd370800000000000000
+      internalID: 8349642203058901517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Anims_Sprites-Sheet_82
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17679fe908057e5f0800000000000000
+      internalID: -727524301443860879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Anims_Sprites-Sheet_83
+      rect:
+        serializedVersion: 2
         x: 1792
         y: 128
         width: 128
@@ -2302,14 +2536,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8b5914c0c141a740800000000000000
-      internalID: 5161478944122821516
+      spriteID: 5089b35e0d6edbd20800000000000000
+      internalID: 3296044287178545157
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_78
+      name: Player_Anims_Sprites-Sheet_84
       rect:
         serializedVersion: 2
         x: 1920
@@ -2323,14 +2557,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57d2d133bebd969e0800000000000000
-      internalID: -1627527987096375947
+      spriteID: e4cfdd065e29c56b0800000000000000
+      internalID: -5306204747078960050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_79
+      name: Player_Anims_Sprites-Sheet_85
       rect:
         serializedVersion: 2
         x: 2048
@@ -2344,14 +2578,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f84f2b46d2f48010800000000000000
-      internalID: 1190343203730966771
+      spriteID: b29e88d1fc8556e30800000000000000
+      internalID: 4496097449576294699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_80
+      name: Player_Anims_Sprites-Sheet_86
       rect:
         serializedVersion: 2
         x: 2176
@@ -2365,14 +2599,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 801bf3d401a837790800000000000000
-      internalID: -7533525949040578296
+      spriteID: 070c6e66578d75220800000000000000
+      internalID: 2474684519012548720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_81
+      name: Player_Anims_Sprites-Sheet_87
       rect:
         serializedVersion: 2
         x: 2304
@@ -2386,14 +2620,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd4ea2371f9b9b1a0800000000000000
-      internalID: -6793194116241234724
+      spriteID: 2adca8659abb6b990800000000000000
+      internalID: -7370497404169433694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_82
+      name: Player_Anims_Sprites-Sheet_88
       rect:
         serializedVersion: 2
         x: 2432
@@ -2407,14 +2641,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 598d8bc4c64eaeec0800000000000000
-      internalID: -3536763403551319915
+      spriteID: 601023ea863552420800000000000000
+      internalID: 2604579668567916806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_83
+      name: Player_Anims_Sprites-Sheet_89
       rect:
         serializedVersion: 2
         x: 2560
@@ -2428,14 +2662,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f818d8c0bd89aea90800000000000000
-      internalID: -7283841380742495857
+      spriteID: 91f59070df652afc0800000000000000
+      internalID: -3485127516886573287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_84
+      name: Player_Anims_Sprites-Sheet_90
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45909d199c5a60d10800000000000000
+      internalID: 2091541362114103636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Anims_Sprites-Sheet_91
       rect:
         serializedVersion: 2
         x: 0
@@ -2449,14 +2704,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06913a4affa8809f0800000000000000
-      internalID: -501998527868364448
+      spriteID: 9b44b573ad42e1f30800000000000000
+      internalID: 4548113193340978361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_85
+      name: Player_Anims_Sprites-Sheet_92
       rect:
         serializedVersion: 2
         x: 128
@@ -2470,14 +2725,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e95c17be23f22cff0800000000000000
-      internalID: -17399552811088482
+      spriteID: c8651c692475d21e0800000000000000
+      internalID: -2221023097715075444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_86
+      name: Player_Anims_Sprites-Sheet_93
       rect:
         serializedVersion: 2
         x: 256
@@ -2491,14 +2746,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fb566a73d7ebb5b0800000000000000
-      internalID: -5351428836722058252
+      spriteID: 40e9feb12b834ef80800000000000000
+      internalID: -8078269493971804668
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_87
+      name: Player_Anims_Sprites-Sheet_94
       rect:
         serializedVersion: 2
         x: 384
@@ -2512,14 +2767,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39bf7c36919e3dc60800000000000000
-      internalID: 7841867671439670163
+      spriteID: f0bb6219b3304f7b0800000000000000
+      internalID: -5191520916078150897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_88
+      name: Player_Anims_Sprites-Sheet_95
       rect:
         serializedVersion: 2
         x: 512
@@ -2533,14 +2788,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5ed9bd6480cdf3a0800000000000000
-      internalID: -6629931401410388389
+      spriteID: 9e65fccc0826a40d0800000000000000
+      internalID: -3437827060212476183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_89
+      name: Player_Anims_Sprites-Sheet_96
       rect:
         serializedVersion: 2
         x: 640
@@ -2554,14 +2809,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 422c5f35d84746bc0800000000000000
-      internalID: -3790776835991289308
+      spriteID: ac758af6efdf8e910800000000000000
+      internalID: 1867021314781894602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_90
+      name: Player_Anims_Sprites-Sheet_97
       rect:
         serializedVersion: 2
         x: 768
@@ -2575,14 +2830,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf5a2b31c49819730800000000000000
-      internalID: 4004132503550076412
+      spriteID: e60190cbf801edb80800000000000000
+      internalID: -8368232848086724498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_91
+      name: Player_Anims_Sprites-Sheet_98
       rect:
         serializedVersion: 2
         x: 896
@@ -2596,14 +2851,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ef5228af5162fb10800000000000000
-      internalID: 2013779046858645473
+      spriteID: fed39c5f8b3d84680800000000000000
+      internalID: -8770527482952991249
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_92
+      name: Player_Anims_Sprites-Sheet_99
       rect:
         serializedVersion: 2
         x: 1024
@@ -2617,14 +2872,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2efe0bfbbf0e4f30800000000000000
-      internalID: 4561600772618255915
+      spriteID: 749bdd5b98d3f2960800000000000000
+      internalID: 7579344359558854983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_93
+      name: Player_Anims_Sprites-Sheet_100
       rect:
         serializedVersion: 2
         x: 1152
@@ -2638,14 +2893,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c009b6faa42dce640800000000000000
-      internalID: 5110690895371145228
+      spriteID: 6940a065d813553c0800000000000000
+      internalID: -4371533380189551466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_94
+      name: Player_Anims_Sprites-Sheet_101
       rect:
         serializedVersion: 2
         x: 1280
@@ -2659,14 +2914,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd32aa7ace5da9ed0800000000000000
-      internalID: -2406375838474165285
+      spriteID: 54732a2da4928e390800000000000000
+      internalID: -7788930154199107771
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_95
+      name: Player_Anims_Sprites-Sheet_102
       rect:
         serializedVersion: 2
         x: 1408
@@ -2680,14 +2935,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba62ef4b026f16ca0800000000000000
-      internalID: -6025264206109071701
+      spriteID: ef49cf36178c92370800000000000000
+      internalID: 8298384177741206782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_96
+      name: Player_Anims_Sprites-Sheet_103
       rect:
         serializedVersion: 2
         x: 1536
@@ -2701,14 +2956,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b080f82599853c980800000000000000
-      internalID: -8519868654516500469
+      spriteID: 9b57d5553be627010800000000000000
+      internalID: 1185131368462251449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_97
+      name: Player_Anims_Sprites-Sheet_104
       rect:
         serializedVersion: 2
         x: 1664
@@ -2722,14 +2977,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f44b94a24949db70800000000000000
-      internalID: 8924244687189656816
+      spriteID: 8d4cb0f7683b17dd0800000000000000
+      internalID: -2490011728720706344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_98
+      name: Player_Anims_Sprites-Sheet_105
       rect:
         serializedVersion: 2
         x: 1792
@@ -2743,14 +2998,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac6707174e3c865c0800000000000000
-      internalID: -4221909264736684342
+      spriteID: 6f7c5245dae9c9760800000000000000
+      internalID: 7466016749551732726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_99
+      name: Player_Anims_Sprites-Sheet_106
       rect:
         serializedVersion: 2
         x: 1920
@@ -2764,14 +3019,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f4f744f91ff8b7e0800000000000000
-      internalID: -1749367968295815946
+      spriteID: 01b8b4abb38671560800000000000000
+      internalID: 7284405528032938768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_100
+      name: Player_Anims_Sprites-Sheet_107
       rect:
         serializedVersion: 2
         x: 2048
@@ -2785,14 +3040,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 502b78de1f18018b0800000000000000
-      internalID: -5183500295031246331
+      spriteID: 134e33ff7a3af2930800000000000000
+      internalID: 4120692126003749937
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_101
+      name: Player_Anims_Sprites-Sheet_108
       rect:
         serializedVersion: 2
         x: 2176
@@ -2806,14 +3061,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbcd840dc1f163e00800000000000000
-      internalID: 1024040173887347901
+      spriteID: b25f19eb0e5bdd390800000000000000
+      internalID: -7791871803406551765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_102
+      name: Player_Anims_Sprites-Sheet_109
       rect:
         serializedVersion: 2
         x: 2304
@@ -2827,14 +3082,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30ff87466631a3b40800000000000000
-      internalID: 5420666431987056387
+      spriteID: 2dcd56e7eae672040800000000000000
+      internalID: 4622785238243073234
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_103
+      name: Player_Anims_Sprites-Sheet_110
       rect:
         serializedVersion: 2
         x: 2432
@@ -2848,14 +3103,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8504fb22b7daab300800000000000000
-      internalID: 268717872157507672
+      spriteID: a8a5f020493756760800000000000000
+      internalID: 7450488238081268362
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Anims_Sprites-Sheet_104
+      name: Player_Anims_Sprites-Sheet_111
       rect:
         serializedVersion: 2
         x: 2560
@@ -2869,8 +3124,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49b1babb45a9e5980800000000000000
-      internalID: -8548225353986139244
+      spriteID: f5b706b4e77e0cca0800000000000000
+      internalID: -5998540174040990881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Anims_Sprites-Sheet_112
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eec93dc9094983f10800000000000000
+      internalID: 2249711362698878190
       vertices: []
       indices: 
       edges: []

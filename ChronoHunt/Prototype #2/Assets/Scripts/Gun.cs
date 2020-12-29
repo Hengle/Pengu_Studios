@@ -70,8 +70,9 @@ public class Gun : MonoBehaviour
     public void Aim(Vector3 point)
     {
         Vector3 direction = point - _player.transform.position;
+        transform.LookAt(direction);
         Quaternion rotation = Quaternion.LookRotation(direction.normalized);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _smoothTime * Time.deltaTime);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _smoothTime * Time.deltaTime);
     }
     void Shoot(float recoilStrength)
     {
